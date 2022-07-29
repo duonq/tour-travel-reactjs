@@ -1,0 +1,33 @@
+.footer-tour {
+    background-color: #7786A7;
+
+    .footer-tour-left {
+        img {
+            height: auto;
+            object-fit: contain;
+            max-width: 60%;
+        }
+
+        p {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 18px;
+            color: #FFFFFF;
+        }
+
+        .navbar {
+            display: block;
+
+            li {
+                padding: 0;
+                a {
+                    font-weight: 400;
+                    font-size: 15px;
+                    line-height: 20px;
+                    font-family: Courier Prime;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}
