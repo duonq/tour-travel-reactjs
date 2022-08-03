@@ -29,36 +29,36 @@ const listsMenu: IPypeListMenu[] = [
   }
 ]
 
-const listsContact = [
+const listsContact: IPypeListMenu[] = [
   {
     id: 1,
     href: "/",
     title: "Bình Giang, Hải dương",
-    // icon: 
+    icon: "map"
   },
   {
     id: 2,
     href: "/",
     title: "033 706 7403",
-    // icon: 
+    icon: "phone"
   },
   {
     id: 3,
     href: "/",
     title: "ntlduong99@gmail.com",
-    // icon: 
+    icon: "mail"
   },
   {
     id: 4,
     href: "/",
     title: "travel.tour",
-    // icon: 
+    icon: "skypee"
   },
   {
     id: 5,
     href: "/",
     title: "travel.tour.mit",
-    // icon: 
+    icon: "instagram"
   }
 ]
 

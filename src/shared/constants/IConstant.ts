@@ -11,6 +11,7 @@ type IPypeListMenu = {
   id: number
   href: string
   title: string
+  icon?: string
 }
 
 export type {
