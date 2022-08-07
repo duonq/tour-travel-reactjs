@@ -1,24 +1,69 @@
 import React from "react";
 import Logo from "../../../../assets/logo.svg";
 import NavigationBar from "../NavigationBar";
-import { EnvironmentOutlined, PhoneOutlined, MailOutlined, SkypeOutlined, InstagramOutlined } from "@ant-design/icons"
+import {
+  EnvironmentOutlined,
+  PhoneOutlined,
+  MailOutlined,
+  SkypeOutlined,
+  InstagramOutlined,
+  FacebookFilled,
+  TwitterCircleFilled,
+  GoogleCircleFilled,
+  LinkedinFilled,
+} from "@ant-design/icons";
 import "./index.scss";
-import { listsContact } from "../../../../shared/constants";
+import { listImgs, listsContact } from "../../../../shared/constants";
 import { Link } from "react-router-dom";
+import { ITypeIcon } from "../../../../shared/constants/IConstant";
+import { Image } from "antd";
 
-const listIcon = [
-  { key: 'map', value: <EnvironmentOutlined /> },
-  { key: 'phone', value: <PhoneOutlined /> },
-  { key: 'mail', value: <MailOutlined /> },
-  { key: 'skypee', value: <SkypeOutlined /> },
-  { key: 'instagram', value: <InstagramOutlined /> }
-]
+const listIcon: ITypeIcon[] = [
+  { key: "map", value: <EnvironmentOutlined />, href: "/" },
+  { key: "phone", value: <PhoneOutlined />, href: "/" },
+  { key: "mail", value: <MailOutlined />, href: "/" },
+  { key: "skypee", value: <SkypeOutlined />, href: "/" },
+  { key: "instagram", value: <InstagramOutlined />, href: "/" },
+];
+
+const listIconContact: ITypeIcon[] = [
+  {
+    key: "facebook",
+    value: <FacebookFilled />,
+    href: "/",
+  },
+  {
+    key: "twitter",
+    value: <TwitterCircleFilled />,
+    href: "/",
+  },
+  {
+    key: "google",
+    value: <GoogleCircleFilled />,
+    href: "/",
+  },
+  {
+    key: "skypee",
+    value: <SkypeOutlined />,
+    href: "/",
+  },
+  {
+    key: "linkedin",
+    value: <LinkedinFilled />,
+    href: "/about",
+  },
+];
+
 const FooterTour = () => {
-
   const renderListIcon = (iconName: string) => {
-    const icon = listIcon.find(item => item.key === iconName)
-    return icon?.value
-  }
+    const icon = listIcon.find((item) => item.key === iconName);
+    return icon?.value;
+  };
+
+  const renderListIconContact = (iconname: string) => {
+    const icon = listIconContact.find((item) => item.key === iconname);
+    return icon?.value;
+  };
 
   return (
     <div className="footer-tour">
@@ -33,19 +78,38 @@ const FooterTour = () => {
       <div className="footer-tour-center">
         <h1>contact us</h1>
         <ul>
-          {listsContact.length > 0 && listsContact.map((itemContact, index) => {
-            return (
-              <li key={index}>
-                <Link to={itemContact.href}>
-                  {renderListIcon(itemContact.icon || " ")}
-                  {itemContact.title}
-                </Link>
-              </li>
-            )
-          })}
+          {listsContact.length > 0 &&
+            listsContact.map((itemContact, index) => {
+              return (
+                <li key={index}>
+                  <Link to={itemContact.href}>
+                    {renderListIcon(itemContact.icon || " ")}
+                    {itemContact.title}
+                  </Link>
+                </li>
+              );
+            })}
+        </ul>
+        <ul>
+          {listIconContact.length > 0 &&
+            listIconContact.map((itemIcon, index) => {
+              return (
+                <li key={index}>
+                  <a href={itemIcon.href} target="_blank">
+                    {renderListIconContact(itemIcon.key)}
+                  </a>
+                </li>
+              );
+            })}
         </ul>
       </div>
-      <div></div>
+      <div className="footer-tour-right">
+        <h1>Instagram</h1>
+        <div>
+          {listImgs.length > 0 &&
+            listImgs.map(({ id, src }) => <img key={id} src={src} />)}
+        </div>
+      </div>
     </div>
   );
 };

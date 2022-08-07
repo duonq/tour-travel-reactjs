@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import FooterTour from "./components/FooterTour";
 import HeaderTour from "./components/HeaderTour";
 

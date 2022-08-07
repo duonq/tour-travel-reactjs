@@ -7,14 +7,21 @@ type ITypeRouter = {
   role?: string[]
 }
 
-type IPypeListMenu = {
+type ITypeListMenu = {
   id: number
   href: string
   title: string
   icon?: string
 }
 
+type ITypeIcon = {
+  key: string
+  value: JSX.Element
+  href: string
+}
+
 export type {
   ITypeRouter,
-  IPypeListMenu
+  ITypeListMenu,
+  ITypeIcon
 }
