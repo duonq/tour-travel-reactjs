@@ -1,14 +1,17 @@
 import React from "react";
+import { useHistory } from "react-router";
+import { listRouterNoLayout } from "../../shared/constants";
 import FooterTour from "./components/FooterTour";
 import HeaderTour from "./components/HeaderTour";
 
 const LayoutTour = ({ children }: any) => {
+  const router = useHistory()
   return (
     <div>
-      <HeaderTour />
+      {!listRouterNoLayout && <HeaderTour />}
       <div className="layout-tour">
         {children}
-        <FooterTour />
+        {!listRouterNoLayout && <FooterTour />}
       </div>
     </div>
   );

@@ -110,8 +110,13 @@ const listImgs = [
     src: img9
   }
 ]
+
+const listRouterNoLayout = [
+  '/login'
+]
 export {
   listsMenu,
   listsContact,
-  listImgs
+  listImgs,
+  listRouterNoLayout
 }

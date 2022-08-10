@@ -20,8 +20,27 @@ type ITypeIcon = {
   href: string
 }
 
+type ITypeInputCustom = {
+  name?: string
+  classCustom?: string
+  type?: string
+  className?: string
+  placeholder?: string
+  prefix?: React.ReactElement
+  suffix?: React.ReactElement
+  value?: string
+  onChange?: any
+  onBlur?: any
+  message?: string
+  messageStyle?: string
+  showMessage?: boolean
+  visibleIcon?: React.ReactElement
+  hiddenIcon?: React.ReactElement
+}
+
 export type {
   ITypeRouter,
   ITypeListMenu,
-  ITypeIcon
+  ITypeIcon,
+  ITypeInputCustom
 }

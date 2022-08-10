@@ -6,44 +6,42 @@ import RouterLinkDefine from "../shared/routerConfig";
 const Router = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        {RouterLinkDefine.map((itemRouter, index) => {
-          if (itemRouter.isAuth) {
-            return (
-              <PrivateRouter
-                key={index}
-                path={itemRouter.path}
-                exact={itemRouter.exact}
-              ></PrivateRouter>
-            );
-          }
+      <LayoutTour>
+        <Switch>
+          {RouterLinkDefine.map((itemRouter, index) => {
+            if (itemRouter.isAuth) {
+              return (
+                <PrivateRouter
+                  key={index}
+                  path={itemRouter.path}
+                  exact={itemRouter.exact}
+                ></PrivateRouter>
+              );
+            }
 
-          return (
-            <LayoutTour key={index}>
-              <Route
+            return (
+              <Route key={index}
                 exact={itemRouter.exact}
                 path={itemRouter.path}
               >
                 {itemRouter.component}
               </Route>
-            </LayoutTour>
-          );
-        })}
-      </Switch>
+            );
+          })}
+        </Switch>
+      </LayoutTour>
     </BrowserRouter>
   );
 };
 
 function PrivateRouter({ children, ...rest }: any) {
   return (
-    // <LayoutTour>
-      <Route
-        {...rest}
-        render={({ location }) => {
-          return <Redirect to={{ pathname: "/", state: { from: location } }} />;
-        }}
-      />
-    // </LayoutTour>
+    <Route
+      {...rest}
+      render={({ location }) => {
+        return <Redirect to={{ pathname: "/", state: { from: location } }} />;
+      }}
+    />
   );
 }
 
