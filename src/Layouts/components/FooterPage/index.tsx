@@ -1,6 +1,5 @@
 import React from "react";
-import Logo from "../../../../assets/logo.svg";
-import NavigationBar from "../NavigationBar";
+import Logo from "../../../../src/assets/logo.svg";
 import {
   EnvironmentOutlined,
   PhoneOutlined,
@@ -13,10 +12,11 @@ import {
   LinkedinFilled,
 } from "@ant-design/icons";
 import "./index.scss";
-import { listImgs, listsContact } from "../../../../shared/constants";
 import { Link } from "react-router-dom";
-import { ITypeIcon } from "../../../../shared/constants/IConstant";
 import { Image } from "antd";
+import { ITypeIcon } from "../../../shared/constants/IConstant";
+import { listImgs, listsContact } from "../../../shared/constants";
+import NavigationBar from "../NavigationBar";
 
 const listIcon: ITypeIcon[] = [
   { key: "map", value: <EnvironmentOutlined />, href: "/" },
@@ -54,7 +54,7 @@ const listIconContact: ITypeIcon[] = [
   },
 ];
 
-const FooterTour = () => {
+const FooterPage = () => {
   const renderListIcon = (iconName: string) => {
     const icon = listIcon.find((item) => item.key === iconName);
     return icon?.value;
@@ -114,4 +114,4 @@ const FooterTour = () => {
   );
 };
 
-export default FooterTour;
+export default FooterPage;

@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import LayoutTour from "../components/LayoutTour";
+import LayoutPage from "../Layouts";
 import RouterLinkDefine from "../shared/routerConfig";
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <LayoutTour>
+      <LayoutPage>
         <Switch>
           {RouterLinkDefine.map((itemRouter, index) => {
             if (itemRouter.isAuth) {
@@ -20,7 +20,8 @@ const Router = () => {
             }
 
             return (
-              <Route key={index}
+              <Route
+                key={index}
                 exact={itemRouter.exact}
                 path={itemRouter.path}
               >
@@ -29,7 +30,7 @@ const Router = () => {
             );
           })}
         </Switch>
-      </LayoutTour>
+      </LayoutPage>
     </BrowserRouter>
   );
 };

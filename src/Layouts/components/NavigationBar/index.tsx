@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { listsMenu } from "../../../../shared/constants";
-import "./index.scss"
+import { listsMenu } from "../../../shared/constants";
+import "./index.scss";
 
 const NavigationBar = () => {
   return (

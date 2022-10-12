@@ -1,5 +1,5 @@
 import React from "react";
-import HomeTour from "../../Modules/HomeTour";
+import HomePage from "../../Modules/HomePage";
 import Login from "../../Modules/Login";
 import { ITypeRouter } from "../constants/IConstant";
 
@@ -7,7 +7,7 @@ const RouterLinkDefine: ITypeRouter[] = [
   {
     path: "/",
     exact: true,
-    component: <HomeTour />,
+    component: <HomePage />,
   },
   {
     path: "/login",

@@ -1,21 +1,21 @@
 import React from "react";
 import { useHistory } from "react-router";
-import Logo from "../../../../assets/logo.svg";
-import DropdownCustom from "../../../DropdownCustom";
-import NavigationBar from "../NavigationBar";
+import Logo from "../../../../src/assets/logo.svg";
 import "./index.scss";
 import { Menu, MenuProps } from "antd";
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons"
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import DropdownCustom from "../../../components/DropdownCustom";
+import NavigationBar from "../NavigationBar";
 
-const HeaderTour = () => {
+const HeaderPage = () => {
   const history = useHistory();
 
   const linkToHome = () => {
     history.push("/");
   };
 
-  const handleMenuClick: MenuProps['onClick'] = e => {
-    console.log('click', e);
+  const handleMenuClick: MenuProps["onClick"] = (e) => {
+    console.log("click", e);
   };
 
   const MenuDropdown = (props: any) => {
@@ -31,7 +31,7 @@ const HeaderTour = () => {
               </a>
             ),
             icon: <UserOutlined />,
-            key: "1"
+            key: "1",
           },
           {
             label: (
@@ -40,7 +40,7 @@ const HeaderTour = () => {
               </a>
             ),
             icon: <LogoutOutlined />,
-            key: "2"
+            key: "2",
           },
         ]}
       />
@@ -57,13 +57,10 @@ const HeaderTour = () => {
         <NavigationBar />
       </div>
       <div className="header-right">
-        <DropdownCustom
-          titleDropdown="mit"
-          menuDropdown={MenuDropdown}
-        />
+        <DropdownCustom titleDropdown="mit" menuDropdown={MenuDropdown} />
       </div>
     </div>
   );
 };
 
-export default HeaderTour;
+export default HeaderPage;
