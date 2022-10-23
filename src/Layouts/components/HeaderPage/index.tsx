@@ -1,18 +1,13 @@
 import React from "react";
-import { useHistory } from "react-router";
-import Logo from "../../../../src/assets/logo.svg";
 import "./index.scss";
 import { Menu, MenuProps } from "antd";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import DropdownCustom from "../../../components/DropdownCustom";
 import NavigationBar from "../NavigationBar";
+import Logo from "../../../../src/assets/logo.png";
 
 const HeaderPage = () => {
-  const history = useHistory();
-
-  const linkToHome = () => {
-    history.push("/");
-  };
+  const linkToHome = () => {};
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
     console.log("click", e);
@@ -50,15 +45,15 @@ const HeaderPage = () => {
   return (
     <div className="header-page">
       <div className="header-left">
-        <img onClick={linkToHome} src={Logo} alt="" />
+        <img src={Logo} alt="" />
       </div>
 
       <div className="header-center">
         <NavigationBar />
       </div>
-      <div className="header-right">
+      {/* <div className="header-right">
         <DropdownCustom titleDropdown="mit" menuDropdown={MenuDropdown} />
-      </div>
+      </div> */}
     </div>
   );
 };

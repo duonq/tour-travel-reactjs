@@ -1,10 +1,11 @@
 type ITypeRouter = {
-  exact: boolean
+  exact?: boolean
   path: string
-  component: JSX.Element
+  component: any
   title?: string
   isAuth?: boolean
   role?: string[]
+  layout?: any
 }
 
 type ITypeListMenu = {
@@ -38,9 +39,26 @@ type ITypeInputCustom = {
   hiddenIcon?: React.ReactElement
 }
 
+type ITypeButtonCustom = {
+  title?: string 
+  color?: string 
+  bg?: string 
+  colorBorder?: string 
+  icon?: any
+  onAction?: any
+  disabled?: boolean 
+  classCustom?: string 
+  preventEventClick?: any
+  widthIcon?: any
+  heightIcon?: any
+  prefix?: any
+  suffix?: any
+}
+
 export type {
   ITypeRouter,
   ITypeListMenu,
   ITypeIcon,
-  ITypeInputCustom
+  ITypeInputCustom,
+  ITypeButtonCustom
 }

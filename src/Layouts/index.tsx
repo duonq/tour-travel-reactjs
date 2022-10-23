@@ -1,20 +1,15 @@
 import React from "react";
-import { useHistory } from "react-router";
-import { listRouterNoLayout } from "../shared/constants";
 import FooterPage from "./components/FooterPage";
 import HeaderTour from "./components/HeaderPage";
+import style from './index.module.scss'
 
 const LayoutPage = ({ children }: any) => {
-  const router = useHistory();
-  console.log("router", router);
   return (
-    <div>
-      {!listRouterNoLayout.includes(router.location.pathname) && <HeaderTour />}
-      <div className="layout-tour">
+    <div className={style.layoutPage}>
+      <HeaderTour />
+      <div className={style.layoutMain}>
         {children}
-        {!listRouterNoLayout.includes(router.location.pathname) && (
-          <FooterPage />
-        )}
+        <FooterPage />
       </div>
     </div>
   );

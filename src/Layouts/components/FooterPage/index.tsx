@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../../../../src/assets/logo.svg";
 import {
   EnvironmentOutlined,
   PhoneOutlined,
@@ -68,15 +67,11 @@ const FooterPage = () => {
   return (
     <div className="footer-tour">
       <div className="footer-tour-left">
-        <img src={Logo} alt="" />
-        <p>
-          always bring you great experiences with your loved ones please share
-          and enjoy it
-        </p>
+        <h1>Thông tin</h1>
         <NavigationBar />
       </div>
       <div className="footer-tour-center">
-        <h1>contact us</h1>
+        <h1>LIÊN HỆ VỚI CHÚNG TÔI</h1>
         <ul>
           {listsContact.length > 0 &&
             listsContact.map((itemContact, index) => {

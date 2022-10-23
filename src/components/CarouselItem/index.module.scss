@@ -1,0 +1,10 @@
+.carouselPage {
+  text-align: center;
+  :global {
+    .ant-carousel .slick-slide img {
+      height: 700px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}

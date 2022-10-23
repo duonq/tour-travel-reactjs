@@ -1,4 +1,5 @@
 import React from "react";
+import LayoutPage from "../../Layouts";
 import HomePage from "../../Modules/HomePage";
 import Login from "../../Modules/Login";
 import { ITypeRouter } from "../constants/IConstant";
@@ -6,13 +7,12 @@ import { ITypeRouter } from "../constants/IConstant";
 const RouterLinkDefine: ITypeRouter[] = [
   {
     path: "/",
-    exact: true,
-    component: <HomePage />,
+    component: HomePage,
+    layout: LayoutPage,
   },
   {
     path: "/login",
-    exact: true,
-    component: <Login />,
+    component: Login,
   },
 ];
 

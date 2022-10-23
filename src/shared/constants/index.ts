@@ -1,5 +1,4 @@
 import { ITypeListMenu } from "./IConstant"
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons"
 import img from "../../../src/assets/img1.svg";
 import img2 from "../../../src/assets/img2.svg";
 import img3 from "../../../src/assets/img3.svg";
@@ -15,27 +14,27 @@ const listsMenu: ITypeListMenu[] = [
   {
     id: 1,
     href: "/",
-    title: "Home"
+    title: "Trang chủ"
   },
   {
     id: 2,
-    href: "/tours",
-    title: "Tours"
+    href: "/rooms",
+    title: "Phòng nghỉ"
   },
   {
     id: 3,
-    href: "/about",
-    title: "About"
+    href: "",
+    title: "Sự kiện"
   },
   {
     id: 4,
-    href: "/contact",
-    title: "Contact"
+    href: "",
+    title: "Dịch vụ"
   },
   {
     id: 5,
-    href: "/blog",
-    title: "Blog"
+    href: "/contact",
+    title: "Liên hệ"
   }
 ]
 
@@ -111,12 +110,8 @@ const listImgs = [
   }
 ]
 
-const listRouterNoLayout = [
-  '/login'
-]
 export {
   listsMenu,
   listsContact,
-  listImgs,
-  listRouterNoLayout
+  listImgs
 }
