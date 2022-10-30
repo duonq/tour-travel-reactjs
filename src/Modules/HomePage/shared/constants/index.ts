@@ -25,21 +25,24 @@ const listRooms: ITypeListService[] = [
     {
       id: 1, 
       price: '2 000 000',
-      name: 'Phòng đơn 01',
+      name: 'Senior Suite Room',
+      type: 'Phòng đơn',
       description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
       img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'
     },
     {
       id: 2, 
       price: '2 400 000',
-      name: 'Phòng đôi 01',
+      name: 'Deluxe Room * Hotel Room',
+      type: 'Phòng đôi',
       description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
       img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Junior-Suite-Room-600-x-600-2.jpg'
     },
     {
       id: 3, 
       price: '1 000 000',
-      name: 'Phòng đơn 02',
+      name: 'Senior Suite Room',
+      type: 'Phòng đơn',
       description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
       img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'
     }
@@ -76,8 +79,67 @@ const listServices: ITypeListService[] = [
     }
 
 ]
+
+const listTours: ITypeListService[] = [
+    {
+        id: 1,
+        name: 'DU LỊCH LÀO CAI',
+        address: 'Địa điểm tham quan tại thành phố Lào Cai',
+        description: 'Lào Cai thành phố biên cương với rất nhiều địa điểm tham quan cũng như check in đẹp. Trong...',
+        img: 'https://duchuygrandhotel.com/wp-content/uploads/2019/08/Den-thuong-lao-Cai-434x419.jpg'
+    },
+    {
+        id: 2,
+        name: 'DU LỊCH LÀO CAI',
+        address: 'Cẩm nang du lịch Lào Cai bạn cần biết',
+        description: 'Lào Cai thành phố biên cương với rất nhiều địa điểm tham quan cũng như check in đẹp. Trong...',
+        img: 'https://duchuygrandhotel.com/wp-content/uploads/2022/07/kinh-nghiem-di-san-may-o-y-ty-434x419.jpg'
+    },
+    {
+        id: 3,
+        name: 'DU LỊCH LÀO CAI',
+        address: 'Địa điểm tham quan tại thành phố Lào Cai',
+        description: 'Lào Cai thành phố biên cương với rất nhiều địa điểm tham quan cũng như check in đẹp. Trong...',
+        img: 'https://duchuygrandhotel.com/wp-content/uploads/2019/08/Den-thuong-lao-Cai-434x419.jpg'
+    }
+]
+
+const listFeeback: ITypeListService[] = [
+    {
+        id: 1,
+        name: 'Nguyễn Văn A',
+        from: 'Lào Cai',
+        description: 'Khách sạn đẹp và sang trọng, tiện nghi đầy đủ và cao cấp, ban công view đẹp và tất cả các phòng đều có bồn tắm, giá rất ưu đãi, nhân viên rất ân cần, thân thiện. 2 bé nhà mình rất thích tắm bể bơi và xông hơi Hàn Quốc ở đây. Nói chung xứng đáng được đánh giá khách sạn tốt nhất TP. Lào Cai hiện nay. Một lựa chọn hàng đầu cho bạn nào sắp tới Lào Cai.'
+    },
+    {
+        id: 2,
+        name: 'Nguyễn Văn B',
+        from: 'Bắc Giang',
+        description: 'Khách sạn đẹp và sang trọng, tiện nghi đầy đủ và cao cấp, ban công view đẹp và tất cả các phòng đều có bồn tắm, giá rất ưu đãi, nhân viên rất ân cần, thân thiện. 2 bé nhà mình rất thích tắm bể bơi và xông hơi Hàn Quốc ở đây. Nói chung xứng đáng được đánh giá khách sạn tốt nhất TP. Lào Cai hiện nay. Một lựa chọn hàng đầu cho bạn nào sắp tới Lào Cai.'
+    },
+    {
+        id: 3,
+        name: 'Nguyễn Văn C',
+        from: 'Hà Nội',
+        description: 'Khách sạn đẹp và sang trọng, tiện nghi đầy đủ và cao cấp, ban công view đẹp và tất cả các phòng đều có bồn tắm, giá rất ưu đãi, nhân viên rất ân cần, thân thiện. 2 bé nhà mình rất thích tắm bể bơi và xông hơi Hàn Quốc ở đây. Nói chung xứng đáng được đánh giá khách sạn tốt nhất TP. Lào Cai hiện nay. Một lựa chọn hàng đầu cho bạn nào sắp tới Lào Cai.'
+    },
+    {
+        id: 4,
+        name: 'Nguyễn Văn R',
+        from: 'Hải Dương',
+        description: 'Khách sạn đẹp và sang trọng, tiện nghi đầy đủ và cao cấp, ban công view đẹp và tất cả các phòng đều có bồn tắm, giá rất ưu đãi, nhân viên rất ân cần, thân thiện. 2 bé nhà mình rất thích tắm bể bơi và xông hơi Hàn Quốc ở đây. Nói chung xứng đáng được đánh giá khách sạn tốt nhất TP. Lào Cai hiện nay. Một lựa chọn hàng đầu cho bạn nào sắp tới Lào Cai.'
+    },
+    {
+        id: 5,
+        name: 'Nguyễn Văn Tuệ',
+        from: 'Thái Bình',
+        description: 'Khách sạn đẹp và sang trọng, tiện nghi đầy đủ và cao cấp, ban công view đẹp và tất cả các phòng đều có bồn tắm, giá rất ưu đãi, nhân viên rất ân cần, thân thiện. 2 bé nhà mình rất thích tắm bể bơi và xông hơi Hàn Quốc ở đây. Nói chung xứng đáng được đánh giá khách sạn tốt nhất TP. Lào Cai hiện nay. Một lựa chọn hàng đầu cho bạn nào sắp tới Lào Cai.'
+    }
+]
 export  {
     listsImage,
     listRooms,
-    listServices
+    listServices,
+    listTours,
+    listFeeback
 }

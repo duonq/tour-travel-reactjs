@@ -33,28 +33,7 @@
     }
     .info {
       text-align: center;
-      h4 {
-        text-align: center;
-        font-size: 20px;
-        margin-top: 40px;
-        font-weight: 400;
-        text-transform: capitalize;
-      }
-      h3 {
-        text-align: center;
-        font-size: 40px;
-        padding: 0 32px;
-        font-weight: 800;
-        text-transform: capitalize;
-        line-height: 45px;
-      }
-      p {
-        text-align: justify;
-        font-size: 18px;
-        padding: 0 32px;
-        font-weight: 300;
-        line-height: 40px;
-      }
+      margin-top: 40px;
       .btnView {
         transition: 0.3s ease;
         p {
@@ -73,15 +52,6 @@
   .roomsStyle {
     text-align: center;
     margin: 50px;
-    h3 {
-      text-align: center;
-      font-size: 40px;
-      padding: 0 32px;
-      font-weight: 700;
-      text-transform: capitalize;
-      line-height: 45px;
-      margin: 50px;
-    }
     .btnView {
       transition: 0.3s ease;
       p {
@@ -113,33 +83,15 @@
       padding: 45px 50px;
       background: #fff;
       box-shadow: 0 15px 35px 0 rgb(0 29 44 / 10%);
+      h3,
+      h4 {
+        text-align: justify;
+      }
     }
   }
   .serviceStyle {
     text-align: center;
     margin: 50px;
-    h4 {
-      font-size: 16px;
-      font-weight: 300;
-      margin-bottom: 0;
-    }
-    h3 {
-      text-align: center;
-      font-size: 38px;
-      padding: 5px 32px;
-      font-weight: 800;
-      text-transform: capitalize;
-      line-height: 45px;
-      margin-bottom: 0;
-    }
-    h5 {
-      text-align: justify;
-      font-size: 18px;
-      padding: 0 32px;
-      font-weight: 300;
-      line-height: 40px;
-      margin-bottom: 0;
-    }
     .videoIllust {
       position: relative;
       margin: 50px 0;
@@ -169,14 +121,6 @@
           padding: 30px;
           background: rgba(0, 0, 0, 0.4);
           color: #fafafa;
-          h5 {
-            font-size: 16px;
-            color: #d6d6d6;
-            font-weight: 300;
-            text-transform: uppercase;
-            line-height: 16px;
-            padding: 5px 0;
-          }
           a {
             font-size: 20px;
             margin: 0;
@@ -212,6 +156,100 @@
             }
             hr {
               width: 100px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .newStyle {
+    text-align: center;
+    .tourStyle {
+      display: flex;
+      justify-content: space-between;
+      .cardStyle {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        margin: 50px 20px;
+        transition: 0.3s ease;
+        & > div {
+          background: #f8f8f8;
+          text-align: justify;
+          &:first-child {
+            padding: 20px;
+          }
+        }
+        button {
+          font-weight: 400;
+          text-transform: uppercase;
+          padding: 15px 45px;
+          background: 0 0;
+          border: 1px solid #c19b76;
+          p {
+            margin-bottom: 0;
+          }
+          &:hover {
+            cursor: pointer;
+            background: #c19b76 !important;
+            color: #fff !important;
+          }
+        }
+
+        img {
+          width: 100%;
+        }
+
+        &:nth-child(2) {
+          flex-direction: column-reverse;
+        }
+        &:hover {
+          box-shadow: 0 15px 35px 0 rgb(0 29 44 / 30%);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .feebackStyle {
+    margin: 50px 0;
+    h3 {
+      text-align: center;
+    }
+    h4 {
+      font-weight: 400;
+    }
+    p {
+      text-align: justify;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 40px;
+    }
+    .listFB {
+      position: relative;
+      padding: 30px;
+      width: 60%;
+      border: 1px solid #fafafa;
+      margin: auto;
+      box-shadow: 0 15px 35px 0 rgb(0 29 44 / 10%);
+      & > div {
+        background-image: url(https://duchuygrandhotel.com/wp-content/themes/sailing/assets/images/background.png);
+        img {
+          width: 50%;
+        }
+        &:nth-child(2) {
+          width: 50%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 30px;
+          text-align: justify;
+          :global {
+            .ant-carousel {
+              ul {
+                bottom: 0;
+                margin-bottom: 0;
+              }
             }
           }
         }

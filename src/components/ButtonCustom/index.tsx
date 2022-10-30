@@ -2,7 +2,7 @@ import React from 'react'
 import { ITypeButtonCustom } from '../../shared/constants/IConstant'
 
 const ButtomCustom = (props: ITypeButtonCustom) => {
-    const { title, color, bg, colorBorder, classCustom, onAction, disabled, icon, heightIcon, widthIcon, prefix, suffix } = props
+    const { title, color, bg, colorBorder, classCustom, onClick, disabled, icon, heightIcon, widthIcon, prefix, suffix } = props
     return (
         <button type='button'
             className={`${classCustom} ${disabled ? "disabled-btn" : ""}`}
@@ -11,7 +11,7 @@ const ButtomCustom = (props: ITypeButtonCustom) => {
                 background: bg,
                 border: colorBorder ? `1px solid ${colorBorder}` : ""
             }}
-            onClick={onAction}
+            onClick={onClick}
             disabled={disabled}
         >
             <p>

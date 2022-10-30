@@ -1,3 +1,5 @@
+import { type } from "os"
+
 type ITypeRouter = {
   exact?: boolean
   path: string
@@ -45,7 +47,7 @@ type ITypeButtonCustom = {
   bg?: string 
   colorBorder?: string 
   icon?: any
-  onAction?: any
+  onClick?: any
   disabled?: boolean 
   classCustom?: string 
   preventEventClick?: any
@@ -55,10 +57,16 @@ type ITypeButtonCustom = {
   suffix?: any
 }
 
+type ITypeTabCustom = {
+  tabLabels: any[]
+  tabPanes?: any[]
+}
+
 export type {
   ITypeRouter,
   ITypeListMenu,
   ITypeIcon,
   ITypeInputCustom,
-  ITypeButtonCustom
+  ITypeButtonCustom,
+  ITypeTabCustom
 }

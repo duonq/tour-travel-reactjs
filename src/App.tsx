@@ -12,7 +12,7 @@ function App() {
             const Page = route.component;
             let Layout = LayoutPage;
             if (route.layout) {
-              Layout = route.layout;
+              Layout = route.layout
             }
             return (
               <Route

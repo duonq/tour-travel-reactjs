@@ -1,0 +1,14 @@
+.itemPage {
+  .infoItem {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .leftItemPage {
+      width: 70%;
+      .titlePrice {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
