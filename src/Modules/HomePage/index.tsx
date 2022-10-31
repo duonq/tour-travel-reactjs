@@ -8,7 +8,7 @@ import { listFeeback, listRooms, listServices, listTours } from "./shared/consta
 
 
 const HomePage = () => {
-    const [visible, setState] = useState(false)
+    const [visible, setState] = useState<Boolean>(false)
     const btnClick = () => {
         setState(true)
     }
