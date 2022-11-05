@@ -8,7 +8,7 @@ import { listFeeback, listRooms, listServices, listTours } from "./shared/consta
 
 
 const HomePage = () => {
-    const [visible, setState] = useState<Boolean>(false)
+    const [visible, setState] = useState<any>(false)
     const btnClick = () => {
         setState(true)
     }
@@ -87,7 +87,7 @@ const HomePage = () => {
                         <ButtomCustom title="video clip" onClick={btnClick} />
                         <Modal
                             title="Product name"
-                            open={visible}
+                            visible={visible}
                             footer={null}
                             onCancel={hideModal}
                             bodyStyle={{ padding: 0 }}

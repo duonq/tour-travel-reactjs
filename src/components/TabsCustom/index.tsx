@@ -9,7 +9,10 @@ const TabCustom = ({ ...props }: ITypeTabCustom) => {
             <nav className={style.tabList}>
                 {props.tabLabels.map((tabLabel, index) => {
                     return (
-                        <a key={index} onClick={() => { setCurrentTab(index) }}>
+                        <a key={index} className={[
+                            "tab-item",
+                            currentTab === index ? style.tabActive : ""
+                        ].join(" ")} onClick={() => { setCurrentTab(index) }}>
                             {tabLabel}
                         </a>
                     )

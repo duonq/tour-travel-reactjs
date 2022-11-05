@@ -1,5 +1,6 @@
 import React from "react";
 import LayoutPage from "../../Layouts";
+import Contact from "../../Modules/contact";
 import HomePage from "../../Modules/HomePage";
 import Login from "../../Modules/Login";
 import NotFound from "../../Modules/NotFound";
@@ -21,6 +22,11 @@ const RouterLinkDefine: ITypeRouter[] = [
     {
         path: "/room-item",
         component: RoomItem,
+        layout: LayoutPage,
+    },
+    {
+        path: "/contact",
+        component: Contact,
         layout: LayoutPage,
     },
     {

@@ -2,7 +2,9 @@
   .infoItem {
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 90%;
+    margin: auto;
+    padding: 50px;
     .leftItemPage {
       width: 70%;
       .titlePrice {
@@ -10,5 +12,173 @@
         justify-content: space-between;
       }
     }
+    .rightItemPage {
+      width: 30%;
+      padding: 50px 0;
+      .booksRoom {
+        width: 80%;
+        margin: auto;
+        padding: 20px;
+        background: #5f9ea0;
+        h3 {
+          text-align: center;
+          margin-bottom: 0;
+          padding: 20px 0;
+          color: #fff;
+        }
+        :global {
+          .ant-form {
+            text-align: center;
+            & > div {
+              width: 100%;
+              margin: 10px 0;
+            }
+            button {
+              width: 100%;
+              margin: auto;
+              margin-top: 10px;
+              p {
+                margin-bottom: 0;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+    }
   }
+  .roomOther {
+    width: 90%;
+    margin: auto;
+    padding: 50px;
+    & > h3 {
+      border-bottom: 4px solid #c19b76;
+      width: max-content;
+    }
+    .roomsList {
+      display: flex;
+      justify-content: space-between;
+      .itemRoom {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #dce0e2;
+        & > div {
+          .imageRoom {
+            position: relative;
+            img {
+              width: 100%;
+            }
+            button {
+              position: absolute;
+              height: auto;
+              top: 10%;
+              left: 10%;
+              p {
+                margin-bottom: 0;
+                padding: 5px 20px;
+              }
+              border: 1px solid #c19b76;
+              &:hover {
+                background: #fff !important;
+                color: #c19b76 !important;
+                border: 1px solid #c19b76;
+              }
+            }
+          }
+        }
+      }
+    }
+    .infoRoom {
+      padding: 30px 30px 0;
+    }
+    .priceRoom {
+      display: flex;
+      align-items: center;
+      padding: 30px;
+      border-top: 1px solid #dce0e2;
+      h5,
+      h4 {
+        margin-bottom: 0;
+      }
+      h4 {
+        padding: 0 10px;
+      }
+    }
+  }
+}
+.infoTab1 {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+
+  .information {
+    width: 60%;
+  }
+  .tableInfo {
+    width: 35%;
+    display: block;
+    height: fit-content;
+    margin-top: 30px;
+    background: #f2f4f8;
+    h5 {
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        padding: 10px 20px;
+        span {
+          padding: 5px;
+          font-size: 15px;
+          color: #5a5a5a;
+          svg {
+            path {
+              fill: #c19b76;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.inforTab2 {
+  margin: 50px 0;
+  .formSubmit {
+    .ratingStyle {
+    }
+    .feebackStyle {
+      textarea {
+        width: 100%;
+        &:focus-visible {
+          outline: 0;
+        }
+      }
+    }
+    .inputStyle {
+      input {
+        padding: 10px 20px;
+        width: 40%;
+        border: 1px solid #333;
+        border-radius: 5px;
+        &:focus-visible {
+          outline: 0;
+        }
+      }
+    }
+    button {
+      width: 20%;
+      p {
+        margin-bottom: 0;
+        text-align: center;
+      }
+    }
+  }
+}
+.inforTab3 {
+  margin: 50px 0;
 }

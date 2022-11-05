@@ -110,8 +110,33 @@ const listImgs = [
   }
 ]
 
+const listEquipment = [
+  {
+    title: "Buffet sáng tự chọn"
+  },
+  {
+    title: "Đồ miến phí chuẩn bị hàng ngày"
+  },
+  {
+    title: "GYM & Bơi bốn mùa miễn phí"
+  },
+  {
+    title: "Bồn tắm riêng có sen vòi Toto"
+  },
+  {
+    title: "Điều hòa tổng có điều khiển riêng"
+  },
+  {
+    title: "Wifi tốc độ cao"
+  },
+  {
+    title: "Tivi Sony 55inch"
+  }
+]
+
 export {
   listsMenu,
   listsContact,
-  listImgs
+  listImgs,
+  listEquipment
 }

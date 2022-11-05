@@ -1,22 +1,48 @@
-import React from 'react'
-import { ITypeButtonCustom } from '../../shared/constants/IConstant'
+import React from "react"
 
-const ButtomCustom = (props: ITypeButtonCustom) => {
-    const { title, color, bg, colorBorder, classCustom, onClick, disabled, icon, heightIcon, widthIcon, prefix, suffix } = props
+type IButtonCustom = {
+    title?: any
+    color?: string
+    bg?: string
+    onClick?: any
+    disabled?: boolean
+    classCustom?: string
+    iconImg?: any
+    heightIcon?: string
+    widthIcon?: string
+    prefix?: JSX.Element
+    type?: any
+}
+
+const ButtonCustom = ({
+    title,
+    color = "#fff",
+    bg,
+    classCustom,
+    disabled,
+    onClick,
+    iconImg,
+    widthIcon,
+    heightIcon,
+    prefix,
+    type
+}: IButtonCustom) => {
     return (
-        <button type='button'
-            className={`${classCustom} ${disabled ? "disabled-btn" : ""}`}
+        <button
+            type={type ? type : "button"}
             style={{
                 color: color,
-                background: bg,
-                border: colorBorder ? `1px solid ${colorBorder}` : ""
+                background: bg
             }}
+            className={`${classCustom} ${disabled ? "buttonDisabled" : ""}`}
             onClick={onClick}
             disabled={disabled}
         >
-            <p>
-                {icon && (
-                    <img src={icon} alt=""
+            <p className="mb-0">
+                {iconImg && (
+                    <img
+                        src={iconImg}
+                        alt="React Logo"
                         style={{
                             height: heightIcon,
                             width: widthIcon
@@ -24,11 +50,10 @@ const ButtomCustom = (props: ITypeButtonCustom) => {
                     />
                 )}
                 {prefix && <span className="icon icon--prefix">{prefix}</span>}
-                <span>{title}</span>
-                {suffix && <span className="icon icon--suffix">{suffix}</span>}
+                {title && <span>{title}</span>}
             </p>
         </button>
     )
 }
 
-export default ButtomCustom
+export default ButtonCustom

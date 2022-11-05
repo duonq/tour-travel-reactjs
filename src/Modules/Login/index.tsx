@@ -4,7 +4,7 @@ import InputCustom from "../../components/InputCustom";
 const Login = () => {
   return (
     <div>
-      <InputCustom type="text" placeholder="Enter something" />
+      <InputCustom placeholder="Enter something" />
     </div>
   );
 };
