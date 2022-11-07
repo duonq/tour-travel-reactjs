@@ -55,13 +55,13 @@ const listIconContact: ITypeIcon[] = [
 
 const FooterPage = () => {
   const renderListIcon = (iconName: string) => {
-    const icon = listIcon.find((item) => item.key === iconName);
-    return icon?.value;
-  };
+    const icon = listIcon.find((item) => item.key === iconName)
+    return icon?.value
+  }
 
   const renderListIconContact = (iconname: string) => {
-    const icon = listIconContact.find((item) => item.key === iconname);
-    return icon?.value;
+    const icon = listIconContact.find((item) => item.key === iconname)
+    return icon?.value
   };
 
   return (

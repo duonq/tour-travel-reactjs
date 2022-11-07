@@ -14,7 +14,8 @@ type ITypeListMenu = {
   id: number
   href: string
   title: string
-  icon?: string
+  icon?: string,
+  children?: any[]
 }
 
 type ITypeIcon = {

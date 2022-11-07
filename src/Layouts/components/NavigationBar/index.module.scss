@@ -1,0 +1,41 @@
+.navbarPage {
+  width: 50%;
+  .navbar {
+    list-style: none;
+    display: flex;
+    // width: 60%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    justify-content: space-around;
+    align-items: center;
+
+    li {
+      padding: 0 25px;
+
+      span {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 28px;
+        color: #fff;
+      }
+    }
+  }
+  :global {
+    .ant-menu {
+      background: none;
+    }
+    .ant-menu-horizontal {
+      border-bottom: 0;
+    }
+    .ant-menu-item:hover {
+      color: #000;
+    }
+    .ant-menu-light .ant-menu-submenu-title:hover,
+    .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover {
+      color: #000;
+    }
+  }
+}

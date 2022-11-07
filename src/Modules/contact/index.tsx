@@ -1,20 +1,40 @@
 import React from 'react'
 import style from "./index.module.scss"
-import { EnvironmentOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import {
+    EnvironmentOutlined, ClockCircleOutlined, SkypeOutlined,
+    PhoneOutlined,
+    MailOutlined,
+    InstagramOutlined
+} from '@ant-design/icons';
 import { Form } from 'antd';
 import InputCustom from '../../components/InputCustom';
 import { TypeInputCustom } from '../../shared/emuns';
 import ButtonCustom from '../../components/ButtonCustom';
 import SlideImage from '../../components/SlideImage';
+import { listsContact } from '../../shared/constants';
+import { Link } from 'react-router-dom';
+import { ITypeIcon } from '../../shared/constants/IConstant';
+
+const listIcon: ITypeIcon[] = [
+    { key: "map", value: <EnvironmentOutlined />, href: "/" },
+    { key: "phone", value: <PhoneOutlined />, href: "/" },
+    { key: "mail", value: <MailOutlined />, href: "/" },
+    { key: "skypee", value: <SkypeOutlined />, href: "/" },
+    { key: "instagram", value: <InstagramOutlined />, href: "/" },
+];
 
 const Contact = () => {
     const [form] = Form.useForm()
+    const renderListIcon = (iconName: string) => {
+        const icon = listIcon.find((item) => item.key === iconName)
+        return icon?.value
+    }
     return (
-        <div>
+        <div className={style.contactPage}>
             <SlideImage backgroundImage={'https://duchuygrandhotel.com/wp-content/uploads/2019/08/hotel-check-out.jpg'}>
                 <h1>Liên hệ với chúng tôi</h1>
             </SlideImage>
-            <div className={style.contactPage}>
+            <div className={style.contacInfo}>
                 <div className={style.inforContact}>
                     <h3>Liên hệ</h3>
                     <p>Chúng tôi có địa chỉ và sử dụng các mạng xã hội, Quý khách có thể tìm thấy chúng tôi ở các địa chỉ dưới đây: (We are also active in social media. You can find us
@@ -28,8 +48,20 @@ const Contact = () => {
                         <p><label>Thời gian 8:00 AM - 10:00 PM</label>
                             <label>Thứ Hai - Chủ Nhật</label></p>
                     </div>
-                    <p>Call. 0846 880 633</p>
-                    <p>Email. duchuygrandhotel@gmail.com</p>
+                    <p>Call. <span>0846 880 633</span></p>
+                    <p>Email. <span>duchuygrandhotel@gmail.com</span></p>
+                    <ul>
+                        {listsContact.length > 0 &&
+                            listsContact.map((itemContact, index) => {
+                                return (
+                                    <li key={index}>
+                                        <Link to={itemContact.href}>
+                                            {renderListIcon(itemContact.icon || " ")}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                    </ul>
                 </div>
                 <div className={style.formContact}>
                     <h3>Gửi tin nhắn</h3>

@@ -14,7 +14,18 @@ const listsMenu: ITypeListMenu[] = [
   {
     id: 1,
     href: "/",
-    title: "Trang chủ"
+    title: "Trang chủ",
+    children: [
+      { id: 1,
+        title: 'Option 3',
+        href: '',
+      },
+      {
+        id: 2,
+        title: 'Option 4',
+        href: '',
+      },
+    ],
   },
   {
     id: 2,
