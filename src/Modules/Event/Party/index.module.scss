@@ -1,0 +1,44 @@
+.partyPage {
+  h1 {
+    line-height: 450px;
+    font-weight: 500;
+    padding-bottom: 2px;
+    background-image: linear-gradient(red, blue);
+    background-position: 0 100%;
+    background-size: 0 2px;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s, background-position 0s 0.5s;
+    cursor: pointer;
+    &:hover {
+      background-position: 100% 100%;
+      background-size: 100% 2px;
+    }
+  }
+  .mainInfoEve {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 0;
+    & > div {
+      &:first-child {
+        width: 30%;
+      }
+      &:last-child {
+        width: 70%;
+      }
+    }
+    .tabStyle {
+      & > div {
+        width: 95%;
+        margin: auto;
+      }
+    }
+  }
+}
+.informationTab {
+  margin: auto;
+  img {
+    width: 100%;
+  }
+}

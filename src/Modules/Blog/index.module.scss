@@ -1,0 +1,19 @@
+.blogStyle {
+  .mainBlog {
+    display: flex;
+    width: 80%;
+    margin: 50px auto;
+    & > div {
+      &:first-child {
+        width: 65%;
+        img {
+          width: 100%;
+        }
+      }
+      &:last-child {
+        width: 35%;
+        padding: 20px 30px;
+      }
+    }
+  }
+}

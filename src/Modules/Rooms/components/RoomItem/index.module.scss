@@ -28,7 +28,6 @@
         }
         :global {
           .ant-form {
-            text-align: center;
             & > div {
               width: 100%;
               margin: 10px 0;
@@ -42,6 +41,34 @@
                 text-align: center;
               }
             }
+          }
+        }
+      }
+      .weatherStyle {
+        width: 80%;
+        padding: 20px;
+        margin: 50px auto;
+        background-color: #f7edc6;
+        & > div {
+          display: flex;
+          justify-content: space-between;
+        }
+        .temperatureStyle {
+          :global {
+            .anticon {
+              font-size: 50px;
+            }
+          }
+          p {
+            margin-bottom: 0;
+          }
+        }
+        .daysStyle {
+          span {
+            padding: 0 5px;
+          }
+          p {
+            margin-bottom: 0;
           }
         }
       }

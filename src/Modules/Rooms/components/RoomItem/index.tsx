@@ -5,7 +5,7 @@ import { listRooms, listsImage } from '../../../HomePage/shared/constants'
 import CarouselItem from '../../../../components/CarouselItem'
 import TabCustom from '../../../../components/TabsCustom'
 import { listEquipment } from '../../../../shared/constants'
-import { CheckCircleFilled } from '@ant-design/icons';
+import { CheckCircleFilled, CloudOutlined } from '@ant-design/icons';
 import { DatePicker, DatePickerProps, Form, Rate, Table } from 'antd'
 import InputCustom from '../../../../components/InputCustom'
 import ButtomCustom from '../../../../components/ButtonCustom'
@@ -221,6 +221,40 @@ const RoomItem = () => {
                             <SelectCustom options={options} placeholder="trẻ em" />
                             <ButtomCustom title="Đặt lịch" bg='#C19B76' />
                         </Form>
+                    </div>
+
+                    <div className={style.weatherStyle}>
+                        <h3>Thời tiết</h3>
+                        <div>
+                            <div className={style.temperatureStyle}>
+                                <CloudOutlined />
+                                <p>10°C</p>
+                                <p>Độ ẩm: 73%</p>
+                                <p>Gió: 1.55m/s</p>
+                            </div>
+                            <div className={style.daysStyle}>
+                                <p>
+                                    Thứ 2
+                                    <span><CloudOutlined /></span>
+                                    15°C
+                                </p>
+                                <p>
+                                    Thứ 3
+                                    <span><CloudOutlined /></span>
+                                    15°C
+                                </p>
+                                <p>
+                                    Thứ 4
+                                    <span><CloudOutlined /></span>
+                                    15°C
+                                </p>
+                                <p>
+                                    Thứ 5
+                                    <span><CloudOutlined /></span>
+                                    15°C
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

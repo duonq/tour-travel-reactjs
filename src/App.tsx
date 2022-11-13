@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LayoutPage from "./Layouts";
 import RouterLinkDefine from "./shared/routerConfig";
 import "./index.css";
+import { Fragment } from "react";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
           {RouterLinkDefine.map((route, index) => {
             const Page = route.component;
             let Layout = LayoutPage;
-            if (route.layout) {
+            if (route?.layout) {
               Layout = route.layout
             }
             return (

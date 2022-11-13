@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import LayoutPage from "../../Layouts";
+import BlogPage from "../../Modules/Blog";
 import Contact from "../../Modules/contact";
+import PartyEvent from "../../Modules/Event/Party";
 import HomePage from "../../Modules/HomePage";
 import Login from "../../Modules/Login";
 import NotFound from "../../Modules/NotFound";
@@ -30,8 +32,19 @@ const RouterLinkDefine: ITypeRouter[] = [
         layout: LayoutPage,
     },
     {
+        path: "/party-organizing",
+        component: PartyEvent,
+        layout: LayoutPage,
+    },
+    {
+        path: "/blog",
+        component: BlogPage,
+        layout: LayoutPage,
+    },
+    {
         path: "/login",
         component: Login,
+        layout: Fragment
     },
     {
         path: "*",

@@ -8,46 +8,48 @@ import img6 from "../../../src/assets/img6.svg";
 import img7 from "../../../src/assets/img7.svg";
 import img8 from "../../../src/assets/img8.svg";
 import img9 from "../../../src/assets/img9.svg";
+import { MenuProps } from "antd";
 
 
-const listsMenu: ITypeListMenu[] = [
-  {
-    id: 1,
-    href: "/",
-    title: "Trang chủ",
-    children: [
-      { id: 1,
-        title: 'Option 3',
-        href: '',
-      },
-      {
-        id: 2,
-        title: 'Option 4',
-        href: '',
-      },
-    ],
-  },
-  {
-    id: 2,
-    href: "/rooms",
-    title: "Phòng nghỉ"
-  },
-  {
-    id: 3,
-    href: "",
-    title: "Sự kiện"
-  },
-  {
-    id: 4,
-    href: "",
-    title: "Dịch vụ"
-  },
-  {
-    id: 5,
-    href: "/contact",
-    title: "Liên hệ"
-  }
-]
+const listsMenu: MenuProps['items'] = [
+    {
+      title: "1",
+      key: "/",
+      label: "Trang chủ",
+    },
+    {
+      title: "2",
+      key: "/rooms",
+      label: "Phòng nghỉ"
+    },
+    {
+      title: "3",
+      key: "",
+      label: "Sự kiện",
+      children: [
+        {
+          title: "7",
+          label: 'Option 3',
+          key: '/party-organizing',
+        },
+        {
+          title: "8",
+          label: 'Option 4',
+          key: '/asas',
+        },
+      ],
+    },
+    {
+      title: "4",
+      key: "/blog",
+      label: "Blog"
+    },
+    {
+      title: "5",
+      key: "/contact",
+      label: "Liên hệ"
+    }
+  ]
 
 const listsContact: ITypeListMenu[] = [
   {

@@ -1,6 +1,9 @@
+import { Form } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router'
+import ButtonCustom from '../../components/ButtonCustom'
 import ButtomCustom from '../../components/ButtonCustom'
+import InputCustom from '../../components/InputCustom'
 import SlideImage from '../../components/SlideImage'
 import { listRooms } from '../HomePage/shared/constants'
 import style from './index.module.scss'
@@ -15,6 +18,12 @@ const Rooms = () => {
             <SlideImage backgroundImage={'https://duchuygrandhotel.com/wp-content/uploads/2019/08/hotel-check-out.jpg'}>
                 <h1>Hotel Room</h1>
             </SlideImage>
+            <div className={style.searchKey}>
+                <Form>
+                    <InputCustom placeholder='Tìm kiếm từ ...' />
+                    <ButtonCustom title="Search" bg='#C19B76' color='#fff' />
+                </Form>
+            </div>
             <div className={style.roomsList}>
                 {listRooms && listRooms.map((item) => {
                     return (
