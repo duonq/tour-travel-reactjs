@@ -24,17 +24,17 @@ const listsMenu: MenuProps['items'] = [
     },
     {
       title: "3",
-      key: "",
+      key: "/events",
       label: "Sự kiện",
       children: [
         {
           title: "7",
-          label: 'Option 3',
+          label: 'Tổ chức tiệc',
           key: '/party-organizing',
         },
         {
           title: "8",
-          label: 'Option 4',
+          label: 'Hội nghị phòng',
           key: '/asas',
         },
       ],

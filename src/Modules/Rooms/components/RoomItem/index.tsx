@@ -13,6 +13,7 @@ import { TypeInputCustom } from '../../../../shared/emuns'
 import { ColumnsType } from 'antd/lib/table'
 import SelectCustom from '../../../../components/SelectCustom'
 import { useNavigate } from 'react-router'
+import ButtonCustom from '../../../../components/ButtonCustom'
 
 
 const RoomItem = () => {
@@ -213,14 +214,16 @@ const RoomItem = () => {
                 </div>
                 <div className={style.rightItemPage}>
                     <div className={style.booksRoom}>
-                        <h3>Đặt phòng của bạn</h3>
+                        <ButtonCustom title="Đặt lịch phòng" color='#000' />
+                        {/* <h3>Đặt phòng của bạn</h3>
                         <Form>
                             <DatePicker onChange={onChange} placeholder="Ngày đến" />
                             <DatePicker onChange={onChange} placeholder="Ngày đi" />
+                            <SelectCustom options={options} placeholder="Phòng" />
                             <SelectCustom options={options} placeholder="Người lớn" />
                             <SelectCustom options={options} placeholder="trẻ em" />
                             <ButtomCustom title="Đặt lịch" bg='#C19B76' />
-                        </Form>
+                        </Form> */}
                     </div>
 
                     <div className={style.weatherStyle}>

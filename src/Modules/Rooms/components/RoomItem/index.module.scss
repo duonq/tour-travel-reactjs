@@ -18,13 +18,56 @@
       .booksRoom {
         width: 80%;
         margin: auto;
-        padding: 20px;
-        background: #5f9ea0;
+        // padding: 20px;
+        // background: #5f9ea0;
         h3 {
           text-align: center;
           margin-bottom: 0;
           padding: 20px 0;
           color: #fff;
+        }
+        button {
+          width: 100%;
+          margin: auto;
+          margin-top: 10px;
+          background-color: transparent;
+          border: 1px solid rgba(0, 0, 0, 0.6);
+          transition: all 0.5s;
+          padding: 10px 20px;
+          p {
+            margin-bottom: 0;
+            text-align: center;
+            span {
+              cursor: pointer;
+              display: inline-block;
+              position: relative;
+              transition: 0.5s;
+              font-weight: 600;
+
+              &:after {
+                content: "\00bb";
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+              }
+            }
+          }
+        }
+        button:hover span {
+          padding-right: 25px;
+          color: #fff;
+        }
+        button:hover {
+          padding-right: 25px;
+          background-color: #b56953;
+          color: #fff;
+        }
+
+        button:hover span:after {
+          opacity: 1;
+          right: 0;
         }
         :global {
           .ant-form {
