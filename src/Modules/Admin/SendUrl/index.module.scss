@@ -1,0 +1,101 @@
+.sendUrlPage {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  .formUrl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4.5rem 5rem;
+    border-radius: 15px;
+    box-shadow: 0 1px 8px rgb(0 0 0 / 18%);
+    background-color: #fff;
+  }
+
+  h1 {
+    font-weight: 700 !important;
+    font-size: 22px;
+    line-height: 32px;
+    color: #13202f;
+  }
+
+  p {
+    text-align: justify;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #13202f;
+  }
+
+  .formInput {
+    form {
+      :global {
+        .ant-form-item {
+          .ant-row {
+            label {
+              margin-bottom: 10px;
+              font-weight: 500;
+              font-size: 15px;
+              line-height: 22px;
+              color: #13202f;
+            }
+
+            input {
+              border-radius: 30px;
+              height: 44px;
+              padding: 0 16px;
+            }
+          }
+        }
+      }
+    }
+
+    .linkTab {
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 22px;
+      text-align: center;
+      text-decoration: underline;
+      padding: 20px 0;
+      cursor: pointer;
+      font-weight: 500;
+      color: #142537;
+    }
+  }
+
+  .inputEmail {
+    padding: 10px !important;
+    font-size: 15px !important;
+
+    input {
+      padding: 0 10px;
+    }
+  }
+
+  button {
+    width: 100%;
+    border: 0;
+    border-radius: 30px;
+    height: 46px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+
+    p {
+      width: 100%;
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 23px;
+      color: #ffffff;
+      margin-bottom: 0;
+    }
+  }
+}

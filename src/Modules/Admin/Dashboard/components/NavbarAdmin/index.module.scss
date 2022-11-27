@@ -1,0 +1,32 @@
+.navbarPage {
+  min-width: 270px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  list-style: none;
+  padding: 32px 0;
+
+  li {
+    padding: 15px 20px;
+    cursor: pointer;
+
+    a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+
+      span {
+        padding: 7px;
+      }
+    }
+
+    &:hover {
+      background-color: #bd5364;
+    }
+  }
+
+  .actionLink {
+    background-color: #bd5364;
+    border-bottom: 2px solid #bd5364;
+  }
+}

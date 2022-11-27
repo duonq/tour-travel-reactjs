@@ -1,0 +1,37 @@
+.DashboardPage {
+  padding: 30px;
+  .total {
+    display: flex;
+    justify-content: space-between;
+    .boxInfo {
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+      padding: 20px;
+      box-shadow: 0px 0.2px 4px 0px rgb(0 21 41 / 25%);
+      div {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        &:first-child {
+          justify-content: space-between;
+          color: rgb(167 157 157 / 85%);
+        }
+        h3,
+        p {
+          margin-bottom: 0;
+        }
+
+        h3 {
+          margin: 0 20px;
+        }
+        :global {
+          .anticon {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -31,10 +31,10 @@ type IPropsInput = {
   maxSizeImage?: number
   valueInput?: any
   placeholder?: string
-  prefix?: string
+  prefix?: JSX.Element
   rules?: any[]
   required?: boolean
-  suffix?: string
+  suffix?: JSX.Element
   handleOnChange?: (value: any) => void
   refPass?: any
   onPressEnter?: (e: any) => void
@@ -223,7 +223,7 @@ const InputCustom = ({
           <div>
             {title && <span>{title}</span>}
             <span className={styles.required}>
-              {required ? "（必須）" : ""}
+              {required ? " (bắt buộc) " : ""}
             </span>
           </div>
         )

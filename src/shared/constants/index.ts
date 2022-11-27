@@ -9,7 +9,7 @@ import img7 from "../../../src/assets/img7.svg";
 import img8 from "../../../src/assets/img8.svg";
 import img9 from "../../../src/assets/img9.svg";
 import { MenuProps } from "antd";
-
+import { regex } from "../regex";
 
 const listsMenu: MenuProps['items'] = [
     {
@@ -147,9 +147,69 @@ const listEquipment = [
   }
 ]
 
+let dataPassword: any = null
+
+const rulePasswordLogin = [
+  {
+      required: true,
+      message: "Vui lòng nhập mật khẩu của bạn",
+      validationTrigger: "onBlur"
+  },
+  () => ({
+      validator(rule: any, value: any) {
+        dataPassword = value
+          if (value && !regex.password.test(value)) {
+              return Promise.reject("Mật khẩu không đúng.")
+          }
+
+          return Promise.resolve()
+      }
+  })
+]
+
+const ruleValidateEmail = [
+  {
+      required: true,
+      message: "Hãy điền địa chỉ email của bạn."
+  },
+  () => ({
+      validator(rule: any, value: any) {
+          if (value && !regex.email.test(value)) {
+              return Promise.reject(
+                  new Error(
+                      "Địa chỉ E-mail không chính xác. Vui lòng kiểm tra các thông tin bạn đã nhập và thử lại."
+                  )
+              )
+          }
+          return Promise.resolve()
+      }
+  })
+]
+
+const ruleConfirmPasswordLogin = [
+  {
+      required: true,
+      message: "Vui lòng nhập mật khẩu (để xác nhận).",
+      validationTrigger: "onBlur"
+  },
+  () => ({
+      validator(rule: any, value: any) {
+          if (value && value !== dataPassword) {
+              return Promise.reject(
+                  new Error("Mật khẩu xác nhận không khớp.")
+              )
+          }
+          return Promise.resolve()
+      }
+  })
+]
+
 export {
   listsMenu,
   listsContact,
   listImgs,
-  listEquipment
+  listEquipment,
+  rulePasswordLogin,
+  ruleValidateEmail,
+  ruleConfirmPasswordLogin
 }

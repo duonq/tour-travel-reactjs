@@ -23,10 +23,10 @@
           .ant-input-number,
           .ant-picker,
           .ant-input-number-affix-wrapper {
-            padding: 0 11px;
+            padding: 4px 11px;
             border-radius: 7px;
-            border-color: skyblue !important;
-            box-shadow: none !important;
+            border-color: green;
+            box-shadow: none;
           }
 
           .ant-input-number-handler-wrap {
@@ -43,7 +43,7 @@
             .ant-input-number-group-addon {
               border-top-right-radius: 7px;
               border-bottom-right-radius: 7px;
-              border-color: #23418c !important;
+              border-color: #23418c;
               background: transparent;
             }
           }
@@ -53,8 +53,8 @@
 
     .ant-select-disabled {
       .ant-select-selector {
-        background: #e5e5e5 !important;
-        color: #333333 !important;
+        background: #e5e5e5;
+        color: #333333;
       }
     }
 

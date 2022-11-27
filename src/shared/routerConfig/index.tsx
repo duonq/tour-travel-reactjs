@@ -4,11 +4,15 @@ import BlogPage from "../../Modules/Blog";
 import Contact from "../../Modules/contact";
 import PartyEvent from "../../Modules/Event/Party";
 import HomePage from "../../Modules/HomePage";
-import Login from "../../Modules/Login";
+import Login from "../../Modules/Admin/Login";
 import NotFound from "../../Modules/NotFound";
 import Rooms from "../../Modules/Rooms";
 import RoomItem from "../../Modules/Rooms/components/RoomItem";
 import { ITypeRouter } from "../constants/IConstant";
+import SendUrl from "../../Modules/Admin/SendUrl";
+import ResetPassword from "../../Modules/Admin/ResetPassword";
+import Dashboard from "../../Modules/Admin/Dashboard/components";
+import LayoutAdmin from "../../Modules/Admin/Dashboard/components/LayoutAdmin";
 
 const RouterLinkDefine: ITypeRouter[] = [
     {
@@ -45,6 +49,21 @@ const RouterLinkDefine: ITypeRouter[] = [
         path: "/login",
         component: Login,
         layout: Fragment
+    },
+    {
+        path: "/send-url",
+        component: SendUrl,
+        layout: Fragment
+    },
+    {
+        path: "/reset-password",
+        component: ResetPassword,
+        layout: Fragment
+    },
+    {
+        path: "/admin/dashboard",
+        component: Dashboard,
+        layout: LayoutAdmin
     },
     {
         path: "*",
