@@ -13,6 +13,9 @@ import SendUrl from "../../Modules/Admin/SendUrl";
 import ResetPassword from "../../Modules/Admin/ResetPassword";
 import Dashboard from "../../Modules/Admin/Dashboard/components";
 import LayoutAdmin from "../../Modules/Admin/Dashboard/components/LayoutAdmin";
+import RoomManager from "../../Modules/Admin/Dashboard/components/RoomManager";
+import BookRoom from "../../Modules/Admin/Dashboard/components/BookRoom";
+import AddRoom from "../../Modules/Admin/Dashboard/components/AddRoom";
 
 const RouterLinkDefine: ITypeRouter[] = [
     {
@@ -63,6 +66,21 @@ const RouterLinkDefine: ITypeRouter[] = [
     {
         path: "/admin/dashboard",
         component: Dashboard,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/quanLyPhong",
+        component: RoomManager,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/bookRoom",
+        component: BookRoom,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/quanLyPhong/themMoi",
+        component: AddRoom,
         layout: LayoutAdmin
     },
     {

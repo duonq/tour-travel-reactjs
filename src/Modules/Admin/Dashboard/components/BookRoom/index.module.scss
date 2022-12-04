@@ -1,0 +1,30 @@
+.RoomManagerPage {
+  .groupInput {
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px;
+    .filterStyle {
+      width: 20%;
+      :global {
+        .ant-form-item {
+          .ant-select {
+            min-width: 80% !important;
+          }
+        }
+      }
+    }
+    .inputSearch {
+      :global {
+      }
+    }
+  }
+  .roomTable {
+    padding: 30px;
+    :global {
+      .ant-pagination {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}

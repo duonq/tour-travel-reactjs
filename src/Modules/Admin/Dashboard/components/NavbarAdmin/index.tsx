@@ -21,13 +21,13 @@ const listMenus = [
     },
     {
         id: 2,
-        href: "",
+        href: "/admin/quanLyPhong",
         title: "Quản lý phòng",
         icon: "phòng"
     },
     {
         id: 3,
-        href: "",
+        href: "/admin/bookRoom",
         title: "Quản lý đặt phòng",
         icon: "giỏ hàng"
     },

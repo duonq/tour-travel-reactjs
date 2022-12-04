@@ -59,11 +59,12 @@
     }
 
     .ant-select-selector {
-      height: 3rem !important;
+      height: 2.5rem !important;
       font-size: 1.1rem;
       color: #333333;
-      border-color: blue !important;
+      border-color: blue;
       border-radius: 7px !important;
+      align-items: center;
 
       .ant-select-selection-item {
         line-height: 3rem;

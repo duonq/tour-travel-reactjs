@@ -1,0 +1,66 @@
+.RoomManagerPage {
+  .inputSearch {
+    display: flex;
+    justify-content: flex-end;
+    padding: 30px;
+
+    button {
+      width: 15%;
+      height: 40px;
+      border-radius: 6px;
+      margin: 0 15px;
+      p {
+        margin-bottom: 0;
+        text-align: center;
+      }
+    }
+    :global {
+      .ant-form-item {
+        width: 25%;
+      }
+    }
+  }
+  .roomTable {
+    padding: 30px;
+    :global {
+      .ant-table-header {
+        thead {
+          tr {
+            th {
+              font-weight: 700;
+              font-size: 12px;
+              line-height: 17px;
+              color: #142537;
+            }
+          }
+        }
+      }
+      .ant-table-tbody {
+        tr {
+          td {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 17px;
+            align-items: center;
+            letter-spacing: 0.024em;
+            color: #142537;
+            padding: 10px 15px;
+          }
+        }
+      }
+
+      .ant-pagination {
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .groupBtn {
+      button {
+        margin: 0 10px;
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

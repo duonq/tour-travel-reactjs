@@ -1,12 +1,13 @@
 import { DatePicker, FormInstance, Input, Radio, Select, Space } from "antd"
 import Form from "antd/lib/form"
-import React from "react"
+import React, { useState } from "react"
 import styles from "./index.module.scss"
 import stylesInputRadio from "../InputRadio/index.module.scss"
 import TextArea from "antd/lib/input/TextArea"
 import moment from "moment"
 import { TypeInputCustom } from "../../shared/emuns"
 import { autoTrimDebounceInput } from "../../shared/function"
+import { CaretDownOutlined } from "@ant-design/icons"
 
 const { Option } = Select
 
@@ -42,6 +43,8 @@ type IPropsInput = {
   autoSize?: any
   defaultValue?: number
   radioDirection?: any
+  listOptions?: any
+  bordered?: boolean
 }
 // input custom use all in project
 const InputCustom = ({
@@ -59,7 +62,7 @@ const InputCustom = ({
   prefix,
   suffix,
   formatValue,
-  formatDebounce,
+  bordered,
   form,
   valueInput,
   onKeyPress,
@@ -68,9 +71,10 @@ const InputCustom = ({
   onPressEnter,
   rows,
   autoSize,
-  defaultValue,
+  listOptions,
   radioDirection
 }: IPropsInput) => {
+  const [openSelect, setOpenSelectBox] = useState<boolean>(false)
   // list css custom label
   const listClassInput = () => {
     let listCss = styles.inputCustom
@@ -145,14 +149,21 @@ const InputCustom = ({
       case TypeInputCustom.select:
         return (
           <Select
-            defaultValue="lucy"
-            className={classCustomInput}
-            disabled={disabled}
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="Yiminghe">yiminghe</Option>
-          </Select>
+            open={openSelect}
+            placeholder={placeholder}
+            suffixIcon={
+              <CaretDownOutlined
+                onClick={() => setOpenSelectBox(!openSelect)}
+              />
+            }
+            onDropdownVisibleChange={visible => {
+              setOpenSelectBox(visible)
+            }}
+            options={listOptions}
+            bordered={bordered}
+            style={{ minWidth: "10%" }}
+            onChange={handleOnChange}
+          ></Select>
         )
       case TypeInputCustom.password:
         return (
