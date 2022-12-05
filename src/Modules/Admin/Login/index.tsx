@@ -6,11 +6,12 @@ import styles from "./index.module.scss"
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons"
 import InputCustom from "../../../components/InputCustom"
 import { useNavigate } from "react-router"
-import { clearStorage } from "../../../shared/function"
+import { clearStorage, NotificationCustom, setDataStorage } from "../../../shared/function"
 import { ILogin } from "../../../shared/@types"
-import { TypeInputCustom } from "../../../shared/emuns"
+import { KeyStorage, StatusCode, TypeInputCustom, TypeNotification } from "../../../shared/emuns"
 import ButtonCustom from "../../../components/ButtonCustom"
 import { rulePasswordLogin, ruleValidateEmail } from "../../../shared/constants"
+import AuthService from "../services/api"
 
 const Login = () => {
   const [form] = Form.useForm()
@@ -24,46 +25,44 @@ const Login = () => {
   const onFinish = async (inputVal: ILogin) => {
     try {
       let dataLogin: ILogin = inputVal
-      console.log('dataLogin', dataLogin)
-      // const resData = await ContactService.postLogin(url, dataLogin)
+      const resData = await AuthService.postLogin(dataLogin)
+      const { status, data } = resData
 
-      // const { status, data } = resData
+      if (status === StatusCode.created) {
+        setDataStorage(KeyStorage.token, data.data.token)
+        // if (!routerAdmin) {
+        //   setDataStorage(
+        //     KeyStorage.profile,
+        //     JSON.stringify({
+        //       identifier: dataLogin.identifier,
+        //       username: dataLogin.username,
+        //       role: TypeRole.contractor
+        //     })
+        //   )
+        // } else {
+        //   setDataStorage(
+        //     KeyStorage.profile,
+        //     JSON.stringify({
+        //       username: dataLogin.username,
+        //       role: TypeRole.admin
+        //     })
+        //   )
 
-      // if (status === StatusCode.created) {
-      //   setDataStorage(KeyStorage.accessToken, data.access_token)
-      //   if (!routerAdmin) {
-      //     setDataStorage(
-      //       KeyStorage.profile,
-      //       JSON.stringify({
-      //         identifier: dataLogin.identifier,
-      //         username: dataLogin.username,
-      //         role: TypeRole.contractor
-      //       })
-      //     )
-      //   } else {
-      //     setDataStorage(
-      //       KeyStorage.profile,
-      //       JSON.stringify({
-      //         username: dataLogin.username,
-      //         role: TypeRole.admin
-      //       })
-      //     )
-
-      //     //use local storage set type
-      //     setDataStorage(KeyStorage.typeAdmin, data.type)
-      //   }
-      //   NotificationCustom({
-      //     type: TypeNotification.success,
-      //     message: data.message
-      //   })
-      //   router.push(RouterName.topPage)
-      // } else {
-      //   NotificationCustom({
-      //     type: TypeNotification.error,
-      //     message: data.message
-      //   })
-      //   form.resetFields()
-      // }
+        //   //use local storage set type
+        //   setDataStorage(KeyStorage.typeAdmin, data.type)
+        // }
+        NotificationCustom({
+          type: TypeNotification.success,
+          message: "Đăng nhập thành công"
+        })
+        router('/admin/dashboard')
+      } else {
+        NotificationCustom({
+          type: TypeNotification.error,
+          message: data.errorMessage
+        })
+        form.resetFields()
+      }
     } catch (error) {
       throw error
     }

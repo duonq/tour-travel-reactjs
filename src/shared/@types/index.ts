@@ -18,10 +18,9 @@ type INotification = {
 }
 
 type ILogin = {
-    username: string
+    email: string
     password: string
     role?: string
-    identifier?: string
 }
 
 type ITypeResetPassword = {

@@ -4,7 +4,7 @@ import { KeyStorage } from "../emuns"
 import { regex } from "../regex"
 
 const checkAuthentication = () => {
-    return localStorage.getItem(KeyStorage.accessToken)
+    return localStorage.getItem(KeyStorage.token)
 }
 
 const getRole = () => {

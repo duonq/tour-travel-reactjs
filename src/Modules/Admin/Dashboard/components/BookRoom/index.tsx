@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import {
     CaretDownOutlined,
     SearchOutlined,
-    EditOutlined,
-    DeleteOutlined
+    EditOutlined
 } from '@ant-design/icons';
 import InputCustom from '../../../../../components/InputCustom';
 import styles from './index.module.scss'
@@ -11,6 +10,7 @@ import { Table } from 'antd';
 import { useNavigate } from 'react-router';
 import { Form } from "antd"
 import { TypeInputCustom } from '../../../../../shared/emuns';
+import ButtonCustom from '../../../../../components/ButtonCustom';
 
 const BookRoom = () => {
     const router = useNavigate()
@@ -59,7 +59,34 @@ const BookRoom = () => {
             title: "Trạng thái",
             dataIndex: "status",
             width: "10%"
-        }
+        },
+        {
+            title: "Đặt cọc",
+            dataIndex: "deposit",
+            width: "10%"
+        },
+        {
+            title: "",
+            dataIndex: "deposit",
+            width: "10%"
+        },
+        {
+            title: "Tùy chọn",
+            dataIndex: "id",
+            width: "10%",
+            render: (text: any, record: any): any => {
+                return (
+                    <div className={styles.groupBtn}>
+                        <ButtonCustom
+                            onClick={() => editContractor(record.id)}
+                            prefix={<EditOutlined />}
+                            color="#D96B06"
+                            bg='#fff'
+                        />
+                    </div>
+                )
+            }
+        },
 
     ]
 
@@ -75,7 +102,8 @@ const BookRoom = () => {
             "id_room": 'P01',
             "name_room": 'P101',
             'status': 'Đã book',
-            'type': 'Phòng ở'
+            'type': 'Phòng ở',
+            'deposit': '2020'
         },
         {
             key: '2',
@@ -106,6 +134,7 @@ const BookRoom = () => {
                     <InputCustom
                         form={form}
                         name="search"
+                        placeholder='Tìm kiếm key'
                         suffix={
                             <SearchOutlined
                             // onClick={() => handleSearchForm()}

@@ -3,7 +3,7 @@ import { KeyStorage, StatusCode, TypeNotification } from "../../shared/emuns"
 import { getDataStorage, NotificationCustom } from "../../shared/function"
 
 const apiConfig = axios.create({
-    baseURL: process.env.APP_URL,
+    baseURL: 'http://localhost:8000',
     headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
@@ -13,7 +13,7 @@ const apiConfig = axios.create({
 
 apiConfig.interceptors.request.use(
     (config: any) => {
-        const token = getDataStorage(KeyStorage.accessToken)
+        const token = getDataStorage(KeyStorage.token)
         if (token) {
             config.headers.Authorization = "Bearer " + token
         }

@@ -1,42 +1,50 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ButtonCustom from '../../../../../components/ButtonCustom'
+import styles from './index.module.scss'
 import {
+    EditOutlined,
     PlusOutlined,
     SearchOutlined,
-    EditOutlined,
     DeleteOutlined
 } from '@ant-design/icons';
-import InputCustom from '../../../../../components/InputCustom';
-import styles from './index.module.scss'
 import { Table } from 'antd';
-import { useNavigate } from 'react-router';
+import InputCustom from '../../../../../components/InputCustom';
 
-const RoomManager = () => {
-    const router = useNavigate()
-    const listColumnRoomManager = [
+const Staff = () => {
+    const listColumnStaffs = [
         {
             title: "#No",
             dataIndex: "id",
             width: "5%"
         },
         {
-            title: "Mã phòng",
-            dataIndex: "id_room",
+            title: "Mã nhân viên",
+            dataIndex: "id_staff",
             width: "10%"
         },
         {
-            title: "Tên phòng",
-            dataIndex: "name_room",
+            title: "Tên nhân viên",
+            dataIndex: "name_staff",
             width: "10%"
         },
         {
-            title: "Trạng thái",
-            dataIndex: "status",
+            title: "Giới tính",
+            dataIndex: "sex",
             width: "10%"
         },
         {
-            title: "Loại phòng",
-            dataIndex: "type",
+            title: "Số điện thoại",
+            dataIndex: "sdt",
+            width: "10%"
+        },
+        {
+            title: "Email",
+            dataIndex: "email",
+            width: "10%"
+        },
+        {
+            title: "Mô tả",
+            dataIndex: "description",
             width: "10%"
         },
         {
@@ -47,16 +55,15 @@ const RoomManager = () => {
                 return (
                     <div className={styles.groupBtn}>
                         <ButtonCustom
-                            onClick={() => editContractor(record.id)}
+                            // onClick={() => editContractor(record.id)}
                             prefix={<EditOutlined />}
                             color="#D96B06"
                             bg='#fff'
-
                         />
                         <ButtonCustom
-                            onClick={() => editContractor(record.id)}
+                            // onClick={() => editContractor(record.id)}
                             prefix={<DeleteOutlined />}
-                            color="#BD5364"
+                            color="#D96B06"
                             bg='#fff'
                         />
                     </div>
@@ -65,38 +72,38 @@ const RoomManager = () => {
         },
     ]
 
-    function editContractor(id: number) {
-        router(`admin/edit/${id}`)
-    }
-
-    // const [dataTable, setDataTable] = useState<any[]>([])
     const dataSource = [
         {
             key: '1',
             'id': 1,
-            "id_room": 'P01',
-            "name_room": 'P101',
+            "id_staff": 'P01',
+            "name_staff": 'P101',
             'status': 'Đã book',
-            'type': 'Phòng ở'
+            'email': 'Phòng ở',
+            'description': '2020',
+            'sex': 'nam',
+            'sdt': '033 706 7403'
         },
         {
             key: '2',
             'id': 2,
-            "id_room": 'P02',
-            "name_room": 'P102',
-            'status': 'Chưa book',
-            'type': 'Phòng hội nghị'
+            "id_staff": 'P02',
+            "name_staff": 'P102',
+            'email': 'Chưa book',
+            'description': 'Phòng hội nghị',
+            'sex': 'nữ',
+            'sdt': '033 706 7403'
         },
     ];
     return (
-        <div className={styles.RoomManagerPage}>
-            <div className={styles.inputSearch}>
-                <ButtonCustom title="Thêm mới" color='#fff' bg='#00859D' prefix={<PlusOutlined />} onClick={() => router('/admin/quan-ly-phong/them-moi')} />
+        <div className={styles.staffPage}>
+            <div className={styles.addStaff}>
+                <ButtonCustom title="Thêm nhân viên" color='#fff' bg='#00859D' prefix={<PlusOutlined />} />
                 <InputCustom placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined />} />
             </div>
             <div className={styles.roomTable}>
                 <Table
-                    columns={listColumnRoomManager}
+                    columns={listColumnStaffs}
                     dataSource={dataSource}
                     scroll={{ y: 450 }}
                     locale={{ emptyText: "Không có data" }}
@@ -106,4 +113,4 @@ const RoomManager = () => {
     )
 }
 
-export default RoomManager
+export default Staff

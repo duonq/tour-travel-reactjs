@@ -1,6 +1,6 @@
 enum KeyStorage {
     profile = "profile",
-    accessToken = "accessToken",
+    token = "token",
     typeScreen = "typeScreen",
     role = "role",
     typeAdmin = "typeAdmin",

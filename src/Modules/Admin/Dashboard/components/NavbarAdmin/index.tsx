@@ -21,19 +21,19 @@ const listMenus = [
     },
     {
         id: 2,
-        href: "/admin/quanLyPhong",
+        href: "/admin/quan-ly-phong",
         title: "Quản lý phòng",
         icon: "phòng"
     },
     {
         id: 3,
-        href: "/admin/bookRoom",
+        href: "/admin/book-room",
         title: "Quản lý đặt phòng",
         icon: "giỏ hàng"
     },
     {
         id: 4,
-        href: "",
+        href: "/admin/quan-ly-nhan-vien",
         title: "Quản lý nhân viên",
         icon: "nhân viên"
     },

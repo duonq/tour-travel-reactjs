@@ -9,6 +9,9 @@
         .ant-form-item {
           .ant-select {
             min-width: 80% !important;
+            .ant-select-selector {
+              border-color: green;
+            }
           }
         }
       }

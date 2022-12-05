@@ -1,11 +1,14 @@
 import { Form } from 'antd'
 import React from 'react'
+import { useNavigate } from 'react-router'
+import ButtonCustom from '../../../../../components/ButtonCustom'
 import InputCustom from '../../../../../components/InputCustom'
 import { TypeInputCustom } from '../../../../../shared/emuns'
 import styles from './index.module.scss'
 
 const AddRoom = () => {
     const [form] = Form.useForm()
+    const router = useNavigate()
     const chooseTypeRoom = [
         {
             value: 1,
@@ -61,6 +64,10 @@ const AddRoom = () => {
                         name="note"
                         typeInput={TypeInputCustom.textarea}
                     />
+                    <div className={styles.groupBtn}>
+                        <ButtonCustom title="Quay lại" color='#000' bg='#F2F2FA' onClick={() => router(-1)} />
+                        <ButtonCustom title="Lưu" bg='#BD5364' color='#fff' />
+                    </div>
                 </Form>
             </div>
         </div>

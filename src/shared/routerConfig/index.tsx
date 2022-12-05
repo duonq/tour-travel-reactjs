@@ -16,6 +16,7 @@ import LayoutAdmin from "../../Modules/Admin/Dashboard/components/LayoutAdmin";
 import RoomManager from "../../Modules/Admin/Dashboard/components/RoomManager";
 import BookRoom from "../../Modules/Admin/Dashboard/components/BookRoom";
 import AddRoom from "../../Modules/Admin/Dashboard/components/AddRoom";
+import Staff from "../../Modules/Admin/Dashboard/components/Staff";
 
 const RouterLinkDefine: ITypeRouter[] = [
     {
@@ -69,23 +70,29 @@ const RouterLinkDefine: ITypeRouter[] = [
         layout: LayoutAdmin
     },
     {
-        path: "/admin/quanLyPhong",
+        path: "/admin/quan-ly-phong",
         component: RoomManager,
         layout: LayoutAdmin
     },
     {
-        path: "/admin/bookRoom",
+        path: "/admin/quan-ly-phong/them-moi",
+        component: AddRoom,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/book-room",
         component: BookRoom,
         layout: LayoutAdmin
     },
     {
-        path: "/admin/quanLyPhong/themMoi",
-        component: AddRoom,
+        path: "/admin/quan-ly-nhan-vien",
+        component: Staff,
         layout: LayoutAdmin
     },
     {
         path: "*",
         component: NotFound,
+        layout: Fragment
     },
 ];
 
