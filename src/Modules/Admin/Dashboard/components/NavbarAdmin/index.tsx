@@ -1,5 +1,5 @@
 // import { listMenus } from "@/shared/constants"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import styles from "./index.module.scss"
 import {
@@ -11,6 +11,7 @@ import {
     DollarOutlined
 } from '@ant-design/icons';
 import { ITypeIcon } from "../../../../../shared/constants/IConstant";
+import { AuthService } from "../../../services/api";
 
 const listMenus = [
     {
@@ -51,6 +52,15 @@ const listMenus = [
     },
 ]
 
+const listMenusUser = [
+    {
+        id: 1,
+        href: "/admin/dashboard",
+        title: "Lịch dọn phòng",
+        icon: "nhân viên"
+    }
+]
+
 const listIcon: ITypeIcon[] = [
     { key: "tiền", value: <DollarOutlined />, href: "/" },
     { key: "phòng", value: <HomeOutlined />, href: "/" },
@@ -64,6 +74,20 @@ const NavbarAdmin = () => {
     const location = useLocation()
     console.log(location)
 
+    const [roleUser, setRoleUser] = useState(null)
+
+    useEffect(() => {
+        getMyProfile()
+      }, [])
+      
+      
+      const getMyProfile = async () => {
+          const resData = await AuthService.getMyProfile()
+          const roleUser = resData.data.data.roles.id
+          setRoleUser(roleUser)
+      }
+
+
     const renderListIcon = (iconName: string) => {
         const icon = listIcon.find((item) => item.key === iconName)
         return icon?.value
@@ -71,8 +95,28 @@ const NavbarAdmin = () => {
 
     return (
         <ul className={styles.navbarPage}>
-            {listMenus &&
+            {roleUser === 1 &&
                 listMenus.map(item => {
+                    return (
+                        <li
+                            key={item.id}
+                            className={[
+                                item.href === location.pathname &&
+                                styles.actionLink
+                            ].join(" ")}
+                        >
+                            <Link to={item.href}>
+                                <span>
+                                    {renderListIcon(item.icon || " ")}
+                                </span>
+                                <span>{item.title}</span>
+                            </Link>
+                        </li>
+                    )
+                })}
+
+            {roleUser === 2 &&
+                listMenusUser.map(item => {
                     return (
                         <li
                             key={item.id}

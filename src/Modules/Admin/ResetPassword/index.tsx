@@ -8,8 +8,8 @@ import InputCustom from "../../../components/InputCustom"
 import { StatusCode, TypeInputCustom, TypeNotification } from "../../../shared/emuns"
 import ButtonCustom from "../../../components/ButtonCustom"
 import { ruleConfirmPasswordLogin, rulePasswordLogin } from "../../../shared/constants"
-import AuthService from "../services/api"
 import { NotificationCustom } from "../../../shared/function"
+import { AuthService } from "../services/api"
 
 
 const ResetPassword = () => {

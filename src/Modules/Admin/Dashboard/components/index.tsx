@@ -1,6 +1,6 @@
-import React from 'react'
 import styles from './index.module.scss'
 import { InfoCircleOutlined, UserOutlined, DollarOutlined, ShoppingCartOutlined, HomeOutlined } from '@ant-design/icons';
+
 
 const Dashboard = () => {
     return (
