@@ -3,33 +3,37 @@ import React from "react"
 import ButtonCustom from "../../../components/ButtonCustom"
 import InputCustom from "../../../components/InputCustom"
 import { ruleValidateEmail } from "../../../shared/constants"
+import { StatusCode, TypeNotification } from "../../../shared/emuns"
+import { NotificationCustom } from "../../../shared/function"
+import AuthService from "../services/api"
 import styles from "./index.module.scss"
 
 
 const SendUrl = () => {
     const [formUrl] = Form.useForm()
     const onFinish = async (inputVal: any) => {
-        // try {
-        //     let dataSendEmail: any = inputVal
-        //     const resData = routerSendUrlAdmin
-        //         ? await ContactService.postSendAdminEmail(dataSendEmail)
-        //         : await ContactService.postSendContractorEmail(dataSendEmail)
-        //     const { status, data } = resData
-        //     if (status === StatusCode.created) {
-        //         NotificationCustom({
-        //             type: TypeNotification.success,
-        //             message: data.message
-        //         })
-        //         formUrl.resetFields()
-        //     } else {
-        //         NotificationCustom({
-        //             type: TypeNotification.error,
-        //             message: data.message
-        //         })
-        //     }
-        // } catch (error) {
-        //     throw error
-        // }
+        try {
+            
+            let dataSendEmail: any = inputVal
+            const resData = await AuthService.forgotPassword(dataSendEmail)
+            const { status, data } = resData
+            if (status === StatusCode.created) {
+                NotificationCustom({
+                    type: TypeNotification.success,
+                    message: 'Gửi email quên mật khẩu thành công'
+                })
+                setTimeout(() => {
+                    window.history.back()
+                }, 2000);
+            } else {
+                NotificationCustom({
+                    type: TypeNotification.error,
+                    message: 'Lỗi sai thông tin email'
+                })
+            }
+        } catch (error) {
+            throw error
+        }
     }
     return (
         <div className={styles.sendUrlPage}>

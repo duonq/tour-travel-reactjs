@@ -5,9 +5,11 @@ import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons"
 import { useNavigate } from "react-router"
 import { ITypeResetPassword } from "../../../shared/@types"
 import InputCustom from "../../../components/InputCustom"
-import { TypeInputCustom } from "../../../shared/emuns"
+import { StatusCode, TypeInputCustom, TypeNotification } from "../../../shared/emuns"
 import ButtonCustom from "../../../components/ButtonCustom"
 import { ruleConfirmPasswordLogin, rulePasswordLogin } from "../../../shared/constants"
+import AuthService from "../services/api"
+import { NotificationCustom } from "../../../shared/function"
 
 
 const ResetPassword = () => {
@@ -16,33 +18,32 @@ const ResetPassword = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showPasswordConfirm, setShowPasswordConfirm] = useState(false)
     const onFinish = async (inputVal: ITypeResetPassword) => {
-        // try {
-        //     let search = window.location.search
-        //     let dataResetPW: any = {}
-        //     dataResetPW.password = inputVal.password.replace(/ +(?= )/g, "")
-        //     dataResetPW.code = new URLSearchParams(search).get("code")
-        //     const resData = routerResetPWAdmin
-        //         ? await ContactService.postResetPasswordAdmin(dataResetPW)
-        //         : await ContactService.postResetPasswordContractor(dataResetPW)
-        //     const { status, data } = resData
-        //     if (status === StatusCode.created) {
-        //         NotificationCustom({
-        //             type: TypeNotification.success,
-        //             message: data.message
-        //         })
-        //         setTimeout(() => {
-        //             router.push(RouterName.login)
-        //         }, 1000)
-        //     } else {
-        //         NotificationCustom({
-        //             type: TypeNotification.error,
-        //             message: data.message
-        //         })
-        //         formReset.resetFields()
-        //     }
-        // } catch (error) {
-        //     throw error
-        // }
+        try {
+            const dataForgotpass = {
+                password: inputVal.password,
+                token: window.location.search.split('?token=')[1]
+            }
+          
+            const resData =  await AuthService.changePassword(dataForgotpass)
+            const { status } = resData
+            if (status === StatusCode.created) {
+                NotificationCustom({
+                    type: TypeNotification.success,
+                    message: 'Thay đổi mật khẩu thành công'
+                })
+                setTimeout(() => {
+                    router('/login')
+                }, 1000)
+            } else {
+                NotificationCustom({
+                    type: TypeNotification.error,
+                    message: 'Lỗi thay đổi mật khẩu'
+                })
+                formReset.resetFields()
+            }
+        } catch (error) {
+            throw error
+        }
     }
 
     // useEffect(() => {

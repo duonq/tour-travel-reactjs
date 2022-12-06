@@ -24,7 +24,7 @@ type ILogin = {
 }
 
 type ITypeResetPassword = {
-    code: string
+    token: string
     password: string
 }
 
