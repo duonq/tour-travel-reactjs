@@ -37,6 +37,7 @@ type IPropsInput = {
   required?: boolean
   suffix?: JSX.Element
   handleOnChange?: (value: any) => void
+  handleSearch?: (value: any) => void
   refPass?: any
   onPressEnter?: (e: any) => void
   rows?: number
@@ -67,6 +68,7 @@ const InputCustom = ({
   valueInput,
   onKeyPress,
   handleOnChange,
+  handleSearch,
   refPass,
   onPressEnter,
   rows,
@@ -203,6 +205,26 @@ const InputCustom = ({
             }}
           />
         )
+        case 'search':
+        return (
+          <Input
+            placeholder={placeholder}
+            disabled={disabled}
+            className={classCustomInput}
+            prefix={prefix}
+            suffix={suffix}
+            name={name}
+            onChange={handleOnChange}
+            value={valueInput}
+            onKeyUp={onKeyUp}
+            onKeyPress={e => {
+              if (onKeyPress) {
+                onKeyPress(e)
+              }
+            }}
+            ref={refPass ? refPass : null}
+          />
+        )
       default:
         return (
           <Input
@@ -234,7 +256,7 @@ const InputCustom = ({
           <div>
             {title && <span>{title}</span>}
             <span className={styles.required}>
-              {required ? " (bắt buộc) " : ""}
+              {required ? " (*) " : ""}
             </span>
           </div>
         )

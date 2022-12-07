@@ -1,0 +1,32 @@
+.AddRoomStyle {
+  form {
+    width: 80%;
+    margin: auto;
+    :global {
+      .ant-form-item-label {
+        width: 20%;
+      }
+      .ant-form-item-control-input-content {
+        .ant-select {
+          width: 100%;
+          .ant-select-selector {
+            border-color: green;
+          }
+        }
+      }
+    }
+    .groupBtn {
+      display: flex;
+      justify-content: space-between;
+      button {
+        width: 20%;
+        height: 44px;
+        border-radius: 6px;
+        p {
+          text-align: center;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

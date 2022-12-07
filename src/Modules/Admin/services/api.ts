@@ -28,5 +28,38 @@ export const ApiService = {
     createRoom(payload: any) {
         let url = 'rooms'
         return apiServices.post(url, payload)
+    },
+    getListMember(dataSerach: string) {
+        let url = 'member/list'
+        if (dataSerach) {
+            url = url + `?search=${dataSerach}`
+        }
+        return apiServices.get(url)
+    },
+    getListCustomer(skip: number, dataSearch: string) {
+        let url = 'customers?take=10'
+        if (skip) {
+            url = url + `&skip=${skip}`
+        }
+        if (dataSearch) {
+            url = url + `&search=${dataSearch}`
+        }
+        return apiServices.get(url)
+    },
+    getListCounpon() {
+        let url = 'counpon'
+        return apiServices.get(url)
+    },
+    getListBlogs() {
+        let url = 'blogs'
+        return apiServices.get(url)
+    },
+    createUser(payload: any) {
+        let url = 'member'
+        return apiServices.post(url, payload)
+    },
+    deleteUser(id: number) {
+        let url = `member/${id}`
+        return apiServices.delete(url)
     }
 }
