@@ -1,6 +1,6 @@
 // import { listMenus } from "@/shared/constants"
-import React from "react"
-import { Link, useLocation } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Link, Router, useLocation, useNavigate } from "react-router-dom"
 import styles from "./index.module.scss"
 import {
     ShoppingCartOutlined,
@@ -11,6 +11,9 @@ import {
     DollarOutlined
 } from '@ant-design/icons';
 import { ITypeIcon } from "../../../../../shared/constants/IConstant";
+import { AuthService } from "../../../services/api";
+import { getDataStorage } from "../../../../../shared/function";
+import { KeyStorage } from "../../../../../shared/emuns";
 
 const listMenus = [
     {
@@ -39,16 +42,31 @@ const listMenus = [
     },
     {
         id: 5,
-        href: "",
+        href: "/admin/quan-ly-khach-hang",
         title: "Quản lý khách hàng",
         icon: "khách hàng"
     },
     {
         id: 6,
-        href: "",
+        href: "/admin/blogs",
+        title: "Quản lý bài viết",
+        icon: "khách hàng"
+    },
+    {
+        id: 7,
+        href: "/admin/ma-giam-gia",
         title: "Mã giảm giá",
         icon: "sale"
     },
+]
+
+const listMenusUser = [
+    {
+        id: 1,
+        href: "/admin/dashboard",
+        title: "Lịch dọn phòng",
+        icon: "nhân viên"
+    }
 ]
 
 const listIcon: ITypeIcon[] = [
@@ -61,8 +79,30 @@ const listIcon: ITypeIcon[] = [
 ];
 
 const NavbarAdmin = () => {
+    const router = useNavigate()
     const location = useLocation()
     console.log(location)
+
+    const [roleUser, setRoleUser] = useState(null)
+
+    useEffect(() => {
+        checkLogin()
+        getMyProfile()
+      }, [])
+      
+      const checkLogin = async () => {
+        const token = getDataStorage(KeyStorage.token)
+        if (!token) {
+            router('/login')
+        }
+      }
+      
+      const getMyProfile = async () => {
+          const resData = await AuthService.getMyProfile()
+          const roleUser = resData.data.data.roles.id
+          setRoleUser(roleUser)
+      }
+
 
     const renderListIcon = (iconName: string) => {
         const icon = listIcon.find((item) => item.key === iconName)
@@ -71,8 +111,28 @@ const NavbarAdmin = () => {
 
     return (
         <ul className={styles.navbarPage}>
-            {listMenus &&
+            {roleUser === 1 &&
                 listMenus.map(item => {
+                    return (
+                        <li
+                            key={item.id}
+                            className={[
+                                item.href === location.pathname &&
+                                styles.actionLink
+                            ].join(" ")}
+                        >
+                            <Link to={item.href}>
+                                <span>
+                                    {renderListIcon(item.icon || " ")}
+                                </span>
+                                <span>{item.title}</span>
+                            </Link>
+                        </li>
+                    )
+                })}
+
+            {roleUser === 2 &&
+                listMenusUser.map(item => {
                     return (
                         <li
                             key={item.id}

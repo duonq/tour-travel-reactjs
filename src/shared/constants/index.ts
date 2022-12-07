@@ -12,44 +12,44 @@ import { MenuProps } from "antd";
 import { regex } from "../regex";
 
 const listsMenu: MenuProps['items'] = [
-    {
-      title: "1",
-      key: "/",
-      label: "Trang chủ",
-    },
-    {
-      title: "2",
-      key: "/rooms",
-      label: "Phòng nghỉ"
-    },
-    {
-      title: "3",
-      key: "/events",
-      label: "Sự kiện",
-      children: [
-        {
-          title: "7",
-          label: 'Tổ chức tiệc',
-          key: '/party-organizing',
-        },
-        {
-          title: "8",
-          label: 'Hội nghị phòng',
-          key: '/asas',
-        },
-      ],
-    },
-    {
-      title: "4",
-      key: "/blog",
-      label: "Blog"
-    },
-    {
-      title: "5",
-      key: "/contact",
-      label: "Liên hệ"
-    }
-  ]
+  {
+    title: "1",
+    key: "/",
+    label: "Trang chủ",
+  },
+  {
+    title: "2",
+    key: "/rooms",
+    label: "Phòng nghỉ"
+  },
+  {
+    title: "3",
+    key: "/events",
+    label: "Sự kiện",
+    children: [
+      {
+        title: "7",
+        label: 'Tổ chức tiệc',
+        key: '/party-organizing',
+      },
+      {
+        title: "8",
+        label: 'Hội nghị phòng',
+        key: '/asas',
+      },
+    ],
+  },
+  {
+    title: "4",
+    key: "/blog",
+    label: "Blog"
+  },
+  {
+    title: "5",
+    key: "/contact",
+    label: "Liên hệ"
+  }
+]
 
 const listsContact: ITypeListMenu[] = [
   {
@@ -151,56 +151,64 @@ let dataPassword: any = null
 
 const rulePasswordLogin = [
   {
-      required: true,
-      message: "Vui lòng nhập mật khẩu của bạn",
-      validationTrigger: "onBlur"
+    required: true,
+    message: "Vui lòng nhập mật khẩu của bạn",
+    validationTrigger: "onBlur"
   },
-  () => ({
-      validator(rule: any, value: any) {
-        dataPassword = value
-          if (value && !regex.password.test(value)) {
-              return Promise.reject("Mật khẩu không đúng.")
-          }
+  // () => ({
+  //   validator(rule: any, value: any) {
+  //     dataPassword = value
+  //     if (value && !regex.password.test(value)) {
+  //       return Promise.reject("Mật khẩu không đúng định dạng.")
+  //     }
 
-          return Promise.resolve()
-      }
-  })
+  //     return Promise.resolve()
+  //   }
+  // })
+]
+
+const ruleName = [
+  {
+    required: true,
+    message: "Vui lòng nhập tên của bạn",
+    validationTrigger: "onBlur"
+  }
 ]
 
 const ruleValidateEmail = [
   {
-      required: true,
-      message: "Hãy điền địa chỉ email của bạn."
+    required: true,
+    message: "Hãy điền địa chỉ email của bạn."
   },
   () => ({
-      validator(rule: any, value: any) {
-          if (value && !regex.email.test(value)) {
-              return Promise.reject(
-                  new Error(
-                      "Địa chỉ E-mail không chính xác. Vui lòng kiểm tra các thông tin bạn đã nhập và thử lại."
-                  )
-              )
-          }
-          return Promise.resolve()
+    validator(rule: any, value: any) {
+      if (value && !regex.email.test(value)) {
+        return Promise.reject(
+          new Error(
+            "Địa chỉ E-mail không chính xác. Vui lòng kiểm tra các thông tin bạn đã nhập và thử lại."
+          )
+        )
       }
+      return Promise.resolve()
+    }
   })
 ]
 
 const ruleConfirmPasswordLogin = [
   {
-      required: true,
-      message: "Vui lòng nhập mật khẩu (để xác nhận).",
-      validationTrigger: "onBlur"
+    required: true,
+    message: "Vui lòng nhập mật khẩu (để xác nhận).",
+    validationTrigger: "onBlur"
   },
   () => ({
-      validator(rule: any, value: any) {
-          if (value && value !== dataPassword) {
-              return Promise.reject(
-                  new Error("Mật khẩu xác nhận không khớp.")
-              )
-          }
-          return Promise.resolve()
+    validator(rule: any, value: any) {
+      if (value && value !== dataPassword) {
+        return Promise.reject(
+          new Error("Mật khẩu xác nhận không khớp.")
+        )
       }
+      return Promise.resolve()
+    }
   })
 ]
 
@@ -211,5 +219,6 @@ export {
   listEquipment,
   rulePasswordLogin,
   ruleValidateEmail,
-  ruleConfirmPasswordLogin
+  ruleConfirmPasswordLogin,
+  ruleName
 }

@@ -45,7 +45,7 @@ const HeaderPage = () => {
   return (
     <div className="header-page">
       <div className="header-left">
-        <img src={Logo} alt="" />
+        {/* <img src={Logo} alt="" /> */}
       </div>
 
       <div className="header-center">

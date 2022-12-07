@@ -11,7 +11,7 @@ import { ILogin } from "../../../shared/@types"
 import { KeyStorage, StatusCode, TypeInputCustom, TypeNotification } from "../../../shared/emuns"
 import ButtonCustom from "../../../components/ButtonCustom"
 import { rulePasswordLogin, ruleValidateEmail } from "../../../shared/constants"
-import AuthService from "../services/api"
+import { AuthService } from "../services/api"
 
 const Login = () => {
   const [form] = Form.useForm()

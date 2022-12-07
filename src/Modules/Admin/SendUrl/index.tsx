@@ -5,7 +5,7 @@ import InputCustom from "../../../components/InputCustom"
 import { ruleValidateEmail } from "../../../shared/constants"
 import { StatusCode, TypeNotification } from "../../../shared/emuns"
 import { NotificationCustom } from "../../../shared/function"
-import AuthService from "../services/api"
+import { AuthService } from "../services/api"
 import styles from "./index.module.scss"
 
 

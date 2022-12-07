@@ -1,14 +1,28 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import DropdownCustom from "../../../../../components/DropdownCustom"
 import NavbarAdmin from "../NavbarAdmin"
 import styles from "./index.module.scss"
 import { Menu, MenuProps } from "antd";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { AuthService } from "../../../services/api";
 
 const LayoutAdmin = ({ children }: any) => {
     const handleMenuClick: MenuProps["onClick"] = (e) => {
         console.log("click", e);
     };
+
+    const [username, setUsername] = useState('')
+
+    useEffect(() => {
+        getMyProfile()
+      }, [])
+      
+      
+      const getMyProfile = async () => {
+          const resData = await AuthService.getMyProfile()
+          const username = resData.data.data.name
+          setUsername(username)
+      }
 
     const MenuDropdown = (props: any) => {
         return (
@@ -46,7 +60,7 @@ const LayoutAdmin = ({ children }: any) => {
             </div>
             <div className={styles.headerRight}>
                 <div className={styles.headerDrop}>
-                    <DropdownCustom titleDropdown="mit" menuDropdown={MenuDropdown} />
+                    <DropdownCustom titleDropdown={username} menuDropdown={MenuDropdown} />
                 </div>
                 <div className={styles.titleHeader}>
                     {children}

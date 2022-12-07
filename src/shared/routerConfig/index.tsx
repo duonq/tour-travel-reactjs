@@ -17,6 +17,10 @@ import RoomManager from "../../Modules/Admin/Dashboard/components/RoomManager";
 import BookRoom from "../../Modules/Admin/Dashboard/components/BookRoom";
 import AddRoom from "../../Modules/Admin/Dashboard/components/AddRoom";
 import Staff from "../../Modules/Admin/Dashboard/components/Staff";
+import Customer from "../../Modules/Admin/Dashboard/components/Customer";
+import Counpon from "../../Modules/Admin/Dashboard/components/Counpon";
+import Blogs from "../../Modules/Admin/Dashboard/components/Blogs";
+import AddUser from "../../Modules/Admin/Dashboard/components/AddUser";
 
 const RouterLinkDefine: ITypeRouter[] = [
     {
@@ -87,6 +91,26 @@ const RouterLinkDefine: ITypeRouter[] = [
     {
         path: "/admin/quan-ly-nhan-vien",
         component: Staff,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/quan-ly-nhan-vien/them-moi",
+        component: AddUser,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/quan-ly-khach-hang",
+        component: Customer,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/ma-giam-gia",
+        component: Counpon,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/blogs",
+        component: Blogs,
         layout: LayoutAdmin
     },
     {

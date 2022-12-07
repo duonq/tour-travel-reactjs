@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ButtonCustom from '../../../../../components/ButtonCustom'
 import styles from './index.module.scss'
 import {
@@ -7,34 +7,34 @@ import {
     SearchOutlined,
     DeleteOutlined
 } from '@ant-design/icons';
-import { Table } from 'antd';
+import { Modal, Table } from 'antd';
 import InputCustom from '../../../../../components/InputCustom';
+import { ApiService } from '../../../services/api';
+import { useNavigate } from 'react-router';
+import { StatusCode, TypeNotification } from '../../../../../shared/emuns';
+import { NotificationCustom } from '../../../../../shared/function';
 
 const Staff = () => {
+    const router = useNavigate()
     const listColumnStaffs = [
         {
-            title: "#No",
+            title: "Id",
             dataIndex: "id",
             width: "5%"
         },
         {
-            title: "Mã nhân viên",
-            dataIndex: "id_staff",
-            width: "10%"
-        },
-        {
             title: "Tên nhân viên",
-            dataIndex: "name_staff",
+            dataIndex: "name",
             width: "10%"
         },
         {
             title: "Giới tính",
-            dataIndex: "sex",
+            dataIndex: "gender",
             width: "10%"
         },
         {
             title: "Số điện thoại",
-            dataIndex: "sdt",
+            dataIndex: "phoneNumber",
             width: "10%"
         },
         {
@@ -61,7 +61,7 @@ const Staff = () => {
                             bg='#fff'
                         />
                         <ButtonCustom
-                            // onClick={() => editContractor(record.id)}
+                            onClick={() => getIdUser(record.id)}
                             prefix={<DeleteOutlined />}
                             color="#D96B06"
                             bg='#fff'
@@ -72,43 +72,76 @@ const Staff = () => {
         },
     ]
 
-    const dataSource = [
-        {
-            key: '1',
-            'id': 1,
-            "id_staff": 'P01',
-            "name_staff": 'P101',
-            'status': 'Đã book',
-            'email': 'Phòng ở',
-            'description': '2020',
-            'sex': 'nam',
-            'sdt': '033 706 7403'
-        },
-        {
-            key: '2',
-            'id': 2,
-            "id_staff": 'P02',
-            "name_staff": 'P102',
-            'email': 'Chưa book',
-            'description': 'Phòng hội nghị',
-            'sex': 'nữ',
-            'sdt': '033 706 7403'
-        },
-    ];
+    const [dataTable, setDataTable] = useState([])
+    const [dataSerach, setInputSearch] = useState('')
+    const [visible, setVisible] = useState(false)
+    const [id, setId] = useState(0)
+
+    useEffect(() => {
+        getlistMember()
+      }, [])
+
+      useEffect(() => {
+        getlistMember()
+      }, [dataSerach])
+      
+      const getlistMember = async () => {
+          const resData = await ApiService.getListMember(dataSerach)
+            const {data} = resData
+            const listMember = resData.data.data
+           for (let idx = 0; idx < listMember.length; idx++) {
+            if (listMember[idx].gender === 1) listMember[idx].gender = "nam"
+            else listMember[idx].gender = "nữ"
+            listMember[idx].key = idx  + 1
+           }
+            setDataTable(listMember)
+      }
+      const getIdUser = async (id: number) => {
+        setId(id)
+        setVisible(true)
+      }
+      const deleteUser = async () => {
+        const resData = await ApiService.deleteUser(id)
+        const { status, data } = resData
+        setVisible(false)
+      if (status === StatusCode.ok) {
+        NotificationCustom({
+          type: TypeNotification.success,
+          message: "Xóa User thành công"
+        })
+        getlistMember()
+      } else {
+        NotificationCustom({
+          type: TypeNotification.error,
+          message: 'Xóa User thất bại'
+        })
+      }
+    }
     return (
         <div className={styles.staffPage}>
             <div className={styles.addStaff}>
-                <ButtonCustom title="Thêm nhân viên" color='#fff' bg='#00859D' prefix={<PlusOutlined />} />
-                <InputCustom placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined />} />
+                <ButtonCustom title="Thêm" color='#fff' bg='#00859D' prefix={<PlusOutlined />} onClick={() => router('/admin/quan-ly-nhan-vien/them-moi')} />
+                <InputCustom typeInput='search' handleOnChange={(e) => {setInputSearch(e.target.value)}} placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined />} />
             </div>
             <div className={styles.roomTable}>
                 <Table
                     columns={listColumnStaffs}
-                    dataSource={dataSource}
+                    dataSource={dataTable}
                     scroll={{ y: 450 }}
                     locale={{ emptyText: "Không có data" }}
                 />
             </div>
+            <Modal
+                title="Bạn có chắc chắn xóa không?"
+                visible={visible}
+                footer={null}
+                onCancel={() => setVisible(false)}
+                bodyStyle={{ padding: 0 }}
+                width={300}
+            >
+                <ButtonCustom title="Xóa" color='#fff' bg='red' onClick={deleteUser} />
+                <ButtonCustom title="Hủy bỏ" color='#fff' bg='#00859D' onClick={() => setVisible(false)}/>
+            </Modal>
         </div>
     )
 }
