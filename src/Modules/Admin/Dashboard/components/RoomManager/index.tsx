@@ -11,6 +11,9 @@ import styles from './index.module.scss'
 import { Table } from 'antd';
 import { useNavigate } from 'react-router';
 import { ApiService } from '../../../services/api';
+import ModelConfirm from '../../../../../components/ModalCustom';
+import { StatusCode, TypeNotification } from '../../../../../shared/emuns';
+import { NotificationCustom } from '../../../../../shared/function';
 
 const RoomManager = () => {
     const router = useNavigate()
@@ -70,7 +73,7 @@ const RoomManager = () => {
 
                         />
                         <ButtonCustom
-                            onClick={() => editContractor(record.id)}
+                            onClick={() => getIdRoom(record.id)}
                             prefix={<DeleteOutlined />}
                             color="#BD5364"
                             bg='#fff'
@@ -81,35 +84,65 @@ const RoomManager = () => {
         },
     ]
 
+    const [dataSearch, setInputSearch] = useState('')
+
     function editContractor(id: number) {
         router(`admin/edit/${id}`)
     }
 
+    const handleSearch = async () => {
+        getListRoom()
+    }
+
     const [listRoom, setListRoom] = useState([])
+    const [visible, setVisible] = useState(false)
+    const [id, setId] = useState(0)
 
     useEffect(() => {
         getListRoom()
-      }, [])
-      
-      const getListRoom = async () => {
-            const resData = await ApiService.getListRoom()
-            const listRoom = resData.data.data
-           for (let idx = 0; idx < listRoom.length; idx++) {
+    }, [])
+
+    const getListRoom = async () => {
+        const resData = await ApiService.getListRoom(dataSearch)
+        const listRoom = resData.data.data
+        for (let idx = 0; idx < listRoom.length; idx++) {
             if (listRoom[idx].type === 1) listRoom[idx].type = "Phòng ở"
             else listRoom[idx].type = "Phòng hội nghị"
 
             if (listRoom[idx].isBooked === 0) listRoom[idx].isBooked = 'Còn trống'
             else listRoom[idx].isBooked = 'Đã được book'
-            listRoom[idx].key = idx  + 1
-           }
-            setListRoom(listRoom)
-      }
-      
+            listRoom[idx].key = idx + 1
+        }
+        setListRoom(listRoom)
+    }
+    const getIdRoom = async (id: number) => {
+        setId(id)
+        setVisible(true)
+    }
+
+    const deleteRoom = async () => {
+        const resData = await ApiService.deleteRoom(id)
+        const { status, data } = resData
+        setVisible(false)
+        if (status === StatusCode.ok) {
+            NotificationCustom({
+                type: TypeNotification.success,
+                message: "Xóa Room thành công"
+            })
+            getListRoom()
+        } else {
+            NotificationCustom({
+                type: TypeNotification.error,
+                message: 'Xóa Room thất bại'
+            })
+        }
+    }
+
     return (
         <div className={styles.RoomManagerPage}>
             <div className={styles.inputSearch}>
                 <ButtonCustom title="Thêm mới" color='#fff' bg='#00859D' prefix={<PlusOutlined />} onClick={() => router('/admin/quan-ly-phong/them-moi')} />
-                <InputCustom placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined />} />
+                <InputCustom placeholder='Tìm kiếm theo tên, mã phòng' handleOnChange={(e) => { setInputSearch(e.target.value) }} suffix={<SearchOutlined onClick={handleSearch} />} />
             </div>
             <div className={styles.roomTable}>
                 <Table
@@ -119,6 +152,14 @@ const RoomManager = () => {
                     locale={{ emptyText: "Không có data" }}
                 />
             </div>
+
+            <ModelConfirm
+                visible={visible}
+                onClosePopup={() => setVisible(false)}
+                toggleModel={() => setVisible(false)}
+                onOk={deleteRoom}
+                title='Bạn có muốn xóa?'
+            />
         </div>
     )
 }

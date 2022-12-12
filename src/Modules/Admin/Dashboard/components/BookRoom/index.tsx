@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     CaretDownOutlined,
     SearchOutlined,
@@ -11,11 +11,14 @@ import { useNavigate } from 'react-router';
 import { Form } from "antd"
 import { TypeInputCustom } from '../../../../../shared/emuns';
 import ButtonCustom from '../../../../../components/ButtonCustom';
+import ModelConfirm from '../../../../../components/ModalCustom';
+import { ApiService } from '../../../services/api';
+import moment from "moment"
 
 const BookRoom = () => {
     const router = useNavigate()
     const [form] = Form.useForm()
-    const listFilter = [
+    const listFilterStatus = [
         {
             value: 1,
             label: "Chưa đặt cọc"
@@ -31,28 +34,23 @@ const BookRoom = () => {
     ]
     const listColumnRoomManager = [
         {
-            title: "#No",
+            title: "Mã phòng",
             dataIndex: "id",
-            width: "5%"
-        },
-        {
-            title: "Mã đặt phòng",
-            dataIndex: "id_room",
             width: "10%"
         },
         {
             title: "Tên phòng",
-            dataIndex: "name_room",
+            dataIndex: "roomName",
             width: "10%"
         },
         {
             title: "Tên khách hàng",
-            dataIndex: "name_customer",
+            dataIndex: "customerName",
             width: "10%"
         },
         {
             title: "Thành tiền",
-            dataIndex: "dola",
+            dataIndex: "price",
             width: "10%"
         },
         {
@@ -66,8 +64,13 @@ const BookRoom = () => {
             width: "10%"
         },
         {
-            title: "",
-            dataIndex: "deposit",
+            title: "Ngày checkin",
+            dataIndex: "checkinDate",
+            width: "10%"
+        },
+        {
+            title: "Ngày checkout",
+            dataIndex: "checkoutDate",
             width: "10%"
         },
         {
@@ -89,9 +92,47 @@ const BookRoom = () => {
         },
 
     ]
-
     function editContractor(id: number) {
-        router(`admin/edit/${id}`)
+        setVisible(true)
+        // router(`admin/edit/${id}`)
+    }
+    const [visible, setVisible] = useState(false)
+    const [dataBooking, setDataBooking] = useState([])
+    const [status, setStatus] = useState()
+
+    useEffect(() => {
+        getListBooking()
+    }, [])
+
+    useEffect(() => {
+        getListBooking()
+    }, [status])
+
+    const changeStatusBooking = async (e: any) => {
+        setStatus(e)
+    }
+
+    const getListBooking = async () => {
+        const resData = await ApiService.getListBooking(status)
+        const dataBooking = resData.data.data.data
+        for (let idx = 0; idx < dataBooking.length; idx++) {
+            let arrRoomName = [] as any
+            let price = 0
+            dataBooking[idx].key = idx + 1
+            dataBooking[idx].bookingRooms.map((item: any) => {
+                arrRoomName.push(item?.room?.name)
+                price = price + item?.room?.price
+            })
+            dataBooking[idx].roomName = arrRoomName.toString()
+            dataBooking[idx].customerName = dataBooking[idx]?.customer?.name
+            dataBooking[idx].price = price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
+            dataBooking[idx].status = listFilterStatus.find((item: any) => item.value === dataBooking[idx].status)?.label
+            dataBooking[idx].checkinDate = moment(dataBooking[idx].checkinDate).format('YYYY-MM-DD HH:mm:ss')
+            dataBooking[idx].checkoutDate = moment(dataBooking[idx].checkoutDate).format('YYYY-MM-DD HH:mm:ss')
+        }
+
+        setDataBooking(dataBooking)
+
     }
 
     // const [dataTable, setDataTable] = useState<any[]>([])
@@ -124,13 +165,14 @@ const BookRoom = () => {
                     <InputCustom
                         form={form}
                         suffix={<CaretDownOutlined />}
-                        listOptions={listFilter}
+                        listOptions={listFilterStatus}
+                        handleOnChange={(e) => changeStatusBooking(e)}
                         placeholder="Bộ lọc trạng thái"
                         name="contractAttribute"
                         typeInput={TypeInputCustom.select}
                     />
                 </div>
-                <div className={styles.inputSearch}>
+                {/* <div className={styles.inputSearch}>
                     <InputCustom
                         form={form}
                         name="search"
@@ -141,16 +183,23 @@ const BookRoom = () => {
                             />
                         }
                     />
-                </div>
+                </div> */}
             </Form>
             <div className={styles.roomTable}>
                 <Table
                     columns={listColumnRoomManager}
-                    dataSource={dataSource}
+                    dataSource={dataBooking}
                     scroll={{ y: 450 }}
                     locale={{ emptyText: "Không có data" }}
                 />
             </div>
+            <ModelConfirm
+                visible={visible}
+                onClosePopup={() => setVisible(false)}
+                toggleModel={() => setVisible(false)}
+                // onOk={deleteRoom}
+                title='Bạn có muốn xóa?'
+            />
         </div>
     )
 }

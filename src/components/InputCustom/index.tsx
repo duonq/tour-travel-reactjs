@@ -8,6 +8,7 @@ import moment from "moment"
 import { TypeInputCustom } from "../../shared/emuns"
 import { autoTrimDebounceInput } from "../../shared/function"
 import { CaretDownOutlined } from "@ant-design/icons"
+import InputImage from "../InputImage"
 
 const { Option } = Select
 
@@ -26,7 +27,7 @@ type IPropsInput = {
   title?: string
   typeInput?: string
   listDataRadio?: Object[]
-  listNameImage?: any[]
+  listNameImage?: any
   valChecked?: any
   name?: string
   maxSizeImage?: number
@@ -74,7 +75,8 @@ const InputCustom = ({
   rows,
   autoSize,
   listOptions,
-  radioDirection
+  radioDirection,
+  listNameImage
 }: IPropsInput) => {
   const [openSelect, setOpenSelectBox] = useState<boolean>(false)
   // list css custom label
@@ -107,6 +109,30 @@ const InputCustom = ({
 
   function disabledDate(current: any) {
     return current && current <= moment().subtract(1, "day")
+  }
+
+  const countImageItem = (listImage: any[]) => {
+    const changeValueImage = (nameImage: any, urlImage: any) => {
+      form?.setFieldsValue({
+        [nameImage]: urlImage
+      })
+    }
+    return (
+      <div>
+        {
+          listImage.map(({ name, url }, index) =>
+            <Form.Item key={index} name={name} style={{ flex: 1 }}>
+              <InputImage
+                name={name}
+                url={url}
+                onChangeImage={changeValueImage}
+                classCustomInput={classCustomInput}
+              />
+            </Form.Item>
+          )
+        }
+      </div>
+    )
   }
 
   const renderTypeInput = () => {
@@ -205,7 +231,25 @@ const InputCustom = ({
             }}
           />
         )
-        case 'search':
+      case TypeInputCustom.image:
+        return (
+          // <div className="d-flex">
+          //   {
+          //     countImageItem(listNameImage)
+          //   }
+          // </div>
+          <Input
+            placeholder={placeholder}
+            disabled={disabled}
+            className={classCustomInput}
+            prefix={prefix}
+            suffix={suffix}
+            name={name}
+            type="file"
+            value={valueInput}
+          />
+        )
+      case 'search':
         return (
           <Input
             placeholder={placeholder}
@@ -247,6 +291,14 @@ const InputCustom = ({
         )
     }
   }
+
+  const normFile = (e: any) => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
+  };
 
   const fillId = `starGrad${Math.random().toFixed(15).slice(2)}`
   return (

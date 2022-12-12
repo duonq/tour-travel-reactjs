@@ -1,0 +1,95 @@
+.bookingPage {
+  .formBook {
+    width: 70%;
+    margin: 50px auto;
+    box-shadow: 0 8px 4px rgb(199 200 199 / 30%);
+
+    form {
+      padding: 20px;
+      h3 {
+        border-bottom: 2px solid gray;
+        margin-bottom: 0;
+      }
+      .formInfor {
+        width: 90%;
+        margin: 50px auto;
+        .inputStyle {
+          display: flex;
+          justify-content: space-between;
+          & > div {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            label {
+              width: 20%;
+              color: #333333;
+              font-size: 1.1rem;
+            }
+            :global {
+              .ant-picker {
+                width: 80%;
+                height: 44px;
+                font-size: 1.1rem;
+                color: #333333;
+                border-color: green;
+                border-radius: 7px;
+              }
+            }
+          }
+          .inputInfor {
+            :global {
+              .ant-row {
+                width: 100%;
+                flex-direction: column;
+                .ant-form-item-control {
+                  input {
+                    height: 44px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .infoStyle {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          & > div {
+            width: 45%;
+          }
+          h4 {
+            font-weight: bold !important;
+            color: cadetblue !important;
+          }
+          .inputInfor {
+            :global {
+              .ant-row {
+                width: 100%;
+                flex-direction: column;
+                .ant-form-item-control {
+                  input {
+                    height: 44px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        button {
+          width: 30%;
+          border-radius: 6px;
+          height: 44px;
+          p {
+            margin-bottom: 0;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .boderStyle {
+      padding: 2px;
+      background-image: linear-gradient(to right, #3366cc, #ccff33);
+    }
+  }
+}

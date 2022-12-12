@@ -13,6 +13,7 @@ import { ApiService } from '../../../services/api';
 import { useNavigate } from 'react-router';
 import { StatusCode, TypeNotification } from '../../../../../shared/emuns';
 import { NotificationCustom } from '../../../../../shared/function';
+import ModelConfirm from '../../../../../components/ModalCustom';
 
 const Staff = () => {
     const router = useNavigate()
@@ -79,49 +80,49 @@ const Staff = () => {
 
     useEffect(() => {
         getlistMember()
-      }, [])
+    }, [])
 
-      useEffect(() => {
+    const handleSearch = async () => {
         getlistMember()
-      }, [dataSerach])
-      
-      const getlistMember = async () => {
-          const resData = await ApiService.getListMember(dataSerach)
-            const {data} = resData
-            const listMember = resData.data.data
-           for (let idx = 0; idx < listMember.length; idx++) {
+    }
+
+    const getlistMember = async () => {
+        const resData = await ApiService.getListMember(dataSerach)
+        const { data } = resData
+        const listMember = resData.data.data
+        for (let idx = 0; idx < listMember.length; idx++) {
             if (listMember[idx].gender === 1) listMember[idx].gender = "nam"
             else listMember[idx].gender = "nữ"
-            listMember[idx].key = idx  + 1
-           }
-            setDataTable(listMember)
-      }
-      const getIdUser = async (id: number) => {
+            listMember[idx].key = idx + 1
+        }
+        setDataTable(listMember)
+    }
+    const getIdUser = async (id: number) => {
         setId(id)
         setVisible(true)
-      }
-      const deleteUser = async () => {
+    }
+    const deleteUser = async () => {
         const resData = await ApiService.deleteUser(id)
         const { status, data } = resData
         setVisible(false)
-      if (status === StatusCode.ok) {
-        NotificationCustom({
-          type: TypeNotification.success,
-          message: "Xóa User thành công"
-        })
-        getlistMember()
-      } else {
-        NotificationCustom({
-          type: TypeNotification.error,
-          message: 'Xóa User thất bại'
-        })
-      }
+        if (status === StatusCode.ok) {
+            NotificationCustom({
+                type: TypeNotification.success,
+                message: "Xóa User thành công"
+            })
+            getlistMember()
+        } else {
+            NotificationCustom({
+                type: TypeNotification.error,
+                message: 'Xóa User thất bại'
+            })
+        }
     }
     return (
         <div className={styles.staffPage}>
             <div className={styles.addStaff}>
-                <ButtonCustom title="Thêm" color='#fff' bg='#00859D' prefix={<PlusOutlined />} onClick={() => router('/admin/quan-ly-nhan-vien/them-moi')} />
-                <InputCustom typeInput='search' handleOnChange={(e) => {setInputSearch(e.target.value)}} placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined />} />
+                <ButtonCustom title="Thêm mới nhân viên" color='#fff' bg='#00859D' prefix={<PlusOutlined />} onClick={() => router('/admin/quan-ly-nhan-vien/them-moi')} />
+                <InputCustom typeInput='search' handleOnChange={(e) => { setInputSearch(e.target.value) }} placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined onClick={handleSearch} />} />
             </div>
             <div className={styles.roomTable}>
                 <Table
@@ -131,17 +132,13 @@ const Staff = () => {
                     locale={{ emptyText: "Không có data" }}
                 />
             </div>
-            <Modal
-                title="Bạn có chắc chắn xóa không?"
+            <ModelConfirm
                 visible={visible}
-                footer={null}
-                onCancel={() => setVisible(false)}
-                bodyStyle={{ padding: 0 }}
-                width={300}
-            >
-                <ButtonCustom title="Xóa" color='#fff' bg='red' onClick={deleteUser} />
-                <ButtonCustom title="Hủy bỏ" color='#fff' bg='#00859D' onClick={() => setVisible(false)}/>
-            </Modal>
+                onClosePopup={() => setVisible(false)}
+                toggleModel={() => setVisible(false)}
+                onOk={deleteUser}
+                title='Bạn có muốn xóa?'
+            />
         </div>
     )
 }

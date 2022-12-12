@@ -11,6 +11,7 @@ import { Table } from 'antd';
 import InputCustom from '../../../../../components/InputCustom';
 import { ApiService } from '../../../services/api';
 import Modal from 'antd/lib/modal/Modal';
+import ModelConfirm from '../../../../../components/ModalCustom';
 
 const Customer = () => {
     const listColumnStaffs = [
@@ -72,37 +73,34 @@ const Customer = () => {
 
     useEffect(() => {
         getlistCustomer()
-      }, [])
+    }, [])
 
-      useEffect(() => {
+    const getlistCustomer = async () => {
+        const resData = await ApiService.getListCustomer(skip, dataSerach)
+        const listMember = resData.data.data.data
+        for (let idx = 0; idx < listMember.length; idx++) {
+            listMember[idx].key = idx + 1
+        }
+        setDataTable(listMember)
+    }
+    const handleSearch = async () => {
         getlistCustomer()
-      }, [dataSerach])
-      
-      const getlistCustomer = async () => {
-          const resData = await ApiService.getListCustomer(skip, dataSerach)
-            const listMember = resData.data.data.data
-           for (let idx = 0; idx < listMember.length; idx++) {
-            listMember[idx].key = idx  + 1
-           }
-            setDataTable(listMember)
-      }
+    }
 
-      const getIdCustomer = async (id: number) => {
+    const getIdCustomer = async (id: number) => {
         setId(id)
         setVisible(true)
-      }
+    }
 
-      const deleteCustomer = async () => {
+    const deleteCustomer = async () => {
         setVisible(false)
-        console.log(1212121212, id);
-        // const resData = await ApiService.getListCustomer(skip, dataSerach)
-      }
+    }
 
     return (
         <div className={styles.staffPage}>
             <div className={styles.addStaff}>
                 <ButtonCustom title="Thêm nhân viên" color='#fff' bg='#00859D' prefix={<PlusOutlined />} />
-                <InputCustom typeInput='search' handleOnChange={(e) => {setInputSearch(e.target.value)}} placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined />} />
+                <InputCustom typeInput='search' handleOnChange={(e) => { setInputSearch(e.target.value) }} placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined onClick={handleSearch} />} />
             </div>
             <div className={styles.roomTable}>
                 <Table
@@ -112,17 +110,13 @@ const Customer = () => {
                     locale={{ emptyText: "Không có data" }}
                 />
             </div>
-            <Modal
-                title="Bạn có chắc chắn xóa không?"
+            <ModelConfirm
                 visible={visible}
-                footer={null}
-                onCancel={() => setVisible(false)}
-                bodyStyle={{ padding: 0 }}
-                width={300}
-            >
-                <ButtonCustom title="Xóa" color='#fff' bg='red' onClick={deleteCustomer} />
-                <ButtonCustom title="Hủy bỏ" color='#fff' bg='#00859D' onClick={() => setVisible(false)}/>
-            </Modal>
+                onClosePopup={() => setVisible(false)}
+                toggleModel={() => setVisible(false)}
+                onOk={deleteCustomer}
+                title='Bạn có muốn xóa?'
+            />
         </div>
     )
 }

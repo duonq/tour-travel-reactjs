@@ -21,6 +21,7 @@ import Customer from "../../Modules/Admin/Dashboard/components/Customer";
 import Counpon from "../../Modules/Admin/Dashboard/components/Counpon";
 import Blogs from "../../Modules/Admin/Dashboard/components/Blogs";
 import AddUser from "../../Modules/Admin/Dashboard/components/AddUser";
+import BookingPage from "../../Modules/Booking";
 
 const RouterLinkDefine: ITypeRouter[] = [
     {
@@ -34,7 +35,7 @@ const RouterLinkDefine: ITypeRouter[] = [
         layout: LayoutPage,
     },
     {
-        path: "/room-item",
+        path: "/room-item/:id",
         component: RoomItem,
         layout: LayoutPage,
     },
@@ -51,6 +52,11 @@ const RouterLinkDefine: ITypeRouter[] = [
     {
         path: "/blog",
         component: BlogPage,
+        layout: LayoutPage,
+    },
+    {
+        path: "/booking",
+        component: BookingPage,
         layout: LayoutPage,
     },
     {

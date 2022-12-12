@@ -25,7 +25,7 @@ const listRooms: ITypeListService[] = [
     {
       id: 1, 
       price: '2 000 000',
-      name: 'Senior Suite Room',
+      name: 'Senior Suite Room1212',
       type: 'Phòng đơn',
       description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
       img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'

@@ -88,20 +88,20 @@ const NavbarAdmin = () => {
     useEffect(() => {
         checkLogin()
         getMyProfile()
-      }, [])
-      
-      const checkLogin = async () => {
+    }, [])
+
+    const checkLogin = async () => {
         const token = getDataStorage(KeyStorage.token)
         if (!token) {
             router('/login')
         }
-      }
-      
-      const getMyProfile = async () => {
-          const resData = await AuthService.getMyProfile()
-          const roleUser = resData.data.data.roles.id
-          setRoleUser(roleUser)
-      }
+    }
+
+    const getMyProfile = async () => {
+        const resData = await AuthService.getMyProfile()
+        const roleUser = resData.data.data.roles.id
+        setRoleUser(roleUser)
+    }
 
 
     const renderListIcon = (iconName: string) => {

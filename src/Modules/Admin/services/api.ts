@@ -21,8 +21,11 @@ export const AuthService = {
     }
 }
 export const ApiService = {
-    getListRoom() {
+    getListRoom(dataSerach: string) {
         let url = 'rooms'
+        if (dataSerach) {
+            url = url + `?search=${dataSerach}`
+        }
         return apiServices.get(url)
     },
     createRoom(payload: any) {
@@ -61,5 +64,28 @@ export const ApiService = {
     deleteUser(id: number) {
         let url = `member/${id}`
         return apiServices.delete(url)
+    },
+    deleteRoom(id: number) {
+        let url = `rooms/${id}`
+        return apiServices.delete(url)
+    },
+    getRoomDetail(id: number) {
+        let url = `rooms/detail?id=${id}`
+        return apiServices.get(url)
+    },
+    getListBooking(status: any) {
+        let url = `bookings`
+        if (status) {
+            url = url + `?status=${status}`
+        }
+        return apiServices.get(url)
+    },
+    getListComment(roomId: number) {
+        let url = `comments?roomId=${roomId}`
+        return apiServices.get(url)
+    },
+    createComment(body: any) {
+        let url = `comments`
+        return apiServices.post(url, body)
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import SlideImage from '../../../../components/SlideImage'
 import { listRooms, listsImage } from '../../../HomePage/shared/constants'
@@ -9,11 +9,13 @@ import { CheckCircleFilled, CloudOutlined } from '@ant-design/icons';
 import { DatePicker, DatePickerProps, Form, Rate, Table } from 'antd'
 import InputCustom from '../../../../components/InputCustom'
 import ButtomCustom from '../../../../components/ButtonCustom'
-import { TypeInputCustom } from '../../../../shared/emuns'
+import { StatusCode, TypeInputCustom, TypeNotification } from '../../../../shared/emuns'
 import { ColumnsType } from 'antd/lib/table'
 import SelectCustom from '../../../../components/SelectCustom'
 import { useNavigate } from 'react-router'
 import ButtonCustom from '../../../../components/ButtonCustom'
+import { ApiService } from '../../../Admin/services/api'
+import { NotificationCustom } from '../../../../shared/function'
 
 
 const RoomItem = () => {
@@ -25,6 +27,36 @@ const RoomItem = () => {
     const redirectItem = () => {
         router('/room-item')
     }
+    const [dataRoom, setDataRoom] = useState() as any
+    const [dataComment, setDataComment] = useState([]) as any
+    const [id, setId] = useState() as any
+
+    useEffect(() => {
+        const roomId = window.location.pathname.split('/').pop()
+        setId(Number(roomId))
+        getListRoom(Number(roomId))
+        getListComment(Number(roomId))
+    }, [])
+
+    const getListRoom = async (roomId: number) => {
+        const resData = await ApiService.getRoomDetail(roomId)
+        setDataRoom(resData.data.data)
+    }
+
+    const getListComment = async (roomId: number) => {
+        const resData = await ApiService.getListComment(roomId)
+        setDataComment(resData.data.data)
+    }
+
+    const createComment = async (dataLogin: any) => {
+        const resData = await ApiService.createComment(dataLogin)
+        const { status } = resData
+        if (status === StatusCode.created) {
+            getListComment(id)
+            form.resetFields()
+        }
+    }
+
     const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful']
     const [value, setValue] = useState(3)
     const options = [
@@ -82,10 +114,10 @@ const RoomItem = () => {
         )
     }
     const tab2 = () => {
-        const onFinish = async (valLogin: any) => {
+        const onFinish = async (dataInsert: any) => {
             try {
-                let dataLogin = valLogin
-                console.log(55, dataLogin)
+                let dataLogin = { ...dataInsert, rate: value, roomId: id }
+                createComment(dataLogin)
             } catch (error) {
 
             }
@@ -93,7 +125,18 @@ const RoomItem = () => {
         return (
             <div className={style.inforTab2}>
                 <h3>Đánh giá</h3>
-                <p>Hiện tại có ... lượt đánh giá</p>
+                <p>Hiện tại có {dataComment.length} lượt đánh giá</p>
+                {
+                    dataComment.length > 0 && dataComment.map((item: any) => {
+                        return (
+                            <div key={item.id}>
+                                <p>Tên: {item.name} </p>
+                                <p>Bình luận: {item.description} </p>
+                                <Rate tooltips={desc} onChange={setValue} value={item.rate} />
+                            </div>
+                        )
+                    })
+                }
                 <div className={style.formSubmit}>
                     <Form onFinish={onFinish} form={form}>
                         <h4>Hãy đánh giá phòng</h4>
@@ -103,7 +146,7 @@ const RoomItem = () => {
                         </div>
                         <div className={style.feebackStyle}>
                             <h4>Viết review</h4>
-                            <InputCustom typeInput={TypeInputCustom.textarea} name='text' form={form} />
+                            <InputCustom typeInput={TypeInputCustom.textarea} name='description' form={form} />
                         </div>
                         <div className={style.inputStyle}>
                             <h4>Tên *</h4>
@@ -190,8 +233,8 @@ const RoomItem = () => {
             <div className={style.infoItem}>
                 <div className={style.leftItemPage}>
                     <div className={style.titlePrice}>
-                        <h4>Tên phòng</h4>
-                        <h5>Giá: Giá phòng</h5>
+                        <h4>{dataRoom?.name}</h4>
+                        <h5>Giá: {dataRoom?.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</h5>
                     </div>
                     <CarouselItem >
                         {listsImage && listsImage.length > 0 && listsImage.map((item) => {
@@ -214,7 +257,7 @@ const RoomItem = () => {
                 </div>
                 <div className={style.rightItemPage}>
                     <div className={style.booksRoom}>
-                        <ButtonCustom title="Đặt lịch phòng" color='#000' />
+                        <ButtonCustom title="Đặt lịch phòng" color='#000' onClick={() => router('/booking')} />
                         {/* <h3>Đặt phòng của bạn</h3>
                         <Form>
                             <DatePicker onChange={onChange} placeholder="Ngày đến" />

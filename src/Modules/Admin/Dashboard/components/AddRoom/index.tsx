@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import ButtonCustom from '../../../../../components/ButtonCustom'
 import InputCustom from '../../../../../components/InputCustom'
+import InputImage from '../../../../../components/InputImage'
 import { StatusCode, TypeInputCustom, TypeNotification } from '../../../../../shared/emuns'
 import { NotificationCustom } from '../../../../../shared/function'
 import { ApiService } from '../../../services/api'
@@ -22,27 +23,33 @@ const AddRoom = () => {
         }
     ]
 
-      const createRoom = async (Value: any) => {
+    const createRoom = async (Value: any) => {
         Value.price = Number(Value.price)
         const resData = await ApiService.createRoom(Value)
-        const {status, data} = resData
+        const { status, data } = resData
         if (status === StatusCode.created) {
             NotificationCustom({
-              type: TypeNotification.success,
-              message: "Tạo mới phòng thành công"
+                type: TypeNotification.success,
+                message: "Tạo mới phòng thành công"
             })
             setTimeout(() => {
                 router('/admin/quan-ly-phong')
             }, 1500);
-          } else {
+        } else {
             NotificationCustom({
-              type: TypeNotification.error,
-              message: data.errorMessage
+                type: TypeNotification.error,
+                message: data.errorMessage
             })
             form.resetFields()
-          }
-           
-      }
+        }
+    }
+
+    const changeValueImage = (nameImage: any, urlImage: any) => {
+        console.log(12121, nameImage, urlImage)
+        // form.setFieldsValue({
+        //     [nameImage]: urlImage
+        // })
+    }
     return (
         <div className={styles.AddRoomStyle}>
             <div>
@@ -76,6 +83,11 @@ const AddRoom = () => {
                         name="description"
                         typeInput={TypeInputCustom.textarea}
                     />
+                    {/* <InputCustom
+                        name="file"
+                        form={form}
+                        typeInput={TypeInputCustom.image}
+                    /> */}
                     <div className={styles.groupBtn}>
                         <ButtonCustom title="Quay lại" color='#000' bg='#F2F2FA' onClick={() => router(-1)} />
                         <ButtonCustom title="Lưu" bg='#BD5364' color='#fff' type="submit" />

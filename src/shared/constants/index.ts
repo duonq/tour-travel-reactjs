@@ -51,11 +51,34 @@ const listsMenu: MenuProps['items'] = [
   }
 ]
 
+const listsFooter = [
+  {
+    title: "Trang chủ",
+    key: "/",
+  },
+  {
+    title: "Phòng nghỉ",
+    key: "/rooms",
+  },
+  {
+    title: "Sự kiện",
+    key: "/events",
+  },
+  {
+    title: "Blog",
+    key: "/blog",
+  },
+  {
+    title: "Liên hệ",
+    key: "/contact",
+  }
+]
+
 const listsContact: ITypeListMenu[] = [
   {
     id: 1,
     href: "/",
-    title: "Bình Giang, Hải dương",
+    title: "Hưng Hà, Thái Bình",
     icon: "map"
   },
   {
@@ -67,19 +90,19 @@ const listsContact: ITypeListMenu[] = [
   {
     id: 3,
     href: "/",
-    title: "ntlduong99@gmail.com",
+    title: "nmt22031997@gmail.com",
     icon: "mail"
   },
   {
     id: 4,
     href: "/",
-    title: "travel.tour",
+    title: "travel.room",
     icon: "skypee"
   },
   {
     id: 5,
     href: "/",
-    title: "travel.tour.mit",
+    title: "travel.room.mit",
     icon: "instagram"
   }
 ]
@@ -214,6 +237,7 @@ const ruleConfirmPasswordLogin = [
 
 export {
   listsMenu,
+  listsFooter,
   listsContact,
   listImgs,
   listEquipment,

@@ -1,0 +1,78 @@
+.inputImageCustom {
+  display: flex;
+
+  .previewImage {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 7px;
+    border: 1px solid blue;
+    cursor: pointer;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    background-color: transparent;
+
+    .iconAdd {
+      height: 35%;
+      width: 35%;
+      border: 1px dashed blue;
+      cursor: pointer;
+      border-radius: 50%;
+      margin: auto;
+      position: relative;
+      display: flex;
+
+      .height {
+        height: 50%;
+        width: 1px;
+        border-left: 1px dashed #23418c;
+        margin: auto;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 25%;
+      }
+      .width {
+        height: 1px;
+        width: 50%;
+        margin: auto;
+        border: 1px dashed #23418c;
+      }
+    }
+
+    img {
+      border: 1px solid transparent;
+      border-radius: 7px;
+      object-fit: fill;
+      height: 10rem;
+      width: 10rem;
+    }
+  }
+  .actionImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    button {
+      font-size: 1.3rem;
+      border-color: #c4c4c4;
+      &:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  // @media screen and(max-width:1065px) {
+  //   .previewImage {
+  //     height: 7rem;
+  //     width: 7rem;
+
+  //     img {
+  //       height: 7rem;
+  //       width: 7rem;
+  //     }
+  //   }
+  // }
+}

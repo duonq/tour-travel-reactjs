@@ -12,10 +12,8 @@ import {
 } from "@ant-design/icons";
 import "./index.scss";
 import { Link } from "react-router-dom";
-import { Image } from "antd";
 import { ITypeIcon } from "../../../shared/constants/IConstant";
-import { listImgs, listsContact } from "../../../shared/constants";
-import NavigationBar from "../NavigationBar";
+import { listImgs, listsContact, listsFooter, listsMenu } from "../../../shared/constants";
 
 const listIcon: ITypeIcon[] = [
   { key: "map", value: <EnvironmentOutlined />, href: "/" },
@@ -68,7 +66,14 @@ const FooterPage = () => {
     <div className="footer-tour">
       <div className="footer-tour-left">
         <h1>Thông tin</h1>
-        <NavigationBar />
+        <p>Luôn mang đến cho bạn những dịch vụ trải nghiệm tuyệt vời, thú vị, lưu lại những khoảnh khắc đẹp</p>
+        <ul>
+          {listsFooter && listsFooter.map((item, index) => {
+            return (
+              <li key={index}>{item?.title}</li>
+            )
+          })}
+        </ul>
       </div>
       <div className="footer-tour-center">
         <h1>LIÊN HỆ VỚI CHÚNG TÔI</h1>
