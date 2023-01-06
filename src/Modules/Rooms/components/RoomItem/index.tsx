@@ -233,7 +233,7 @@ const RoomItem = () => {
             <div className={style.infoItem}>
                 <div className={style.leftItemPage}>
                     <div className={style.titlePrice}>
-                        <h4>{dataRoom?.name}</h4>
+                        <h4>Phòng: {dataRoom?.name}</h4>
                         <h5>Giá: {dataRoom?.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</h5>
                     </div>
                     <CarouselItem >

@@ -22,10 +22,12 @@
     width: 90%;
     margin: auto;
     padding: 50px 0;
+    display: flex;
     form {
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 70%;
       & > div {
         width: 50%;
         margin-bottom: 0;
@@ -37,6 +39,72 @@
         p {
           margin-bottom: 0;
           padding: 0 30px;
+        }
+      }
+    }
+    .btnBook {
+      margin: auto;
+      width: 30%;
+
+      button {
+        width: 100%;
+        margin: auto;
+        background-color: transparent;
+        border: 1px solid #a98662;
+        transition: all 0.5s;
+        // padding: 10px 20px;
+        border-radius: 5px;
+
+        p {
+          margin-bottom: 0;
+          text-align: center;
+          span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+            font-weight: 600;
+
+            &:after {
+              content: "\00bb";
+              position: absolute;
+              opacity: 0;
+              top: 0;
+              right: -20px;
+              transition: 0.5s;
+            }
+          }
+        }
+      }
+      button:hover span {
+        padding-right: 25px;
+        color: #fff;
+      }
+      button:hover {
+        padding-right: 25px;
+        background-color: #b56953 !important;
+        color: #fff;
+      }
+
+      button:hover span:after {
+        opacity: 1;
+        right: 0;
+      }
+      :global {
+        .ant-form {
+          & > div {
+            width: 100%;
+            margin: 10px 0;
+          }
+          button {
+            width: 100%;
+            margin: auto;
+            margin-top: 10px;
+            p {
+              margin-bottom: 0;
+              text-align: center;
+            }
+          }
         }
       }
     }

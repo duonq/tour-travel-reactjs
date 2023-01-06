@@ -81,7 +81,6 @@ const listIcon: ITypeIcon[] = [
 const NavbarAdmin = () => {
     const router = useNavigate()
     const location = useLocation()
-    console.log(location)
 
     const [roleUser, setRoleUser] = useState(null)
 

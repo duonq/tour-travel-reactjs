@@ -34,4 +34,14 @@
       }
     }
   }
+  .roomTable {
+    margin-top: 50px;
+    padding: 30px;
+    :global {
+      .ant-pagination {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
 }

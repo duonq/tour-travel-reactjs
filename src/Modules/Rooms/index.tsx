@@ -12,8 +12,8 @@ import moment from "moment"
 
 const Rooms = () => {
     const router = useNavigate()
-    const redirectItem = () => {
-        router('/room-item')
+    const redirectItem = (id: any) => {
+        router(`/room-item/${id}`)
     }
     const listFilterStatus = [
         {
@@ -48,7 +48,6 @@ const Rooms = () => {
             else listRoom[idx].isBooked = 'Đã được book'
             listRoom[idx].key = idx + 1
         }
-        console.log(121212, listRoom)
         setListRoom(listRoom)
     }
 
@@ -62,14 +61,17 @@ const Rooms = () => {
                     <InputCustom placeholder='Tìm kiếm từ ...' handleOnChange={(e) => { setInputSearch(e.target.value) }} />
                     <ButtonCustom title="Search" bg='#C19B76' color='#fff' onClick={getListRoom} />
                 </Form>
+                <div className={style.btnBook}>
+                    <ButtomCustom bg="#C19B76" color="#000" title="Đặt phòng" onClick={() => router('/booking')} />
+                </div>
             </div>
             <div className={style.roomsList}>
                 {listRoom && listRoom.map((item: any) => {
                     return (
                         <div key={item.id}>
                             <div className={style.imageRoom}>
-                                {/* <img src={`http://localhost:8000/uploads/` + item.thumbnail} alt="" /> */}
-                                <img src={'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'} alt="" />
+                                <img src={`http://localhost:4000/uploads/` + item.thumbnail} alt="" />
+                                {/* <img src={'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'} alt="" /> */}
                             </div>
                             <div className={style.infoRoom}>
                                 <h3>{item.name}</h3>
@@ -80,7 +82,7 @@ const Rooms = () => {
                             <div className={style.priceRoom}>
                                 <h5>Giá/1 ngày đêm</h5>
                                 <h2>{item.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</h2>
-                                <ButtomCustom bg='#C19B76' color='#fff' title='xem chi tiết' onClick={redirectItem} />
+                                <ButtomCustom bg='#C19B76' color='#fff' title='xem chi tiết' onClick={() => redirectItem(item.id)} />
                             </div>
                         </div>
                     )

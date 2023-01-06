@@ -1,5 +1,6 @@
 import { Modal } from "antd"
 import { useState } from "react"
+import { useNavigate } from "react-router"
 import ButtomCustom from "../../components/ButtonCustom"
 import CarouselItem from "../../components/CarouselItem"
 import BannerPage from "./components/BannerHomePage"
@@ -8,6 +9,7 @@ import { listFeeback, listRooms, listServices, listTours } from "./shared/consta
 
 
 const HomePage = () => {
+    const router = useNavigate()
     const [visible, setState] = useState<any>(false)
     const btnClick = () => {
         setState(true)
@@ -18,6 +20,9 @@ const HomePage = () => {
     return (
         <div className={style.homePage}>
             <BannerPage />
+            <div className={style.btnBook}>
+                <ButtomCustom bg="#C19B76" color="#000" title="Đặt phòng" onClick={() => router('/booking')} />
+            </div>
             <div className={style.infoContact}>
                 <div className={style.imageContact}>
                     <div className={style.zoomImage}>
@@ -33,11 +38,11 @@ const HomePage = () => {
                     <h4>Giới thiệu</h4>
                     <h2>Hãy trải nghiệm những dịch vụ tuyệt vời nhất</h2>
                     <p>Cùng tổ hợp Trung tâm thương mại Đức Huy Plaza, tọa lạc tại vị trí tọa độ trung tâm mới của Thành phố Lào Cai, Đức Huy Grand Hotel & Spa Lào Cai là khách sạn đạt tiêu chuẩn 4 sao với 87 phòng nghỉ hiện đai, thiết kế linh hoạt đáp ứng những nhu cầu khác nhau của quý khách.</p>
-                    <ButtomCustom classCustom={style.btnView} bg="#C19B76" color="#fff" title="xem chi tiết" />
+                    <ButtomCustom classCustom={style.btnView} bg="#C19B76" color="#fff" title="xem chi tiết" onClick={() => router('/rooms')} />
                 </div>
             </div>
             <div className={style.roomsStyle}>
-                <h2>Phòng & Thiết bị</h2>
+                <h2>Phòng & thiết bị</h2>
                 <ButtomCustom classCustom={style.btnView} bg="#C19B76" color="#fff" title="xem tất cả các phòng" />
             </div>
             <div>

@@ -23,56 +23,56 @@ const listsImage: ITypeListBanner[] = [
 
 const listRooms: ITypeListService[] = [
     {
-      id: 1, 
-      price: '2 000 000',
-      name: 'Senior Suite Room1212',
-      type: 'Phòng đơn',
-      description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
-      img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'
+        id: 1,
+        price: '2 000 000',
+        name: 'Senior Suite Room1212',
+        type: 'Phòng đơn',
+        description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
+        img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'
     },
     {
-      id: 2, 
-      price: '2 400 000',
-      name: 'Deluxe Room * Hotel Room',
-      type: 'Phòng đôi',
-      description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
-      img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Junior-Suite-Room-600-x-600-2.jpg'
+        id: 2,
+        price: '2 400 000',
+        name: 'Deluxe Room * Hotel Room',
+        type: 'Phòng đôi',
+        description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
+        img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Junior-Suite-Room-600-x-600-2.jpg'
     },
     {
-      id: 3, 
-      price: '1 000 000',
-      name: 'Senior Suite Room',
-      type: 'Phòng đơn',
-      description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
-      img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'
+        id: 3,
+        price: '1 000 000',
+        name: 'Senior Suite Room',
+        type: 'Phòng đơn',
+        description: 'Phòng có 1 giường đôi hoặc 2 giường đơn, thiết kế tông trắng, hiện đại',
+        img: 'https://duchuygrandhotel.com/wp-content/uploads/2015/10/Senior-Suite-Room-600.jpg'
     }
 ]
 
 const listServices: ITypeListService[] = [
     {
         id: 1,
-        price: '99 000',
+        price: '99.000 VND',
         name: 'Xông hơi hàn quốc',
         extraService: 'Tặng vé miễn phí',
         img: 'https://duchuygrandhotel.com/wp-content/uploads/2020/01/1-4.jpg'
     },
     {
         id: 2,
-        price: '199 000',
+        price: '199.000 VND',
         name: 'Massage foot',
         extraService: 'Massage',
         img: 'https://duchuygrandhotel.com/wp-content/uploads/2019/01/Spa.jpg'
     },
     {
         id: 3,
-        price: '299 000',
+        price: '299.000 VND',
         name: 'Phòng sức chứa 20 khách - Karaoke',
         extraService: 'Tặng ngay 5 bia Heineken hoặc Tiger',
         img: 'https://duchuygrandhotel.com/wp-content/uploads/2019/08/Karaoke-5.jpg'
     },
     {
         id: 4,
-        price: '1 199 000',
+        price: '1.199.000 VND',
         name: 'Dịch vụ tiệc cưới / CHỈ 1.990.00đ/MÂM 10 KHÁCH',
         extraService: 'Tiệc cưới của bạn tại khách sạn',
         img: 'https://duchuygrandhotel.com/wp-content/uploads/2019/01/Wedding.jpg'
@@ -136,7 +136,7 @@ const listFeeback: ITypeListService[] = [
         description: 'Khách sạn đẹp và sang trọng, tiện nghi đầy đủ và cao cấp, ban công view đẹp và tất cả các phòng đều có bồn tắm, giá rất ưu đãi, nhân viên rất ân cần, thân thiện. 2 bé nhà mình rất thích tắm bể bơi và xông hơi Hàn Quốc ở đây. Nói chung xứng đáng được đánh giá khách sạn tốt nhất TP. Lào Cai hiện nay. Một lựa chọn hàng đầu cho bạn nào sắp tới Lào Cai.'
     }
 ]
-export  {
+export {
     listsImage,
     listRooms,
     listServices,

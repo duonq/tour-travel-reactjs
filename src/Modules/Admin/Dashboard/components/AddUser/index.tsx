@@ -31,28 +31,28 @@ const AddUser = () => {
     const [showPassword, setShowPassword] = useState(false)
     const createUSer = async (value: any) => {
         const resData = await ApiService.createUser(value)
-        const {status, data} = resData
+        const { status, data } = resData
         if (status === StatusCode.created) {
             NotificationCustom({
-              type: TypeNotification.success,
-              message: data.data.message,
+                type: TypeNotification.success,
+                message: data.data.message,
             })
             setTimeout(() => {
                 router('/admin/quan-ly-nhan-vien')
             }, 1500);
-          } else {
+        } else {
             NotificationCustom({
-              type: TypeNotification.error,
-              message: data.errorMessage
+                type: TypeNotification.error,
+                message: data.errorMessage
             })
             form.resetFields()
-          }
-      }
+        }
+    }
     return (
         <div className={styles.AddRoomStyle}>
             <div>
-                <h3>Thêm mới</h3>
                 <Form form={form} onFinish={createUSer}>
+                    <h3>Thêm mới</h3>
                     <InputCustom
                         form={form}
                         title='Email'
@@ -61,7 +61,7 @@ const AddUser = () => {
                         name='email'
                         required
                     />
-                   <InputCustom
+                    <InputCustom
                         title="Password"
                         name="password"
                         placeholder='Nhập password'

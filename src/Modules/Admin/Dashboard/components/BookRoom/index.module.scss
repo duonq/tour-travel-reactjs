@@ -31,3 +31,17 @@
     }
   }
 }
+
+.modalStyle {
+  .groupBtn {
+    display: flex;
+    justify-content: space-between;
+    p {
+      margin-bottom: 0;
+      text-align: center;
+    }
+    button {
+      width: 30%;
+    }
+  }
+}

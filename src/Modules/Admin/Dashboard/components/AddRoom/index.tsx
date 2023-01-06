@@ -10,6 +10,16 @@ import { ApiService } from '../../../services/api'
 import styles from './index.module.scss'
 
 const AddRoom = () => {
+    const [id, setId] = useState<number>()
+
+    useEffect(() => {
+        const routerEdit = '/admin/quan-ly-phong/edit/'
+        if (window.location.pathname.includes(routerEdit)) {
+            const arr = window.location.pathname.split(routerEdit)
+            setId(Number(arr[1]))
+            roomDetail(Number(arr[1]))
+        }
+    }, [])
     const [form] = Form.useForm()
     const router = useNavigate()
     const chooseTypeRoom = [
@@ -23,24 +33,57 @@ const AddRoom = () => {
         }
     ]
 
-    const createRoom = async (Value: any) => {
-        Value.price = Number(Value.price)
-        const resData = await ApiService.createRoom(Value)
+    const roomDetail = async (id: any) => {
+        const resData = await ApiService.roomDetail(id)
         const { status, data } = resData
-        if (status === StatusCode.created) {
-            NotificationCustom({
-                type: TypeNotification.success,
-                message: "Tạo mới phòng thành công"
-            })
-            setTimeout(() => {
-                router('/admin/quan-ly-phong')
-            }, 1500);
+        const { name, price, type, description } = data.data
+        form.setFieldsValue({
+            name: name,
+            price: price,
+            type: type,
+            description: description
+        })
+    }
+
+    const createRoom = async (Value: any) => {
+        if (!id) {
+            Value.price = Number(Value.price)
+            const resData = await ApiService.createRoom(Value)
+            const { status, data } = resData
+            if (status === StatusCode.created) {
+                NotificationCustom({
+                    type: TypeNotification.success,
+                    message: "Tạo mới phòng thành công"
+                })
+                setTimeout(() => {
+                    router('/admin/quan-ly-phong')
+                }, 1500);
+            } else {
+                NotificationCustom({
+                    type: TypeNotification.error,
+                    message: data.errorMessage
+                })
+                form.resetFields()
+            }
         } else {
-            NotificationCustom({
-                type: TypeNotification.error,
-                message: data.errorMessage
-            })
-            form.resetFields()
+            Value.price = Number(Value.price)
+            const resData = await ApiService.updateRoom(id, Value)
+            const { status, data } = resData
+            if (status === 200) {
+                NotificationCustom({
+                    type: TypeNotification.success,
+                    message: "Cập nhật thông tin phòng thành công"
+                })
+                setTimeout(() => {
+                    router('/admin/quan-ly-phong')
+                }, 1500);
+            } else {
+                NotificationCustom({
+                    type: TypeNotification.error,
+                    message: data.errorMessage
+                })
+                form.resetFields()
+            }
         }
     }
 
@@ -53,8 +96,8 @@ const AddRoom = () => {
     return (
         <div className={styles.AddRoomStyle}>
             <div>
-                <h3>Thêm mới</h3>
                 <Form form={form} onFinish={createRoom}>
+                    <h3>Thêm mới</h3>
                     <InputCustom
                         form={form}
                         title='Tên phòng'

@@ -138,9 +138,9 @@ const InputCustom = ({
   const renderTypeInput = () => {
     switch (typeInput) {
       case TypeInputCustom.date:
-        const dateFormat = "YYYY年MM月DD日"
+        const dateFormat = "YYYY-MM-DD HH:mm:ss"
         const customFormat = (value: any) => `${value.format(dateFormat)}`
-        return <DatePicker disabledDate={disabledDate} format={customFormat} />
+        return <DatePicker showTime disabledDate={disabledDate} format={customFormat} />
       case TypeInputCustom.textarea:
         return (
           <TextArea

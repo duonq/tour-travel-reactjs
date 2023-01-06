@@ -41,15 +41,15 @@ const Contact = () => {
                         on below address.)</p>
                     <div>
                         <EnvironmentOutlined />
-                        <p>072-074 Đại Lộ Trần Hưng Đạo, P. Bắc Cường, TP. Lào Cai.</p>
+                        <p>số 59 Giải Phóng, Hai Bà Trưng, Hà Nội.</p>
                     </div>
                     <div>
                         <ClockCircleOutlined />
                         <p><label>Thời gian 8:00 AM - 10:00 PM</label>
                             <label>Thứ Hai - Chủ Nhật</label></p>
                     </div>
-                    <p>Call. <span>0846 880 633</span></p>
-                    <p>Email. <span>duchuygrandhotel@gmail.com</span></p>
+                    <p>Call: <span>0846 880 633</span></p>
+                    <p>Email: <span>tue255961@nuce.edu.vn</span></p>
                     <ul>
                         {listsContact.length > 0 &&
                             listsContact.map((itemContact, index) => {

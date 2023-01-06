@@ -49,16 +49,6 @@ const RoomManager = () => {
             width: "10%"
         },
         {
-            title: "Ngày checkin tiếp theo",
-            dataIndex: "nextCheckinDate",
-            width: "10%"
-        },
-        {
-            title: "Ngày checkout tiếp theo",
-            dataIndex: "nextCheckoutDate",
-            width: "10%"
-        },
-        {
             title: "Tùy chọn",
             dataIndex: "id",
             width: "10%",
@@ -87,7 +77,9 @@ const RoomManager = () => {
     const [dataSearch, setInputSearch] = useState('')
 
     function editContractor(id: number) {
-        router(`admin/edit/${id}`)
+        console.log(id)
+        // router.push(RouterNameAdmin.contractor + "/" + id)
+        router(`/admin/quan-ly-phong/edit` + '/' + id)
     }
 
     const handleSearch = async () => {
@@ -127,13 +119,13 @@ const RoomManager = () => {
         if (status === StatusCode.ok) {
             NotificationCustom({
                 type: TypeNotification.success,
-                message: "Xóa Room thành công"
+                message: "Xóa phòng thành công"
             })
             getListRoom()
         } else {
             NotificationCustom({
                 type: TypeNotification.error,
-                message: 'Xóa Room thất bại'
+                message: 'Xóa phòng thất bại'
             })
         }
     }

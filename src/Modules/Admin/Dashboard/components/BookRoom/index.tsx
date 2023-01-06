@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import {
     CaretDownOutlined,
-    SearchOutlined,
-    EditOutlined
+    EditOutlined,
+    DeleteOutlined
 } from '@ant-design/icons';
 import InputCustom from '../../../../../components/InputCustom';
 import styles from './index.module.scss'
-import { Table } from 'antd';
+import { Modal, Table } from 'antd';
 import { useNavigate } from 'react-router';
 import { Form } from "antd"
-import { TypeInputCustom } from '../../../../../shared/emuns';
+import { TypeInputCustom, TypeNotification } from '../../../../../shared/emuns';
 import ButtonCustom from '../../../../../components/ButtonCustom';
 import ModelConfirm from '../../../../../components/ModalCustom';
 import { ApiService } from '../../../services/api';
 import moment from "moment"
+import { NotificationCustom } from '../../../../../shared/function';
 
 const BookRoom = () => {
     const router = useNavigate()
+    const [formUpdate] = Form.useForm()
     const [form] = Form.useForm()
+    const [id, setId] = useState<any>()
     const listFilterStatus = [
         {
             value: 1,
@@ -34,7 +37,7 @@ const BookRoom = () => {
     ]
     const listColumnRoomManager = [
         {
-            title: "Mã phòng",
+            title: "Mã đặt phòng",
             dataIndex: "id",
             width: "10%"
         },
@@ -81,8 +84,14 @@ const BookRoom = () => {
                 return (
                     <div className={styles.groupBtn}>
                         <ButtonCustom
-                            onClick={() => editContractor(record.id)}
+                            onClick={() => editBooking(record)}
                             prefix={<EditOutlined />}
+                            color="#D96B06"
+                            bg='#fff'
+                        />
+                        <ButtonCustom
+                            onClick={() => deleteBook(record.id)}
+                            prefix={<DeleteOutlined />}
                             color="#D96B06"
                             bg='#fff'
                         />
@@ -92,11 +101,25 @@ const BookRoom = () => {
         },
 
     ]
-    function editContractor(id: number) {
-        setVisible(true)
-        // router(`admin/edit/${id}`)
+    function editBooking(record: any) {
+        const { status, deposit } = record
+        const statusRecord = listFilterStatus.find((item: any) => item.label === status)?.value
+        setId(record.id)
+        formUpdate.setFieldsValue({
+            status: statusRecord,
+            deposit: Number(deposit.split(' VND')[0])
+        })
+        setVisibleEdit(true)
+
     }
+
+    function deleteBook(id: number) {
+        setId(id)
+        setVisible(true)
+    }
+
     const [visible, setVisible] = useState(false)
+    const [visibleEdit, setVisibleEdit] = useState(false)
     const [dataBooking, setDataBooking] = useState([])
     const [status, setStatus] = useState()
 
@@ -110,6 +133,25 @@ const BookRoom = () => {
 
     const changeStatusBooking = async (e: any) => {
         setStatus(e)
+    }
+
+    const updateBooking = async (value: any) => {
+        value.deposit = Number(value.deposit)
+        const resData = await ApiService.updateBooking(id, value)
+        const { status, data } = resData
+        if (status === 200) {
+            NotificationCustom({
+                type: TypeNotification.success,
+                message: "Cập nhật thông tin booking thành công"
+            })
+            getListBooking()
+            setVisibleEdit(false)
+        } else {
+            NotificationCustom({
+                type: TypeNotification.error,
+                message: data.errorMessage
+            })
+        }
     }
 
     const getListBooking = async () => {
@@ -126,35 +168,49 @@ const BookRoom = () => {
             dataBooking[idx].roomName = arrRoomName.toString()
             dataBooking[idx].customerName = dataBooking[idx]?.customer?.name
             dataBooking[idx].price = price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
+            dataBooking[idx].deposit = dataBooking[idx]?.deposit.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
             dataBooking[idx].status = listFilterStatus.find((item: any) => item.value === dataBooking[idx].status)?.label
             dataBooking[idx].checkinDate = moment(dataBooking[idx].checkinDate).format('YYYY-MM-DD HH:mm:ss')
             dataBooking[idx].checkoutDate = moment(dataBooking[idx].checkoutDate).format('YYYY-MM-DD HH:mm:ss')
         }
 
         setDataBooking(dataBooking)
+    }
 
+    const deleteBooking = async () => {
+        const resData = await ApiService.deleteBooking(id)
+        const { status, data } = resData
+        if (status === 200) {
+            NotificationCustom({
+                type: TypeNotification.success,
+                message: "Xóa booking thành công"
+            })
+            getListBooking()
+            setVisibleEdit(false)
+        } else {
+            NotificationCustom({
+                type: TypeNotification.error,
+                message: data.errorMessage
+            })
+        }
     }
 
     // const [dataTable, setDataTable] = useState<any[]>([])
-    const dataSource = [
+
+    const chooseTypeBooking = [
         {
-            key: '1',
-            'id': 1,
-            "id_room": 'P01',
-            "name_room": 'P101',
-            'status': 'Đã book',
-            'type': 'Phòng ở',
-            'deposit': '2020'
+            value: 1,
+            label: 'Chưa đặt cọc'
         },
         {
-            key: '2',
-            'id': 2,
-            "id_room": 'P02',
-            "name_room": 'P102',
-            'status': 'Chưa book',
-            'type': 'Phòng hội nghị'
+            value: 2,
+            label: 'Đã đặt cọc'
         },
-    ];
+        {
+            value: 3,
+            label: 'Đã thanh toán'
+        },
+    ]
     return (
         <div className={styles.RoomManagerPage}>
             <Form
@@ -197,10 +253,41 @@ const BookRoom = () => {
                 visible={visible}
                 onClosePopup={() => setVisible(false)}
                 toggleModel={() => setVisible(false)}
-                // onOk={deleteRoom}
+                onOk={() => deleteBooking()}
                 title='Bạn có muốn xóa?'
             />
-        </div>
+
+            <Modal
+                visible={visibleEdit}
+                onCancel={() => setVisibleEdit(false)}
+                onOk={() => setVisibleEdit(false)}
+                title='Cập nhật book phòng'
+                footer={null}
+                className={styles.modalStyle}
+            >
+                <Form form={formUpdate} onFinish={updateBooking}>
+                    <InputCustom
+                        form={formUpdate}
+                        listOptions={chooseTypeBooking}
+                        placeholder="Chọn loại phòng"
+                        title='Loại phòng'
+                        name="status"
+                        typeInput={TypeInputCustom.select}
+                    />
+                    <InputCustom
+                        typeInput="number"
+                        form={formUpdate}
+                        title='Đặt cọc'
+                        placeholder='Nhập giá tiền đặt cọc'
+                        name="deposit"
+                    />
+                    <div className={styles.groupBtn}>
+                        <ButtonCustom title="Quay lại" color='#000' bg='#F2F2FA' onClick={() => setVisibleEdit(false)} />
+                        <ButtonCustom title="Lưu" bg='#BD5364' color='#fff' type="submit" />
+                    </div>
+                </Form>
+            </Modal>
+        </div >
     )
 }
 

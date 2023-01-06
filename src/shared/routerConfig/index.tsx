@@ -22,6 +22,7 @@ import Counpon from "../../Modules/Admin/Dashboard/components/Counpon";
 import Blogs from "../../Modules/Admin/Dashboard/components/Blogs";
 import AddUser from "../../Modules/Admin/Dashboard/components/AddUser";
 import BookingPage from "../../Modules/Booking";
+import AddCounpon from "../../Modules/Admin/Dashboard/components/AddCounpon";
 
 const RouterLinkDefine: ITypeRouter[] = [
     {
@@ -90,6 +91,11 @@ const RouterLinkDefine: ITypeRouter[] = [
         layout: LayoutAdmin
     },
     {
+        path: "/admin/quan-ly-phong/edit/:id",
+        component: AddRoom,
+        layout: LayoutAdmin
+    },
+    {
         path: "/admin/book-room",
         component: BookRoom,
         layout: LayoutAdmin
@@ -112,6 +118,11 @@ const RouterLinkDefine: ITypeRouter[] = [
     {
         path: "/admin/ma-giam-gia",
         component: Counpon,
+        layout: LayoutAdmin
+    },
+    {
+        path: "/admin/ma-giam-gia/them-moi",
+        component: AddCounpon,
         layout: LayoutAdmin
     },
     {

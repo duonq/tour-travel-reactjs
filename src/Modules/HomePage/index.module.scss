@@ -1,4 +1,69 @@
 .homePage {
+  .btnBook {
+    width: 20%;
+    margin: auto;
+
+    button {
+      width: 100%;
+      margin: auto;
+      margin-top: 10px;
+      background-color: transparent;
+      border: 1px solid rgba(225, 165, 87, 0.6);
+      transition: all 0.5s;
+      padding: 10px 20px;
+      p {
+        margin-bottom: 0;
+        text-align: center;
+        span {
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: 0.5s;
+          font-weight: 600;
+
+          &:after {
+            content: "\00bb";
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+          }
+        }
+      }
+    }
+    button:hover span {
+      padding-right: 25px;
+      color: #fff;
+    }
+    button:hover {
+      padding-right: 25px;
+      background-color: #b56953 !important;
+      color: #fff;
+    }
+
+    button:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
+    :global {
+      .ant-form {
+        & > div {
+          width: 100%;
+          margin: 10px 0;
+        }
+        button {
+          width: 100%;
+          margin: auto;
+          margin-top: 10px;
+          p {
+            margin-bottom: 0;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
   .infoContact {
     display: flex;
     justify-content: space-between;
@@ -36,6 +101,7 @@
       margin-top: 40px;
       .btnView {
         transition: 0.3s ease;
+        padding: 5px 10px;
         p {
           margin-bottom: 0;
           text-transform: capitalize;

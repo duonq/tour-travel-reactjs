@@ -99,7 +99,6 @@ const Customer = () => {
     return (
         <div className={styles.staffPage}>
             <div className={styles.addStaff}>
-                <ButtonCustom title="Thêm nhân viên" color='#fff' bg='#00859D' prefix={<PlusOutlined />} />
                 <InputCustom typeInput='search' handleOnChange={(e) => { setInputSearch(e.target.value) }} placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined onClick={handleSearch} />} />
             </div>
             <div className={styles.roomTable}>

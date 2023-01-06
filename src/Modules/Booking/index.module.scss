@@ -86,7 +86,9 @@
         }
       }
     }
-
+    .required {
+      color: #ff0000;
+    }
     .boderStyle {
       padding: 2px;
       background-image: linear-gradient(to right, #3366cc, #ccff33);

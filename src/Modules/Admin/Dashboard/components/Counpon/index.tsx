@@ -11,8 +11,10 @@ import { Table } from 'antd';
 import InputCustom from '../../../../../components/InputCustom';
 import { ApiService } from '../../../services/api';
 import moment from "moment"
+import { useNavigate } from 'react-router';
 
 const Counpon = () => {
+    const router = useNavigate()
     const listColumnStaffs = [
         {
             title: "Id",
@@ -48,12 +50,6 @@ const Counpon = () => {
                     <div className={styles.groupBtn}>
                         <ButtonCustom
                             // onClick={() => editContractor(record.id)}
-                            prefix={<EditOutlined />}
-                            color="#D96B06"
-                            bg='#fff'
-                        />
-                        <ButtonCustom
-                            // onClick={() => editContractor(record.id)}
                             prefix={<DeleteOutlined />}
                             color="#D96B06"
                             bg='#fff'
@@ -68,25 +64,25 @@ const Counpon = () => {
 
     useEffect(() => {
         getlistCoupon()
-      }, [])
-      
-      const getlistCoupon = async () => {
-          const resData = await ApiService.getListCounpon()
-            const listcoupon = resData.data.data
-           for (let idx = 0; idx < listcoupon.length; idx++) {
+    }, [])
+
+    const getlistCoupon = async () => {
+        const resData = await ApiService.getListCounpon()
+        const listcoupon = resData.data.data
+        for (let idx = 0; idx < listcoupon.length; idx++) {
             listcoupon[idx].expriedAt = moment(listcoupon[idx].expriedAt).format('YYYY-MM-DD HH:mm:ss')
             listcoupon[idx].couponPersent = listcoupon[idx].couponPersent + '%'
-            listcoupon[idx].key = idx  + 1
+            listcoupon[idx].key = idx + 1
             if (listcoupon[idx].canUse === 1) listcoupon[idx].canUse = 'còn hạn sử dụng'
             else listcoupon[idx].canUse = 'hết hạn sử dụng'
-           }
-            setDataTable(listcoupon)
-      }
+        }
+        setDataTable(listcoupon)
+    }
 
     return (
         <div className={styles.staffPage}>
             <div className={styles.addStaff}>
-                <ButtonCustom title="Thêm nhân viên" color='#fff' bg='#00859D' prefix={<PlusOutlined />} />
+                <ButtonCustom title="Thêm mã giảm giá" color='#fff' bg='#00859D' prefix={<PlusOutlined />} onClick={() => router('/admin/ma-giam-gia/them-moi')} />
                 <InputCustom typeInput='search' placeholder='Tìm kiếm theo tên, mã phòng' suffix={<SearchOutlined />} />
             </div>
             <div className={styles.roomTable}>

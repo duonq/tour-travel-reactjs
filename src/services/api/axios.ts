@@ -3,7 +3,7 @@ import { KeyStorage, StatusCode, TypeNotification } from "../../shared/emuns"
 import { getDataStorage, NotificationCustom } from "../../shared/function"
 
 const apiConfig = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'http://localhost:4000',
     headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
@@ -32,7 +32,7 @@ apiConfig.interceptors.response.use(
         if (status === StatusCode.expired_token) {
             NotificationCustom({
                 type: TypeNotification.warning,
-                message: "セクションの有効期限が切れています。"
+                message: "Vui lòng đăng nhập!"
             })
             // history.push(RouterNameContact.login)
             return

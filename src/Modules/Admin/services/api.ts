@@ -32,6 +32,14 @@ export const ApiService = {
         let url = 'rooms'
         return apiServices.post(url, payload)
     },
+    updateRoom(id: number, payload: any) {
+        let url = `rooms/${id}`
+        return apiServices.put(url, payload)
+    },
+    roomDetail(id: any) {
+        let url = `rooms/detail?id=${id}`
+        return apiServices.get(url)
+    },
     getListMember(dataSerach: string) {
         let url = 'member/list'
         if (dataSerach) {
@@ -52,6 +60,10 @@ export const ApiService = {
     getListCounpon() {
         let url = 'counpon'
         return apiServices.get(url)
+    },
+    createCounpon(payload: any) {
+        let url = 'counpon'
+        return apiServices.post(url, payload)
     },
     getListBlogs() {
         let url = 'blogs'
@@ -87,5 +99,21 @@ export const ApiService = {
     createComment(body: any) {
         let url = `comments`
         return apiServices.post(url, body)
-    }
+    },
+    createBooking(body: any) {
+        let url = 'bookings'
+        return apiServices.post(url, body)
+    },
+    updateBooking(id: any, body: any) {
+        let url = `bookings/${id}`
+        return apiServices.put(url, body)
+    },
+    deleteBooking(id: any) {
+        let url = `bookings/${id}`
+        return apiServices.delete(url)
+    },
+    getDashboard() {
+        let url = `bookings/doanh-thu`
+        return apiServices.get(url)
+    },
 }

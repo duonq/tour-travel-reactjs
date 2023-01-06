@@ -178,16 +178,16 @@ const rulePasswordLogin = [
     message: "Vui lòng nhập mật khẩu của bạn",
     validationTrigger: "onBlur"
   },
-  // () => ({
-  //   validator(rule: any, value: any) {
-  //     dataPassword = value
-  //     if (value && !regex.password.test(value)) {
-  //       return Promise.reject("Mật khẩu không đúng định dạng.")
-  //     }
+  () => ({
+    validator(rule: any, value: any) {
+      dataPassword = value
+      if (value && !regex.password.test(value)) {
+        return Promise.reject("Mật khẩu không đúng định dạng.")
+      }
 
-  //     return Promise.resolve()
-  //   }
-  // })
+      return Promise.resolve()
+    }
+  })
 ]
 
 const ruleName = [
@@ -217,6 +217,13 @@ const ruleValidateEmail = [
   })
 ]
 
+const ruleRequired = [
+  {
+    required: true,
+    message: "Hãy điền đầy đủ thông tin."
+  }
+]
+
 const ruleConfirmPasswordLogin = [
   {
     required: true,
@@ -244,5 +251,6 @@ export {
   rulePasswordLogin,
   ruleValidateEmail,
   ruleConfirmPasswordLogin,
-  ruleName
+  ruleName,
+  ruleRequired
 }
