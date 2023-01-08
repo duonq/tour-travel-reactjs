@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import InputCustom from '../../../../../components/InputCustom';
 import styles from './index.module.scss'
-import { Modal, Table } from 'antd';
+import { Modal, Table, Pagination } from 'antd';
 import { useNavigate } from 'react-router';
 import { Form } from "antd"
 import { TypeInputCustom, TypeNotification } from '../../../../../shared/emuns';
@@ -40,7 +40,7 @@ const BookRoom = () => {
         {
             title: "Mã đặt phòng",
             dataIndex: "id",
-            width: "5%"
+            width: "10%"
         },
         {
             title: "Tên phòng",
@@ -130,6 +130,9 @@ const BookRoom = () => {
     const [visibleEdit, setVisibleEdit] = useState(false)
     const [dataBooking, setDataBooking] = useState([])
     const [status, setStatus] = useState()
+    const [take, setTake] = useState(10)
+    const [current, setCurrent] = useState(1);
+    const [totalItem, setTotalItem] = useState(0);
 
     useEffect(() => {
         getListBooking()
@@ -137,11 +140,15 @@ const BookRoom = () => {
 
     useEffect(() => {
         getListBooking()
-    }, [status])
+    }, [status, current])
 
     const changeStatusBooking = async (e: any) => {
         setStatus(e)
     }
+
+    const onChange = async (page: number) => {
+        setCurrent(page);
+    };
 
     const updateBooking = async (value: any) => {
         value.deposit = Number(value.deposit)
@@ -163,8 +170,9 @@ const BookRoom = () => {
     }
 
     const getListBooking = async () => {
-        const resData = await ApiService.getListBooking(status)
+        const resData = await ApiService.getListBooking(status, take, current)
         const dataBooking = resData.data.data.data
+        setTotalItem(resData.data.data.total)
         for (let idx = 0; idx < dataBooking.length; idx++) {
             let arrRoomName = [] as any
             let price = 0
@@ -181,6 +189,7 @@ const BookRoom = () => {
             dataBooking[idx].status = listFilterStatus.find((item: any) => item.value === dataBooking[idx].status)?.label
             dataBooking[idx].checkinDate = moment(dataBooking[idx].checkinDate).format('YYYY-MM-DD HH:mm:ss')
             dataBooking[idx].checkoutDate = moment(dataBooking[idx].checkoutDate).format('YYYY-MM-DD HH:mm:ss')
+            // Math.ceil(myNumber)
         }
 
         setDataBooking(dataBooking)
@@ -256,7 +265,9 @@ const BookRoom = () => {
                     dataSource={dataBooking}
                     scroll={{ y: 450 }}
                     locale={{ emptyText: "Không có data" }}
+                    pagination={false}
                 />
+                <Pagination current={current} onChange={onChange} total={totalItem} pageSize={take} />
             </div>
             <ModelConfirm
                 visible={visible}

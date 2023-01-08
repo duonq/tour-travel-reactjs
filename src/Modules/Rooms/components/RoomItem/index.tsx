@@ -4,7 +4,7 @@ import SlideImage from '../../../../components/SlideImage'
 import { listRooms, listsImage } from '../../../HomePage/shared/constants'
 import CarouselItem from '../../../../components/CarouselItem'
 import TabCustom from '../../../../components/TabsCustom'
-import { listEquipment } from '../../../../shared/constants'
+import { listEquipment, ruleRequired } from '../../../../shared/constants'
 import { CheckCircleFilled, CloudOutlined } from '@ant-design/icons';
 import { DatePicker, DatePickerProps, Form, Rate, Table } from 'antd'
 import InputCustom from '../../../../components/InputCustom'
@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router'
 import ButtonCustom from '../../../../components/ButtonCustom'
 import { ApiService } from '../../../Admin/services/api'
 import { NotificationCustom } from '../../../../shared/function'
+import Avata from "../../../../assets/avata.svg";
 
 
 const RoomItem = () => {
@@ -50,10 +51,15 @@ const RoomItem = () => {
 
     const createComment = async (dataLogin: any) => {
         const resData = await ApiService.createComment(dataLogin)
-        const { status } = resData
+        const { data, status } = resData
         if (status === StatusCode.created) {
             getListComment(id)
             form.resetFields()
+        } else {
+            NotificationCustom({
+                type: TypeNotification.error,
+                message: data.errorMessage
+            })
         }
     }
 
@@ -124,19 +130,27 @@ const RoomItem = () => {
         }
         return (
             <div className={style.inforTab2}>
-                <h3>Đánh giá</h3>
-                <p>Hiện tại có {dataComment.length} lượt đánh giá</p>
-                {
-                    dataComment.length > 0 && dataComment.map((item: any) => {
-                        return (
-                            <div key={item.id}>
-                                <p>Tên: {item.name} </p>
-                                <p>Bình luận: {item.description} </p>
-                                <Rate tooltips={desc} onChange={setValue} value={item.rate} />
-                            </div>
-                        )
-                    })
-                }
+                <div className={style.feebback}>
+                    <h5>Hiện tại có {dataComment.length} lượt đánh giá</h5>
+                    <div className={style.secFB}>
+                        {
+                            dataComment.length > 0 && dataComment.map((item: any) => {
+                                return (
+                                    <div key={item.id} className={style.numberFB}>
+                                        <div>
+                                            <img src={Avata} alt="" />
+                                            <span>{item.name} </span>
+                                        </div>
+                                        <Rate tooltips={desc} onChange={setValue} value={item.rate} />
+                                        <p>Mô tả: {item.description} </p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+                <div className={style.boderStyle}></div>
+                <h3> Đánh giá dịch vụ</h3>
                 <div className={style.formSubmit}>
                     <Form onFinish={onFinish} form={form}>
                         <h4>Hãy đánh giá phòng</h4>
@@ -146,15 +160,15 @@ const RoomItem = () => {
                         </div>
                         <div className={style.feebackStyle}>
                             <h4>Viết review</h4>
-                            <InputCustom typeInput={TypeInputCustom.textarea} name='description' form={form} />
+                            <InputCustom typeInput={TypeInputCustom.textarea} name='description' form={form} rules={ruleRequired} required />
                         </div>
                         <div className={style.inputStyle}>
-                            <h4>Tên *</h4>
-                            <InputCustom name='name' form={form} />
+                            <h4>Tên</h4>
+                            <InputCustom name='name' form={form} rules={ruleRequired} required />
                         </div>
                         <div className={style.inputStyle}>
-                            <h4>Email *</h4>
-                            <InputCustom name='email' form={form} />
+                            <h4>Email</h4>
+                            <InputCustom name='email' form={form} rules={ruleRequired} required />
                         </div>
                         <ButtomCustom title='submit' type='submit' color='#fff' bg='#C19B76' />
                     </Form>

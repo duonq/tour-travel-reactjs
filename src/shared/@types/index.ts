@@ -28,9 +28,22 @@ type ITypeResetPassword = {
     password: string
 }
 
+type IPagination = {
+    page: number
+    limit: number
+    total: number
+}
+
+type IValueLabel = {
+    value: number | string
+    label: string
+}
+
 export type {
     IRouter,
     INotification,
     ILogin,
-    ITypeResetPassword
+    ITypeResetPassword,
+    IPagination,
+    IValueLabel
 }

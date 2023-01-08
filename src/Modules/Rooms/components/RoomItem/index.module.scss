@@ -218,6 +218,53 @@
 }
 .inforTab2 {
   margin: 50px 0;
+  .feebback {
+    h5 {
+      margin-bottom: 0;
+      color: #b56953;
+      font-style: italic;
+    }
+    .secFB {
+      max-height: 300px;
+      overflow: auto;
+    }
+    .numberFB {
+      border-bottom: 2px solid #e7efef;
+      padding: 10px 20px;
+      margin: 10px 0px;
+      & > div {
+        display: flex;
+        align-items: center;
+        img {
+          width: 35px;
+        }
+        span {
+          font-size: 18px;
+          padding: 0 10px;
+          font-weight: 600;
+        }
+      }
+      :global {
+        .ant-rate {
+          font-size: 16px;
+        }
+      }
+      p {
+        margin-bottom: 0;
+        font-size: 16px;
+        line-height: 28px;
+        opacity: 0.8;
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+  .boderStyle {
+    margin-top: 50px;
+    padding: 2px;
+    background-image: linear-gradient(to right, #3366cc, #ccff33);
+  }
   .formSubmit {
     .ratingStyle {
     }
@@ -233,7 +280,6 @@
       input {
         padding: 10px 20px;
         width: 40%;
-        border: 1px solid #333;
         border-radius: 5px;
         &:focus-visible {
           outline: 0;

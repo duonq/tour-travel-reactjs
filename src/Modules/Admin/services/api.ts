@@ -1,3 +1,4 @@
+
 import apiServices from "../../../services/api/axios"
 import { ILogin, ITypeResetPassword } from "../../../shared/@types"
 
@@ -85,10 +86,10 @@ export const ApiService = {
         let url = `rooms/detail?id=${id}`
         return apiServices.get(url)
     },
-    getListBooking(status: any) {
-        let url = `bookings`
+    getListBooking(status: any, take: number, page: number) {
+        let url = `bookings?page=${page}&take=${take}`
         if (status) {
-            url = url + `?status=${status}`
+            url = url + `&status=${status}`
         }
         return apiServices.get(url)
     },

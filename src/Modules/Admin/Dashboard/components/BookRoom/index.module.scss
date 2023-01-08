@@ -22,11 +22,20 @@
     }
   }
   .roomTable {
-    padding: 30px;
     :global {
       .ant-pagination {
         display: flex;
         justify-content: center;
+        margin-top: 40px;
+      }
+    }
+  }
+  @media only screen and (max-width: 1440px) {
+    .roomTable {
+      :global {
+        .ant-table-thead > tr > th {
+          padding: 10px !important;
+        }
       }
     }
   }

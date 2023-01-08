@@ -32,11 +32,11 @@ const listsMenu: MenuProps['items'] = [
         label: 'Tổ chức tiệc',
         key: '/party-organizing',
       },
-      {
-        title: "8",
-        label: 'Hội nghị phòng',
-        key: '/asas',
-      },
+      // {
+      //   title: "8",
+      //   label: 'Hội nghị phòng',
+      //   key: '/party-organizingg',
+      // },
     ],
   },
   {
