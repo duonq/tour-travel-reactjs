@@ -5,8 +5,11 @@ import styles from "./index.module.scss"
 import { Menu, MenuProps } from "antd";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { AuthService } from "../../../services/api";
+import { clearStorage } from "../../../../../shared/function";
+import { useNavigate } from "react-router";
 
 const LayoutAdmin = ({ children }: any) => {
+    const router = useNavigate()
     const handleMenuClick: MenuProps["onClick"] = (e) => {
         console.log("click", e);
     };
@@ -30,18 +33,18 @@ const LayoutAdmin = ({ children }: any) => {
                 onClick={handleMenuClick}
                 className="menu-dropdown"
                 items={[
+                    // {
+                    //     label: (
+                    //         <a href="/" target="_blank" rel="noopener noreferrer">
+                    //             personal page
+                    //         </a>
+                    //     ),
+                    //     icon: <UserOutlined />,
+                    //     key: "1",
+                    // },
                     {
                         label: (
-                            <a href="/" target="_blank" rel="noopener noreferrer">
-                                personal page
-                            </a>
-                        ),
-                        icon: <UserOutlined />,
-                        key: "1",
-                    },
-                    {
-                        label: (
-                            <a href="/" target="_blank" rel="noopener noreferrer">
+                            <a onClick={() => handleLogout()}>
                                 Logout
                             </a>
                         ),
@@ -51,6 +54,12 @@ const LayoutAdmin = ({ children }: any) => {
                 ]}
             />
         )
+    }
+
+
+    const handleLogout = () => {
+        clearStorage()
+        router('/')
     }
     return (
         <div className={styles.layoutAdmin}>

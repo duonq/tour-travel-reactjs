@@ -30,10 +30,10 @@ apiConfig.interceptors.response.use(
     (error: any) => {
         const { status } = error.response
         if (status === StatusCode.expired_token) {
-            NotificationCustom({
-                type: TypeNotification.warning,
-                message: "Vui lòng đăng nhập!"
-            })
+            // NotificationCustom({
+            //     type: TypeNotification.warning,
+            //     message: "Vui lòng đăng nhập!"
+            // })
             // history.push(RouterNameContact.login)
             return
         }

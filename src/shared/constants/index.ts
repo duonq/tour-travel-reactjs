@@ -181,10 +181,6 @@ const rulePasswordLogin = [
   () => ({
     validator(rule: any, value: any) {
       dataPassword = value
-      if (value && !regex.password.test(value)) {
-        return Promise.reject("Mật khẩu không đúng định dạng.")
-      }
-
       return Promise.resolve()
     }
   })

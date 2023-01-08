@@ -104,6 +104,7 @@ const RoomManager = () => {
             if (listRoom[idx].isBooked === 0) listRoom[idx].isBooked = 'Còn trống'
             else listRoom[idx].isBooked = 'Đã được book'
             listRoom[idx].key = idx + 1
+            listRoom[idx].price = listRoom[idx].price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
         }
         setListRoom(listRoom)
     }

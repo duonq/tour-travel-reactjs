@@ -5,13 +5,14 @@ import ButtonCustom from '../../../../../components/ButtonCustom'
 import InputCustom from '../../../../../components/InputCustom'
 import InputImage from '../../../../../components/InputImage'
 import { ruleRequired } from '../../../../../shared/constants'
-import { StatusCode, TypeInputCustom, TypeNotification } from '../../../../../shared/emuns'
-import { NotificationCustom } from '../../../../../shared/function'
+import { KeyStorage, StatusCode, TypeInputCustom, TypeNotification } from '../../../../../shared/emuns'
+import { getDataStorage, NotificationCustom } from '../../../../../shared/function'
 import { ApiService } from '../../../services/api'
 import styles from './index.module.scss'
 import moment from 'moment'
 
 const AddCounpon = () => {
+    const token = getDataStorage(KeyStorage.token)
     const [id, setId] = useState<number>()
 
     useEffect(() => {

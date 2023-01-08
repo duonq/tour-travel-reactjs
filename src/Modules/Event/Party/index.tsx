@@ -45,7 +45,6 @@ const PartyEvent = () => {
                     <NavBarLeft />
                 </div>
                 <div>
-                    <div>show image</div>
                     <div className={style.tabStyle}>
                         <TabCustom tabLabels={["Giới thiệu"]}
                             tabPanes={[

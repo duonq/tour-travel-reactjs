@@ -22,7 +22,11 @@
     }
   }
   .roomTable {
+    padding: 20px;
     :global {
+      .ant-table-thead>tr> .ant-table-cell{
+        text-align: center !important;
+      }
       .ant-pagination {
         display: flex;
         justify-content: center;
@@ -30,11 +34,12 @@
       }
     }
   }
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width:1950px) {
     .roomTable {
       :global {
         .ant-table-thead > tr > th {
           padding: 10px !important;
+          text-align: center !important;
         }
       }
     }

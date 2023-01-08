@@ -38,9 +38,9 @@ const BookRoom = () => {
     ]
     const listColumnRoomManager = [
         {
-            title: "Mã đặt phòng",
+            title: "Id",
             dataIndex: "id",
-            width: "10%"
+            width: "5%"
         },
         {
             title: "Tên phòng",
@@ -50,7 +50,7 @@ const BookRoom = () => {
         {
             title: "Tên khách hàng",
             dataIndex: "customerName",
-            width: "10%"
+            width: "12%"
         },
         {
             title: "Email",
@@ -73,19 +73,24 @@ const BookRoom = () => {
             width: "10%"
         },
         {
-            title: "Ngày checkin",
-            dataIndex: "checkinDate",
-            width: "10%"
+            title: "Ngày ở",
+            dataIndex: "checkinCheckout",
+            width: "20%"
         },
+        // {
+        //     title: "Ngày checkin",
+        //     dataIndex: "checkinDate",
+        //     width: "10%"
+        // },
         {
-            title: "Ngày checkout",
-            dataIndex: "checkoutDate",
-            width: "10%"
+            title: "Thời gian đặt phòng",
+            dataIndex: "createdAt",
+            width: "15%"
         },
         {
             title: "Tùy chọn",
             dataIndex: "id",
-            width: "10%",
+            width: "8%",
             render: (text: any, record: any): any => {
                 return (
                     <div className={styles.groupBtn}>
@@ -120,7 +125,6 @@ const BookRoom = () => {
     }
 
     function deleteBook(record: any) {
-        console.log(121212, record);
         setId(record.id)
         setEmail(record.email)
         setVisible(true)
@@ -187,11 +191,11 @@ const BookRoom = () => {
             dataBooking[idx].price = price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
             dataBooking[idx].deposit = dataBooking[idx]?.deposit.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
             dataBooking[idx].status = listFilterStatus.find((item: any) => item.value === dataBooking[idx].status)?.label
-            dataBooking[idx].checkinDate = moment(dataBooking[idx].checkinDate).format('YYYY-MM-DD HH:mm:ss')
-            dataBooking[idx].checkoutDate = moment(dataBooking[idx].checkoutDate).format('YYYY-MM-DD HH:mm:ss')
-            // Math.ceil(myNumber)
+            // dataBooking[idx].checkinDate = moment(dataBooking[idx].checkinDate).format('YYYY-MM-DD HH:mm:ss')
+            // dataBooking[idx].checkoutDate = moment(dataBooking[idx].checkoutDate).format('YYYY-MM-DD HH:mm:ss')
+            dataBooking[idx].checkinCheckout = moment(dataBooking[idx].checkinDate).format('YYYY/MM/DD HH:mm') + ' - ' + moment(dataBooking[idx].checkoutDate).format('YYYY/MM/DD HH:mm')
+            dataBooking[idx].createdAt = moment(dataBooking[idx].createdAt).format('YYYY/MM/DD HH:mm')
         }
-
         setDataBooking(dataBooking)
     }
 
@@ -213,7 +217,6 @@ const BookRoom = () => {
         }
     }
 
-    // const [dataTable, setDataTable] = useState<any[]>([])
 
     const chooseTypeBooking = [
         {
@@ -263,7 +266,7 @@ const BookRoom = () => {
                 <Table
                     columns={listColumnRoomManager}
                     dataSource={dataBooking}
-                    scroll={{ y: 450 }}
+                    scroll={{ y: 500 }}
                     locale={{ emptyText: "Không có data" }}
                     pagination={false}
                 />
