@@ -108,9 +108,9 @@ export const ApiService = {
         let url = `bookings/${id}`
         return apiServices.put(url, body)
     },
-    deleteBooking(id: any) {
-        let url = `bookings/${id}`
-        return apiServices.delete(url)
+    deleteBooking(id: any, body: any) {
+        let url = `bookings/delete/${id}`
+        return apiServices.put(url, body)
     },
     getDashboard() {
         let url = `bookings/doanh-thu`

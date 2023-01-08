@@ -21,6 +21,7 @@ const BookRoom = () => {
     const [formUpdate] = Form.useForm()
     const [form] = Form.useForm()
     const [id, setId] = useState<any>()
+    const [email, setEmail] = useState<any>()
     const listFilterStatus = [
         {
             value: 1,
@@ -39,7 +40,7 @@ const BookRoom = () => {
         {
             title: "Mã đặt phòng",
             dataIndex: "id",
-            width: "10%"
+            width: "5%"
         },
         {
             title: "Tên phòng",
@@ -50,6 +51,11 @@ const BookRoom = () => {
             title: "Tên khách hàng",
             dataIndex: "customerName",
             width: "10%"
+        },
+        {
+            title: "Email",
+            dataIndex: "email",
+            width: "15%"
         },
         {
             title: "Thành tiền",
@@ -90,7 +96,7 @@ const BookRoom = () => {
                             bg='#fff'
                         />
                         <ButtonCustom
-                            onClick={() => deleteBook(record.id)}
+                            onClick={() => deleteBook(record)}
                             prefix={<DeleteOutlined />}
                             color="#D96B06"
                             bg='#fff'
@@ -107,14 +113,16 @@ const BookRoom = () => {
         setId(record.id)
         formUpdate.setFieldsValue({
             status: statusRecord,
-            deposit: Number(deposit.split(' VND')[0])
+            deposit: (deposit.split(' VND')[0].replace('.', ''))
         })
         setVisibleEdit(true)
 
     }
 
-    function deleteBook(id: number) {
-        setId(id)
+    function deleteBook(record: any) {
+        console.log(121212, record);
+        setId(record.id)
+        setEmail(record.email)
         setVisible(true)
     }
 
@@ -167,6 +175,7 @@ const BookRoom = () => {
             })
             dataBooking[idx].roomName = arrRoomName.toString()
             dataBooking[idx].customerName = dataBooking[idx]?.customer?.name
+            dataBooking[idx].email = dataBooking[idx]?.customer?.email
             dataBooking[idx].price = price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
             dataBooking[idx].deposit = dataBooking[idx]?.deposit.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
             dataBooking[idx].status = listFilterStatus.find((item: any) => item.value === dataBooking[idx].status)?.label
@@ -178,7 +187,7 @@ const BookRoom = () => {
     }
 
     const deleteBooking = async () => {
-        const resData = await ApiService.deleteBooking(id)
+        const resData = await ApiService.deleteBooking(id, { email })
         const { status, data } = resData
         if (status === 200) {
             NotificationCustom({

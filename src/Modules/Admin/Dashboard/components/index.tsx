@@ -1,8 +1,10 @@
 import styles from './index.module.scss'
-import { InfoCircleOutlined, UserOutlined, DollarOutlined, ShoppingCartOutlined, HomeOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, UserOutlined, DollarOutlined, ShoppingCartOutlined, HomeOutlined, SearchOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { ApiService } from '../../services/api';
 import { Table } from 'antd';
+import ButtonCustom from '../../../../components/ButtonCustom';
+import InputCustom from '../../../../components/InputCustom';
 
 
 const Dashboard = () => {
@@ -11,27 +13,44 @@ const Dashboard = () => {
     }, [])
 
     const [data, setData] = useState<any>()
+    const [dataTableConstant, setDataTableConstant] = useState<any>()
     const [dataTable, setDataTable] = useState<any>()
+    const [dataSearch, setDataSearch] = useState<any>()
 
     const getDashboard = async () => {
         const resData = await ApiService.getDashboard()
         const data = resData.data.data
         setData(data)
         const arr = [] as any
-        data.listRate.map((item: any, index: number) => {
+        data.listRate.length > 0 && data.listRate.map((item: any, index: number) => {
             arr.push({
-                key: index,
-                month: item.month,
-                totalMoney: item.totalMoney.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
+                key: index + 1,
+                month: item?.month,
+                totalMoney: item?.totalMoney?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
             })
         })
         setDataTable(arr)
+        setDataTableConstant(arr)
+    }
+
+    const handleSearch = async () => {
+        const arraySearch = [] as any
+        dataTableConstant.map((item: any) => {
+            if (item.month.includes(dataSearch)) {
+                arraySearch.push(item)
+            }
+        })
+        setDataTable(arraySearch)
+    }
+
+    const setInputSearch = async (val: string) => {
+        setDataSearch(val)
     }
 
     const listData = [
         {
             title: "Số thứ tự",
-            dataIndex: "id",
+            dataIndex: "key",
             width: "10%"
         },
         {
@@ -85,9 +104,12 @@ const Dashboard = () => {
                     </div>
                     <div>
                         <DollarOutlined />
-                        <h3>{data?.totalMoney.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}|| 0</h3>
+                        <h3>{data?.totalMoney.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) || 0}</h3>
                     </div>
                 </div>
+            </div>
+            <div className={styles.search}>
+                <InputCustom typeInput='search' handleOnChange={(e) => { setInputSearch(e.target.value) }} placeholder='Tìm kiếm theo tháng' suffix={<SearchOutlined onClick={handleSearch} />} />
             </div>
 
             <div className={styles.roomTable}>
