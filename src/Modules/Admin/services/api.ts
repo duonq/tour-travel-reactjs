@@ -22,10 +22,10 @@ export const AuthService = {
     }
 }
 export const ApiService = {
-    getListRoom(dataSerach: string) {
-        let url = 'rooms'
+    getListRoom(dataSerach: string, take: number, page: number) {
+        let url = `rooms?page=${page}&take=${take}`
         if (dataSerach) {
-            url = url + `?search=${dataSerach}`
+            url = url + `&search=${dataSerach}`
         }
         return apiServices.get(url)
     },

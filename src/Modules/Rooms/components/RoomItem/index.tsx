@@ -241,7 +241,7 @@ const RoomItem = () => {
     }
     return (
         <div className={style.itemPage}>
-            <SlideImage backgroundImage={'https://duchuygrandhotel.com/wp-content/uploads/2019/08/hotel-check-out.jpg'}>
+            <SlideImage backgroundImage={`http://localhost:4000/uploads/` + dataRoom?.thumbnail}>
                 <h1>Junior Suite Room</h1>
             </SlideImage>
             <div className={style.infoItem}>

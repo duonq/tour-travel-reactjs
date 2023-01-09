@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import InputCustom from '../../../../../components/InputCustom';
 import styles from './index.module.scss'
-import { Table } from 'antd';
+import { Pagination, Table } from 'antd';
 import { useNavigate } from 'react-router';
 import { ApiService } from '../../../services/api';
 import ModelConfirm from '../../../../../components/ModalCustom';
@@ -89,14 +89,27 @@ const RoomManager = () => {
     const [listRoom, setListRoom] = useState([])
     const [visible, setVisible] = useState(false)
     const [id, setId] = useState(0)
+    const [current, setCurrent] = useState(1);
+    const [totalItem, setTotalItem] = useState(0);
+    const [take, setTake] = useState(10)
+
+    const onChange = async (page: number) => {
+        setCurrent(page);
+    };
 
     useEffect(() => {
         getListRoom()
     }, [])
 
+    useEffect(() => {
+        getListRoom()
+    }, [current])
+
     const getListRoom = async () => {
-        const resData = await ApiService.getListRoom(dataSearch)
-        const listRoom = resData.data.data
+        const resData = await ApiService.getListRoom(dataSearch, take, current)
+        const listRoom = resData.data.data.data
+        setTotalItem(resData.data.data.total)
+
         for (let idx = 0; idx < listRoom.length; idx++) {
             if (listRoom[idx].type === 1) listRoom[idx].type = "Phòng ở"
             else listRoom[idx].type = "Phòng hội nghị"
@@ -142,8 +155,11 @@ const RoomManager = () => {
                     columns={listColumnRoomManager}
                     dataSource={listRoom}
                     scroll={{ y: 450 }}
+                    pagination={false}
                     locale={{ emptyText: "Không có data" }}
                 />
+                <Pagination current={current} onChange={onChange} total={totalItem} pageSize={take} />
+
             </div>
 
             <ModelConfirm

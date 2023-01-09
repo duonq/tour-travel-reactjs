@@ -38,8 +38,8 @@ const Rooms = () => {
     }, [])
 
     const getListRoom = async () => {
-        const resData = await ApiService.getListRoom(dataSearch)
-        const listRoom = resData.data.data
+        const resData = await ApiService.getListRoom(dataSearch, 5, 1)
+        const listRoom = resData.data.data.data
         for (let idx = 0; idx < listRoom.length; idx++) {
             if (listRoom[idx].type === 1) listRoom[idx].type = "Phòng ở"
             else listRoom[idx].type = "Phòng hội nghị"
